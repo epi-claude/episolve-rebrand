@@ -90,8 +90,8 @@ export default function Index() {
           </motion.div>
           
           {/* Gradient overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/60 to-background/40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/70 to-background/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
           
           {/* Animated accent glow */}
           <motion.div
