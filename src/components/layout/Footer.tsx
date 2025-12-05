@@ -37,7 +37,7 @@ export function Footer() {
               <img 
                 src={logo} 
                 alt="epiSolve LLC" 
-                className="h-14 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
