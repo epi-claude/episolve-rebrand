@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Linkedin, Target, Heart, Lightbulb, Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
+import { EpiHighlight } from "@/components/EpiHighlight";
 import { team } from "@/data/team";
 
 const fadeInUp = {
@@ -59,7 +60,7 @@ export default function About() {
             className="max-w-3xl"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
-              About <span className="gradient-text">epiSolve</span>
+              About <EpiHighlight text="epiSolve" />
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
               We're a technology consulting firm built for businesses that value relationships over transactions.
@@ -81,9 +82,9 @@ export default function About() {
                 Our Story
               </h2>
               <div className="space-y-4 text-muted-foreground text-lg">
-                <p>
-                  epiSolve was founded with a simple observation: small and mid-size businesses deserve the same quality technology guidance that Fortune 500 companies get—without the enterprise price tag or corporate bureaucracy.
-                </p>
+              <p>
+                <EpiHighlight text="epiSolve" /> was founded with a simple observation: small and mid-size businesses deserve the same quality technology guidance that Fortune 500 companies get—without the enterprise price tag or corporate bureaucracy.
+              </p>
                 <p>
                   Based in Newark, NJ, we serve family-run businesses and non-profits across the NYC/NJ tristate region. Our clients aren't just customers—they're partners we're genuinely invested in helping succeed.
                 </p>
