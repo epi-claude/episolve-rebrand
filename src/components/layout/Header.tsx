@@ -43,7 +43,7 @@ export function Header() {
           <img 
             src={logo} 
             alt="epiSolve LLC" 
-            className="h-10 w-auto"
+            className="h-14 w-auto"
           />
         </Link>
 
