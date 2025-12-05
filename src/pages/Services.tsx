@@ -33,7 +33,7 @@ export default function Services() {
             className="absolute inset-0"
           >
             <img
-              src="/hero-image.jpg"
+              src="/hero-services.jpg"
               alt="Technology network background"
               className="w-full h-full object-cover"
             />
