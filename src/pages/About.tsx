@@ -126,7 +126,7 @@ export default function About() {
               <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
                 <div className="text-center p-8">
                   <div className="text-6xl md:text-7xl font-display font-bold gradient-text mb-4">
-                    15+
+                    20+
                   </div>
                   <div className="text-xl text-foreground font-semibold mb-2">
                     Years of Experience
