@@ -22,7 +22,7 @@ const stagger = {
 };
 
 const stats = [
-  { value: "15+", label: "Years Experience" },
+  { value: "20+", label: "Years Experience" },
   { value: "200+", label: "Projects Delivered" },
   { value: "98%", label: "Client Retention" },
   { value: "24/7", label: "Support Available" },
