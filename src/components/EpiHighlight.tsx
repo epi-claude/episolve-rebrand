@@ -13,7 +13,7 @@ export function EpiHighlight({ text, className }: EpiHighlightProps) {
   if (text.toLowerCase().startsWith("epi")) {
     return (
       <span className={cn("", className)}>
-        <span className="text-accent bg-primary/90 px-1.5 py-0.5 rounded">epi</span>
+        <span className="text-accent font-bold">epi</span>
         {text.slice(3)}
       </span>
     );
