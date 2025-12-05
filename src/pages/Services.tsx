@@ -23,10 +23,33 @@ export default function Services() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-24 hero-gradient relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden">
+        {/* Background image with overlay */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-secondary/10 rounded-full blur-[80px]" />
+          <motion.div
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute inset-0"
+          >
+            <img
+              src="/hero-image.jpg"
+              alt="Technology network background"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+          
+          {/* Gradient overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
+          
+          {/* Animated accent glow */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 0.5 }}
+            className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px]"
+          />
         </div>
 
         <div className="container relative z-10">
