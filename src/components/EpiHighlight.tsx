@@ -10,13 +10,5 @@ interface EpiHighlightProps {
  * Usage: <EpiHighlight text="epiSolve" /> renders "epi" in yellow, "Solve" in default
  */
 export function EpiHighlight({ text, className }: EpiHighlightProps) {
-  if (text.toLowerCase().startsWith("epi")) {
-    return (
-      <span className={cn("", className)}>
-        <span className="text-accent font-bold">epi</span>
-        {text.slice(3)}
-      </span>
-    );
-  }
   return <span className={className}>{text}</span>;
 }
