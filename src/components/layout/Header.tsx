@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/episolve-logo-horizontal.png";
 
 const navLinks = [
   { name: "Services", href: "/services" },
@@ -33,20 +34,17 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "glass py-3" : "py-5"
+        scrolled ? "glass py-3 shadow-md" : "py-5 bg-background/80 backdrop-blur-sm"
       )}
     >
       <div className="container flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <div className="relative">
-            <div className="h-10 w-10 rounded-xl cta-gradient flex items-center justify-center">
-              <span className="text-primary-foreground font-display font-bold text-xl">e</span>
-            </div>
-          </div>
-          <span className="font-display font-bold text-xl text-foreground">
-            epiSolve
-          </span>
+        <Link to="/" className="flex items-center">
+          <img 
+            src={logo} 
+            alt="epiSolve LLC" 
+            className="h-10 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -59,7 +57,7 @@ export function Header() {
                 "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
                 location.pathname === link.href
                   ? "text-primary bg-primary/10"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  : "text-muted-foreground hover:text-primary hover:bg-muted"
               )}
             >
               {link.name}
@@ -69,7 +67,7 @@ export function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button variant="hero" size="default" asChild>
+          <Button variant="default" size="default" asChild>
             <Link to="/contact">
               Book a Consultation
               <ArrowRight className="ml-1 h-4 w-4" />
@@ -94,7 +92,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass mt-2 mx-4 rounded-2xl overflow-hidden"
+            className="md:hidden glass mt-2 mx-4 rounded-2xl overflow-hidden shadow-lg"
           >
             <nav className="flex flex-col p-4 gap-1">
               {navLinks.map((link) => (
@@ -105,14 +103,14 @@ export function Header() {
                     "px-4 py-3 rounded-lg text-base font-medium transition-colors",
                     location.pathname === link.href
                       ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      : "text-muted-foreground hover:text-primary hover:bg-muted"
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
               <div className="mt-3 pt-3 border-t border-border">
-                <Button variant="hero" className="w-full" asChild>
+                <Button variant="default" className="w-full" asChild>
                   <Link to="/contact">
                     Book a Consultation
                     <ArrowRight className="ml-1 h-4 w-4" />
