@@ -21,8 +21,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "(973) 555-1234",
-    href: "tel:+19735551234",
+    value: "(973) 740-0414",
+    href: "tel:+19737400414",
   },
   {
     icon: MapPin,

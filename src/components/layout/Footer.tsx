@@ -123,9 +123,9 @@ export function Footer() {
               <Mail size={16} />
               hello@episolve.com
             </a>
-            <a href="tel:+19735551234" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a href="tel:+19737400414" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Phone size={16} />
-              (973) 555-1234
+              (973) 740-0414
             </a>
             <span className="flex items-center gap-2">
               <MapPin size={16} />
