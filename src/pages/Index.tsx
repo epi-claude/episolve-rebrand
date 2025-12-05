@@ -73,11 +73,39 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center hero-gradient overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[100px]" />
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0">
+          <motion.div
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute inset-0"
+          >
+            <img
+              src="/hero-image.jpg"
+              alt="Professional business technology"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+          
+          {/* Gradient overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/40" />
+          
+          {/* Animated accent glow */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 0.5 }}
+            className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-accent/20 rounded-full blur-[150px]"
+          />
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 0.5, x: 0 }}
+            transition={{ duration: 2, delay: 0.8 }}
+            className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px]"
+          />
         </div>
 
         <div className="container relative z-10">
