@@ -57,7 +57,7 @@ export default function About() {
             className="absolute inset-0"
           >
             <img
-              src="/hero-image.jpg"
+              src="/hero-about.jpg"
               alt="Technology network background"
               className="w-full h-full object-cover"
             />

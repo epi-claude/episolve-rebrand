@@ -87,7 +87,7 @@ export default function Contact() {
             className="absolute inset-0"
           >
             <img
-              src="/hero-image.jpg"
+              src="/hero-contact.jpg"
               alt="Technology network background"
               className="w-full h-full object-cover"
             />

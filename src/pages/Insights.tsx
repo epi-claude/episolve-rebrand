@@ -40,7 +40,7 @@ export default function Insights() {
             className="absolute inset-0"
           >
             <img
-              src="/hero-image.jpg"
+              src="/hero-insights.jpg"
               alt="Technology network background"
               className="w-full h-full object-cover"
             />
