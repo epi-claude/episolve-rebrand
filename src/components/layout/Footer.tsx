@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import logo from "@/assets/episolve-logo-horizontal.png";
 
 const footerLinks = {
   services: [
@@ -20,22 +21,23 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border bg-card/50">
+    <footer className="relative border-t border-border bg-muted/30">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container relative py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="h-10 w-10 rounded-xl cta-gradient flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold text-xl">e</span>
-              </div>
-              <span className="font-display font-bold text-xl text-foreground">epiSolve</span>
+            <Link to="/" className="flex items-center mb-4">
+              <img 
+                src={logo} 
+                alt="epiSolve LLC" 
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
               Technology Solutions for Business Problems. Helping family-run businesses and non-profits thrive with modern IT.
@@ -45,7 +47,7 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-muted hover:bg-primary/20 hover:text-primary transition-colors"
+                className="p-2 rounded-lg bg-background border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
               >
                 <Linkedin size={18} />
               </a>
@@ -53,7 +55,7 @@ export function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-muted hover:bg-primary/20 hover:text-primary transition-colors"
+                className="p-2 rounded-lg bg-background border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
               >
                 <Twitter size={18} />
               </a>
@@ -104,7 +106,7 @@ export function Footer() {
               <Input
                 type="email"
                 placeholder="Your email"
-                className="bg-muted border-border"
+                className="bg-background border-border"
               />
               <Button variant="default" size="icon">
                 <ArrowRight size={16} />
