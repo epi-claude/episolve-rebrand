@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { EpiHighlight } from "@/components/EpiHighlight";
 import logo from "@/assets/episolve-logo-horizontal.png";
 
 const footerLinks = {
@@ -135,7 +136,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} epiSolve LLC. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} <EpiHighlight text="epiSolve" /> LLC. All rights reserved.</p>
         </div>
       </div>
     </footer>

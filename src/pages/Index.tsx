@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle, Users, Zap, Shield, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
+import { EpiHighlight } from "@/components/EpiHighlight";
 import { getFeaturedServices } from "@/data/services";
 import { getFeaturedInsights } from "@/data/insights";
 
@@ -52,12 +53,14 @@ const values = [
 
 const testimonials = [
   {
-    quote: "epiSolve helped us modernize our entire operation. They took the time to understand our family business and delivered technology that actually fits how we work.",
+    quote: " helped us modernize our entire operation. They took the time to understand our family business and delivered technology that actually fits how we work.",
+    hasEpi: true,
     name: "Robert Hernandez",
     title: "CEO, Hernandez Manufacturing",
   },
   {
     quote: "Finally, an IT partner that speaks our language. They've saved us countless hours and helped us make smarter technology investments.",
+    hasEpi: false,
     name: "Michelle Wong",
     title: "Executive Director, Newark Community Foundation",
   },
@@ -316,7 +319,7 @@ export default function Index() {
                 className="p-8 rounded-2xl card-gradient border border-border"
               >
                 <blockquote className="text-foreground mb-6 text-lg leading-relaxed">
-                  "{testimonial.quote}"
+                  "{testimonial.hasEpi && <EpiHighlight text="epiSolve" />}{testimonial.quote}"
                 </blockquote>
                 <div>
                   <div className="font-semibold text-foreground">
