@@ -53,13 +53,15 @@ const values = [
 
 const testimonials = [
   {
-    quote: " helped us modernize our entire operation. They took the time to understand our family business and delivered technology that actually fits how we work.",
+    quote:
+      " helped us modernize our entire operation. They took the time to understand our family business and delivered technology that actually fits how we work.",
     hasEpi: true,
     name: "Robert Hernandez",
     title: "CEO, Hernandez Manufacturing",
   },
   {
-    quote: "Finally, an IT partner that speaks our language. They've saved us countless hours and helped us make smarter technology investments.",
+    quote:
+      "Finally, an IT partner that speaks our language. They've saved us countless hours and helped us make smarter technology investments.",
     hasEpi: false,
     name: "Michelle Wong",
     title: "Executive Director, Newark Community Foundation",
@@ -82,17 +84,13 @@ export default function Index() {
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="absolute inset-0"
           >
-            <img
-              src="/hero-image.jpg"
-              alt="Professional business technology"
-              className="w-full h-full object-cover"
-            />
+            <img src="/hero-image.jpg" alt="Professional business technology" className="w-full h-full object-cover" />
           </motion.div>
-          
+
           {/* Gradient overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
-          
+
           {/* Animated accent glow */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -127,8 +125,7 @@ export default function Index() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground mb-6 leading-tight"
             >
-              You Work.{" "}
-              <span className="gradient-text">We IT.</span>
+              You Work. <span className="gradient-text">We I.T.</span>
             </motion.h1>
 
             <motion.p
@@ -137,8 +134,8 @@ export default function Index() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto text-balance"
             >
-              Your outsourced IT partner for family-run businesses and non-profits. 
-              We make technology work for you—without the jargon or complexity.
+              Your outsourced IT partner for family-run businesses and non-profits. We make technology work for
+              you—without the jargon or complexity.
             </motion.p>
 
             <motion.div
@@ -154,9 +151,7 @@ export default function Index() {
                 </Link>
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/services">
-                  Explore Services
-                </Link>
+                <Link to="/services">Explore Services</Link>
               </Button>
             </motion.div>
           </div>
@@ -190,14 +185,8 @@ export default function Index() {
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="text-center"
-              >
-                <div className="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">
-                  {stat.value}
-                </div>
+              <motion.div key={index} variants={fadeInUp} className="text-center">
+                <div className="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">{stat.value}</div>
                 <div className="text-muted-foreground">{stat.label}</div>
               </motion.div>
             ))}
@@ -214,11 +203,10 @@ export default function Index() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              How We Help
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">How We Help</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              From strategic consulting to hands-on implementation, we provide the technology expertise your business needs.
+              From strategic consulting to hands-on implementation, we provide the technology expertise your business
+              needs.
             </p>
           </motion.div>
 
@@ -232,10 +220,7 @@ export default function Index() {
             {featuredServices.map((service, index) => {
               const Icon = service.icon;
               return (
-                <motion.div
-                  key={service.id}
-                  variants={fadeInUp}
-                >
+                <motion.div key={service.id} variants={fadeInUp}>
                   <Link
                     to={`/services/${service.slug}`}
                     className="block h-full p-6 rounded-2xl card-gradient border border-border hover:border-primary/50 transition-all duration-300 group"
@@ -246,9 +231,7 @@ export default function Index() {
                     <h3 className="text-lg font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {service.shortDescription}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{service.shortDescription}</p>
                   </Link>
                 </motion.div>
               );
@@ -298,20 +281,12 @@ export default function Index() {
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  className="text-center"
-                >
+                <motion.div key={index} variants={fadeInUp} className="text-center">
                   <div className="h-14 w-14 rounded-2xl cta-gradient flex items-center justify-center mx-auto mb-4">
                     <Icon className="h-7 w-7 text-primary-foreground" />
                   </div>
-                  <h3 className="text-lg font-display font-semibold text-foreground mb-2">
-                    {value.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {value.description}
-                  </p>
+                  <h3 className="text-lg font-display font-semibold text-foreground mb-2">{value.title}</h3>
+                  <p className="text-muted-foreground text-sm">{value.description}</p>
                 </motion.div>
               );
             })}
@@ -328,9 +303,7 @@ export default function Index() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              What Clients Say
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">What Clients Say</h2>
           </motion.div>
 
           <motion.div
@@ -347,15 +320,12 @@ export default function Index() {
                 className="p-8 rounded-2xl card-gradient border border-border"
               >
                 <blockquote className="text-foreground mb-6 text-lg leading-relaxed">
-                  "{testimonial.hasEpi && <EpiHighlight text="epiSolve" />}{testimonial.quote}"
+                  "{testimonial.hasEpi && <EpiHighlight text="epiSolve" />}
+                  {testimonial.quote}"
                 </blockquote>
                 <div>
-                  <div className="font-semibold text-foreground">
-                    {testimonial.name}
-                  </div>
-                  <div className="text-muted-foreground text-sm">
-                    {testimonial.title}
-                  </div>
+                  <div className="font-semibold text-foreground">{testimonial.name}</div>
+                  <div className="text-muted-foreground text-sm">{testimonial.title}</div>
                 </div>
               </motion.div>
             ))}
@@ -373,9 +343,7 @@ export default function Index() {
             className="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
           >
             <div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-                Latest Insights
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">Latest Insights</h2>
               <p className="text-muted-foreground max-w-xl text-lg">
                 Practical technology guidance for growing businesses.
               </p>
@@ -396,10 +364,7 @@ export default function Index() {
             className="grid md:grid-cols-2 gap-8"
           >
             {featuredInsights.map((post) => (
-              <motion.article
-                key={post.id}
-                variants={fadeInUp}
-              >
+              <motion.article key={post.id} variants={fadeInUp}>
                 <Link
                   to={`/insights/${post.slug}`}
                   className="block p-6 rounded-2xl card-gradient border border-border hover:border-primary/50 transition-all duration-300 group"
@@ -408,16 +373,12 @@ export default function Index() {
                     <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
                       {post.category}
                     </span>
-                    <span className="text-muted-foreground text-sm">
-                      {post.readTime} min read
-                    </span>
+                    <span className="text-muted-foreground text-sm">{post.readTime} min read</span>
                   </div>
                   <h3 className="text-xl font-display font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-muted-foreground">
-                    {post.excerpt}
-                  </p>
+                  <p className="text-muted-foreground">{post.excerpt}</p>
                 </Link>
               </motion.article>
             ))}
@@ -453,9 +414,7 @@ export default function Index() {
                 </Link>
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <a href="tel:+19737400414">
-                  Call (973) 740-0414
-                </a>
+                <a href="tel:+19737400414">Call (973) 740-0414</a>
               </Button>
             </div>
           </motion.div>
