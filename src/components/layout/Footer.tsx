@@ -2,31 +2,28 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { EpiHighlight } from "@/components/EpiHighlight";
-import logo from "@/assets/episolve-logo-horizontal.png";
 
 const footerLinks = {
-  services: [
-    { name: "IT Consulting", href: "/services/it-consulting" },
-    { name: "Software Development", href: "/services/software-development" },
-    { name: "AI Solutions", href: "/services/ai-solutions" },
-    { name: "Integration Services", href: "/services/integration" },
+  solutions: [
+    { name: "Fractional Technology Office", href: "/solutions/fractional-technology-office" },
+    { name: "AI-Driven Cyber Resilience", href: "/solutions/risk-insurance" },
+    { name: "Custom Workflows", href: "/solutions/intelligent-automation" },
   ],
   company: [
     { name: "About", href: "/about" },
+    { name: "Case Studies", href: "/case-studies" },
     { name: "Insights", href: "/insights" },
     { name: "Contact", href: "/contact" },
-    { name: "Privacy Policy", href: "/privacy" },
   ],
 };
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border bg-muted/30">
+    <footer className="relative border-t border-border bg-card">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container relative py-16">
@@ -34,21 +31,19 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center mb-4">
-              <img 
-                src={logo} 
-                alt="epiSolve LLC" 
-                className="h-20 w-auto"
-              />
+              <span className="text-2xl font-display font-bold text-foreground">
+                Episolve
+              </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
-              Technology Solutions for Business Problems. Helping family-run businesses and non-profits thrive with modern IT.
+              Strategic Technology Leadership for Growth-Focused Organizations. We bridge the gap between complex enterprise IT and nimble business strategy.
             </p>
             <div className="flex gap-3">
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-background border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+                className="p-2 rounded-lg bg-muted border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
               >
                 <Linkedin size={18} />
               </a>
@@ -56,18 +51,18 @@ export function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-background border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+                className="p-2 rounded-lg bg-muted border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
               >
                 <Twitter size={18} />
               </a>
             </div>
           </div>
 
-          {/* Services */}
+          {/* Solutions */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Services</h4>
+            <h4 className="font-display font-semibold text-foreground mb-4">Solutions</h4>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
+              {footerLinks.solutions.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
@@ -101,13 +96,13 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4">Stay Updated</h4>
             <p className="text-sm text-muted-foreground mb-4">
-              Get insights on technology trends and business solutions.
+              Get insights on technology strategy and risk management.
             </p>
             <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
               <Input
                 type="email"
                 placeholder="Your email"
-                className="bg-background border-border"
+                className="bg-muted border-border"
               />
               <Button variant="default" size="icon">
                 <ArrowRight size={16} />
@@ -129,14 +124,14 @@ export function Footer() {
             </a>
             <span className="flex items-center gap-2">
               <MapPin size={16} />
-              Newark, NJ
+              Tri-State Area
             </span>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} <EpiHighlight text="epiSolve" /> LLC. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Episolve. All rights reserved.</p>
         </div>
       </div>
     </footer>

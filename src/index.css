@@ -4,119 +4,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* epiSolve Design System - Light Mode (Brand Colors: Navy #254071 + Yellow #FDFC8C) */
+/* Episolve Design System - Dark Mode ("Strategic Technology Office" Rebrand) */
 
 @layer base {
   :root {
-    /* Base Colors - Light theme */
-    --background: 0 0% 100%;
-    --foreground: 218 51% 20%;
+    /* Dark theme - Deep Navy/Slate for "Cyber Security" & "Premium Consulting" feel */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
     
     /* Card/Surface colors */
-    --card: 0 0% 100%;
-    --card-foreground: 218 51% 20%;
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 98%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 218 51% 20%;
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
     
-    /* Primary - Navy Blue (Pantone 295 U) */
-    --primary: 218 51% 30%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary - Bright accent for CTAs */
+    --primary: 47 100% 62%;
+    --primary-foreground: 222 47% 7%;
     
-    /* Secondary - Medium Blue */
-    --secondary: 213 38% 47%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary - Slate Blue */
+    --secondary: 215 28% 25%;
+    --secondary-foreground: 210 40% 98%;
     
-    /* Muted - Pale Blue surface */
-    --muted: 216 24% 92%;
-    --muted-foreground: 0 0% 40%;
+    /* Muted - Dark slate surface */
+    --muted: 222 40% 14%;
+    --muted-foreground: 215 20% 55%;
     
-    /* Accent - Bright Yellow (Pantone 101 U) */
-    --accent: 60 96% 78%;
-    --accent-foreground: 218 51% 20%;
+    /* Accent - Gold/Amber for premium feel */
+    --accent: 47 100% 62%;
+    --accent-foreground: 222 47% 7%;
     
     --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 40% 98%;
     
-    --border: 216 20% 85%;
-    --input: 216 20% 85%;
-    --ring: 218 51% 30%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 47 100% 62%;
     
     --radius: 0.75rem;
     
     /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(218 51% 30%) 0%, hsl(213 38% 47%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(216 24% 96%) 0%, hsl(0 0% 100%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(216 24% 98%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(218 51% 30%) 0%, hsl(213 38% 47%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(60 96% 78%) 0%, hsl(54 85% 72%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(47 100% 62%) 0%, hsl(38 95% 55%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(222 47% 5%) 0%, hsl(222 47% 10%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 47% 9%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(47 100% 62%) 0%, hsl(38 95% 55%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(47 100% 62%) 0%, hsl(38 95% 55%) 100%);
+    --gradient-dark: linear-gradient(135deg, hsl(222 47% 12%) 0%, hsl(222 47% 8%) 100%);
     
-    /* Glass effect - for light mode */
-    --glass-bg: hsl(0 0% 100% / 0.9);
-    --glass-border: hsl(216 20% 85% / 0.8);
+    /* Glass effect - for dark mode */
+    --glass-bg: hsl(222 47% 10% / 0.85);
+    --glass-border: hsl(222 30% 22% / 0.6);
     
     /* Glow effects */
-    --glow-primary: 0 0 60px hsl(218 51% 30% / 0.15);
-    --glow-accent: 0 0 80px hsl(60 96% 78% / 0.3);
+    --glow-primary: 0 0 60px hsl(47 100% 62% / 0.2);
+    --glow-accent: 0 0 80px hsl(47 100% 62% / 0.15);
     
     /* Shadows */
-    --shadow-sm: 0 2px 8px hsl(218 51% 30% / 0.08);
-    --shadow-md: 0 4px 16px hsl(218 51% 30% / 0.1);
-    --shadow-lg: 0 8px 32px hsl(218 51% 30% / 0.12);
-    --shadow-glow: 0 0 40px hsl(218 51% 30% / 0.1);
+    --shadow-sm: 0 2px 8px hsl(222 47% 3% / 0.4);
+    --shadow-md: 0 4px 16px hsl(222 47% 3% / 0.5);
+    --shadow-lg: 0 8px 32px hsl(222 47% 3% / 0.6);
+    --shadow-glow: 0 0 40px hsl(47 100% 62% / 0.15);
     
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 218 51% 20%;
-    --sidebar-primary: 218 51% 30%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 216 24% 92%;
-    --sidebar-accent-foreground: 218 51% 20%;
-    --sidebar-border: 216 20% 85%;
-    --sidebar-ring: 218 51% 30%;
-  }
-
-  .dark {
-    /* Dark mode variant (keeping for reference) */
-    --background: 218 51% 10%;
-    --foreground: 0 0% 98%;
-    
-    --card: 218 45% 13%;
-    --card-foreground: 0 0% 98%;
-    
-    --popover: 218 45% 13%;
-    --popover-foreground: 0 0% 98%;
-    
-    --primary: 60 96% 78%;
-    --primary-foreground: 218 51% 10%;
-    
-    --secondary: 213 38% 47%;
-    --secondary-foreground: 0 0% 98%;
-    
-    --muted: 218 40% 18%;
-    --muted-foreground: 216 15% 60%;
-    
-    --accent: 60 96% 78%;
-    --accent-foreground: 218 51% 10%;
-    
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
-    
-    --border: 218 30% 22%;
-    --input: 218 30% 22%;
-    --ring: 60 96% 78%;
-    
-    --gradient-primary: linear-gradient(135deg, hsl(60 96% 78%) 0%, hsl(54 85% 72%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(218 45% 12%) 0%, hsl(218 51% 10%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(218 45% 14%) 0%, hsl(218 45% 12%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(60 96% 78%) 0%, hsl(54 85% 72%) 100%);
-    
-    --glass-bg: hsl(218 45% 12% / 0.8);
-    --glass-border: hsl(218 30% 25% / 0.5);
-    
-    --shadow-sm: 0 2px 8px hsl(218 51% 5% / 0.4);
-    --shadow-md: 0 4px 16px hsl(218 51% 5% / 0.5);
-    --shadow-lg: 0 8px 32px hsl(218 51% 5% / 0.6);
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 47 100% 62%;
+    --sidebar-primary-foreground: 222 47% 7%;
+    --sidebar-accent: 222 40% 14%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 47 100% 62%;
   }
 }
 
@@ -136,7 +94,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    @apply font-bold tracking-tight text-primary;
+    @apply font-bold tracking-tight text-foreground;
   }
 }
 
@@ -174,6 +132,10 @@
   
   .accent-gradient {
     background: var(--gradient-accent);
+  }
+
+  .dark-gradient {
+    background: var(--gradient-dark);
   }
 }
 
