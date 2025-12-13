@@ -8,73 +8,73 @@
 
 @layer base {
   :root {
-    /* Dark theme - Deep Navy/Slate for "Cyber Security" & "Premium Consulting" feel */
-    --background: 222 47% 7%;
-    --foreground: 210 40% 98%;
+    /* Light theme - Clean & Professional with Navy accents */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
     
     /* Card/Surface colors */
-    --card: 222 47% 10%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
     
-    --popover: 222 47% 10%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
     
-    /* Primary - Bright accent for CTAs */
-    --primary: 47 100% 62%;
-    --primary-foreground: 222 47% 7%;
+    /* Primary - Deep Navy for authority */
+    --primary: 222 47% 20%;
+    --primary-foreground: 210 40% 98%;
     
-    /* Secondary - Slate Blue */
-    --secondary: 215 28% 25%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary - Light slate */
+    --secondary: 215 25% 94%;
+    --secondary-foreground: 222 47% 20%;
     
-    /* Muted - Dark slate surface */
-    --muted: 222 40% 14%;
-    --muted-foreground: 215 20% 55%;
+    /* Muted - Soft gray surface */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 20% 45%;
     
-    /* Accent - Gold/Amber for premium feel */
-    --accent: 47 100% 62%;
-    --accent-foreground: 222 47% 7%;
+    /* Accent - Rich amber/gold for premium feel */
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 47 100% 62%;
+    --border: 215 25% 88%;
+    --input: 215 25% 88%;
+    --ring: 222 47% 20%;
     
     --radius: 0.75rem;
     
     /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(47 100% 62%) 0%, hsl(38 95% 55%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(222 47% 5%) 0%, hsl(222 47% 10%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 47% 9%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(47 100% 62%) 0%, hsl(38 95% 55%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(47 100% 62%) 0%, hsl(38 95% 55%) 100%);
-    --gradient-dark: linear-gradient(135deg, hsl(222 47% 12%) 0%, hsl(222 47% 8%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(222 47% 20%) 0%, hsl(222 47% 30%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(215 25% 94%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(32 95% 45%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(32 95% 45%) 100%);
+    --gradient-dark: linear-gradient(135deg, hsl(222 47% 15%) 0%, hsl(222 47% 20%) 100%);
     
-    /* Glass effect - for dark mode */
-    --glass-bg: hsl(222 47% 10% / 0.85);
-    --glass-border: hsl(222 30% 22% / 0.6);
+    /* Glass effect - for light mode */
+    --glass-bg: hsl(0 0% 100% / 0.85);
+    --glass-border: hsl(215 25% 88% / 0.6);
     
     /* Glow effects */
-    --glow-primary: 0 0 60px hsl(47 100% 62% / 0.2);
-    --glow-accent: 0 0 80px hsl(47 100% 62% / 0.15);
+    --glow-primary: 0 0 60px hsl(222 47% 20% / 0.15);
+    --glow-accent: 0 0 80px hsl(38 92% 50% / 0.2);
     
     /* Shadows */
-    --shadow-sm: 0 2px 8px hsl(222 47% 3% / 0.4);
-    --shadow-md: 0 4px 16px hsl(222 47% 3% / 0.5);
-    --shadow-lg: 0 8px 32px hsl(222 47% 3% / 0.6);
-    --shadow-glow: 0 0 40px hsl(47 100% 62% / 0.15);
+    --shadow-sm: 0 2px 8px hsl(222 47% 11% / 0.08);
+    --shadow-md: 0 4px 16px hsl(222 47% 11% / 0.1);
+    --shadow-lg: 0 8px 32px hsl(222 47% 11% / 0.12);
+    --shadow-glow: 0 0 40px hsl(38 92% 50% / 0.15);
     
     /* Sidebar */
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 47 100% 62%;
-    --sidebar-primary-foreground: 222 47% 7%;
-    --sidebar-accent: 222 40% 14%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 47 100% 62%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 222 47% 20%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 215 25% 88%;
+    --sidebar-ring: 222 47% 20%;
   }
 }
 
