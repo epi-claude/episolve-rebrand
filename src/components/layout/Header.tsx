@@ -49,7 +49,7 @@ export function Header() {
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="Episolve" className="h-16" />
+          <img src={logo} alt="Episolve" className="h-32" />
         </Link>
 
         {/* Desktop Navigation */}
