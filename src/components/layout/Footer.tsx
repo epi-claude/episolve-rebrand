@@ -32,7 +32,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center mb-4">
-              <img src={logo} alt="Episolve" className="h-16" />
+              <img src={logo} alt="Episolve" className="h-24" />
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
               Strategic Technology Leadership for Growth-Focused Organizations. We bridge the gap between complex enterprise IT and nimble business strategy.
