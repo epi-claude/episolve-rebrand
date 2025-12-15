@@ -67,17 +67,17 @@ export default function CaseStudies() {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className="p-8 rounded-2xl dark-gradient border border-border"
+                className="p-8 rounded-2xl dark-gradient border border-white/10"
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="h-10 w-10 rounded-full bg-destructive/20 flex items-center justify-center flex-shrink-0">
                     <AlertTriangle className="h-5 w-5 text-destructive" />
                   </div>
-                  <h3 className="text-xl font-display font-semibold text-foreground">
+                  <h3 className="text-xl font-display font-semibold text-white">
                     The Challenge
                   </h3>
                 </div>
-                <p className="text-muted-foreground text-lg leading-relaxed pl-14">
+                <p className="text-white/70 text-lg leading-relaxed pl-14">
                   A prominent non-profit suffered a targeted Business Email Compromise (BEC) attack. Hackers compromised a weak password, monitored email, and authorized a fraudulent wire transfer.
                 </p>
               </motion.div>
@@ -88,18 +88,18 @@ export default function CaseStudies() {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className="p-8 rounded-2xl dark-gradient border border-border"
+                className="p-8 rounded-2xl dark-gradient border border-white/10"
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                    <Shield className="h-5 w-5 text-primary" />
+                  <div className="h-10 w-10 rounded-full bg-[hsl(213_37%_47%)] flex items-center justify-center flex-shrink-0">
+                    <Shield className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="text-xl font-display font-semibold text-foreground">
+                  <h3 className="text-xl font-display font-semibold text-white">
                     The Fix
                   </h3>
                 </div>
-                <p className="text-muted-foreground text-lg leading-relaxed pl-14">
-                  Episolve acted as the Crisis Response Team. We severed access, traced the breach, and deployed our <span className="text-primary font-medium">Adaptive Trust AI</span> stack. We implemented mandatory 2FA and enterprise Password Managers.
+                <p className="text-white/70 text-lg leading-relaxed pl-14">
+                  Episolve acted as the Crisis Response Team. We severed access, traced the breach, and deployed our <span className="text-[hsl(210_47%_70%)] font-medium">Adaptive Trust AI</span> stack. We implemented mandatory 2FA and enterprise Password Managers.
                 </p>
               </motion.div>
 
@@ -109,27 +109,27 @@ export default function CaseStudies() {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className="p-8 rounded-2xl dark-gradient border border-primary/30"
+                className="p-8 rounded-2xl dark-gradient border border-[hsl(210_47%_70%)]/30"
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="h-5 w-5 text-primary" />
+                  <div className="h-10 w-10 rounded-full bg-[hsl(213_37%_47%)] flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="text-xl font-display font-semibold text-foreground">
+                  <h3 className="text-xl font-display font-semibold text-white">
                     The Result
                   </h3>
                 </div>
-                <ul className="space-y-3 text-muted-foreground text-lg pl-14">
+                <ul className="space-y-3 text-white/70 text-lg pl-14">
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                    <CheckCircle className="h-5 w-5 text-[hsl(210_47%_70%)] flex-shrink-0 mt-1" />
                     <span>Zero recurrence of account takeovers</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                    <CheckCircle className="h-5 w-5 text-[hsl(210_47%_70%)] flex-shrink-0 mt-1" />
                     <span>Full compliance with new Cyber Liability Insurance requirements</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                    <CheckCircle className="h-5 w-5 text-[hsl(210_47%_70%)] flex-shrink-0 mt-1" />
                     <span>A culture shifted from 'fear' to 'defense'</span>
                   </li>
                 </ul>
