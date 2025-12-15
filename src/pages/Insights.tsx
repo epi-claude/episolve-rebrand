@@ -30,7 +30,7 @@ export default function Insights() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-32 relative overflow-hidden">
         {/* Background image with overlay */}
         <div className="absolute inset-0">
           <motion.div
