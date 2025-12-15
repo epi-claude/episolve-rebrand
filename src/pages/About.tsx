@@ -145,24 +145,24 @@ export default function About() {
               <motion.div
                 key={member.id}
                 variants={fadeInUp}
-                className="p-6 rounded-2xl dark-gradient border border-border text-center group"
+                className="p-6 rounded-2xl dark-gradient border border-white/10 text-center group"
               >
-                <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-2xl font-display font-bold text-foreground">
+                <div className="h-24 w-24 rounded-full bg-gradient-to-br from-accent/40 to-accent/20 mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-2xl font-display font-bold text-white">
                     {member.name.split(" ").map((n) => n[0]).join("")}
                   </span>
                 </div>
-                <h3 className="text-lg font-display font-semibold text-foreground mb-1">
+                <h3 className="text-lg font-display font-semibold text-white mb-1">
                   {member.name}
                 </h3>
-                <p className="text-primary text-sm mb-3">{member.role}</p>
-                <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
+                <p className="text-accent text-sm mb-3">{member.role}</p>
+                <p className="text-white/70 text-sm mb-4">{member.bio}</p>
                 {member.linkedin && (
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center p-2 rounded-lg bg-muted hover:bg-primary/20 hover:text-primary transition-colors"
+                    className="inline-flex items-center justify-center p-2 rounded-lg bg-white/10 hover:bg-accent/20 text-white hover:text-accent transition-colors"
                   >
                     <Linkedin size={18} />
                   </a>
