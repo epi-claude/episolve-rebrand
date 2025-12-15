@@ -49,9 +49,7 @@ export function Header() {
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <span className="text-2xl font-display font-bold text-foreground">
-            Episolve
-          </span>
+          <img src={logo} alt="Episolve" className="h-8" />
         </Link>
 
         {/* Desktop Navigation */}

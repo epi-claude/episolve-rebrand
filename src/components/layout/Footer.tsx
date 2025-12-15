@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import logo from "@/assets/episolve-logo-horizontal.png";
 
 const footerLinks = {
   solutions: [
@@ -31,9 +32,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center mb-4">
-              <span className="text-2xl font-display font-bold text-foreground">
-                Episolve
-              </span>
+              <img src={logo} alt="Episolve" className="h-8" />
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
               Strategic Technology Leadership for Growth-Focused Organizations. We bridge the gap between complex enterprise IT and nimble business strategy.
