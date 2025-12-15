@@ -56,7 +56,7 @@ export default function Services() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
+            className="max-w-3xl pt-8 pb-16"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
               Our <span className="gradient-text">Services</span>
