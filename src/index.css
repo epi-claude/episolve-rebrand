@@ -38,7 +38,7 @@
     --muted: 215 20% 94%;
     --muted-foreground: 213 37% 40%;
     
-    /* Accent - Yellow #FDFC6C */
+    /* Accent - Yellow #FDFC6C - needs dark text for contrast */
     --accent: 60 97% 71%;
     --accent-foreground: 222 50% 18%;
     
