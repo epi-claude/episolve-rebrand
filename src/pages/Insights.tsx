@@ -154,7 +154,7 @@ export default function Insights() {
               />
               <button
                 type="submit"
-                className="h-12 px-6 rounded-lg cta-gradient font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                className="h-12 px-6 rounded-lg cta-gradient font-semibold text-[hsl(222_50%_18%)] hover:opacity-90 transition-opacity"
               >
                 Subscribe
               </button>
