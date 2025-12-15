@@ -147,7 +147,7 @@ export default function About() {
                 variants={fadeInUp}
                 className="p-6 rounded-2xl dark-gradient border border-white/10 text-center group"
               >
-                <div className="h-24 w-24 rounded-full bg-gradient-to-br from-accent/40 to-accent/20 mx-auto mb-4 flex items-center justify-center">
+                <div className="h-24 w-24 rounded-full bg-[hsl(213_37%_47%)] mx-auto mb-4 flex items-center justify-center">
                   <span className="text-2xl font-display font-bold text-white">
                     {member.name.split(" ").map((n) => n[0]).join("")}
                   </span>
@@ -155,7 +155,7 @@ export default function About() {
                 <h3 className="text-lg font-display font-semibold text-white mb-1">
                   {member.name}
                 </h3>
-                <p className="text-accent text-sm mb-3">{member.role}</p>
+                <p className="text-[hsl(210_47%_70%)] text-sm mb-3">{member.role}</p>
                 <p className="text-white/70 text-sm mb-4">{member.bio}</p>
                 {member.linkedin && (
                   <a
