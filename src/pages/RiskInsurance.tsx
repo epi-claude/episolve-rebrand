@@ -113,18 +113,18 @@ export default function RiskInsurance() {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="p-8 rounded-2xl dark-gradient border border-border"
+                  className="p-8 rounded-2xl dark-gradient border border-white/10"
                 >
-                  <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-                    <Icon className="h-7 w-7 text-primary" />
+                  <div className="h-14 w-14 rounded-xl bg-[hsl(213_37%_47%)] flex items-center justify-center mb-6">
+                    <Icon className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-display font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-display font-semibold text-white mb-2">
                     {feature.title}
                   </h3>
                   {feature.subtitle && (
-                    <p className="text-primary text-sm mb-3">{feature.subtitle}</p>
+                    <p className="text-[hsl(210_47%_70%)] text-sm mb-3">{feature.subtitle}</p>
                   )}
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white/70 leading-relaxed">
                     {feature.description}
                   </p>
                 </motion.div>

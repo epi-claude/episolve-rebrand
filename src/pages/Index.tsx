@@ -212,14 +212,14 @@ export default function Index() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <div className="relative p-10 rounded-2xl dark-gradient border border-border">
-              <Quote className="h-12 w-12 text-primary/30 absolute top-8 left-8" />
-              <blockquote className="text-xl md:text-2xl text-foreground leading-relaxed mb-8 pl-8">
+            <div className="relative p-10 rounded-2xl dark-gradient border border-white/10">
+              <Quote className="h-12 w-12 text-[hsl(210_47%_70%)]/30 absolute top-8 left-8" />
+              <blockquote className="text-xl md:text-2xl text-white leading-relaxed mb-8 pl-8">
                 "Episolve helped us modernize our entire operation. They took the time to understand our family business and delivered technology that actually fits how we work."
               </blockquote>
               <div className="pl-8">
-                <div className="font-semibold text-foreground">Robert Hernandez</div>
-                <div className="text-muted-foreground">CEO, Hernandez Manufacturing</div>
+                <div className="font-semibold text-white">Robert Hernandez</div>
+                <div className="text-white/70">CEO, Hernandez Manufacturing</div>
               </div>
             </div>
           </motion.div>
