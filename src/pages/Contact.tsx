@@ -77,7 +77,7 @@ export default function Contact() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-32 relative overflow-hidden">
+      <section className="py-32 min-h-[60vh] flex items-center relative overflow-hidden">
         {/* Background image with overlay */}
         <div className="absolute inset-0">
           <motion.div
