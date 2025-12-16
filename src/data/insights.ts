@@ -19,7 +19,7 @@ export const insights: InsightPost[] = [
     id: "1",
     slug: "ai-for-small-business-practical-guide",
     title: "AI for Small Business: A Practical Guide for 2025",
-    excerpt: "Cut through the hype. Here's what AI can actually do for your family-run business today, and where to start without breaking the bank.",
+    excerpt: "Cut through the hype. Here's what AI can actually do for your not-for-profit today, and where to start without breaking the bank.",
     content: `
       <p>The AI conversation has shifted from "will it change business?" to "how do I actually use it?" For small and mid-size businesses, the answer isn't about massive investments or rebuilding your company from scratch.</p>
 
@@ -57,10 +57,10 @@ export const insights: InsightPost[] = [
   {
     id: "2",
     slug: "choosing-right-crm-family-business",
-    title: "Choosing the Right CRM for Your Family Business",
-    excerpt: "Not all CRMs are created equal. Learn how to evaluate options based on what actually matters for relationship-driven businesses.",
+    title: "Choosing the Right CRM for Your Not-For-Profit",
+    excerpt: "Not all CRMs are created equal. Learn how to evaluate options based on what actually matters for mission-driven organizations.",
     content: `
-      <p>For family-run businesses, relationships are everything. Your CRM should enhance those relationships, not create administrative burden.</p>
+      <p>For not-for-profit organizations, relationships with donors, volunteers, and communities are everything. Your CRM should enhance those relationships, not create administrative burden.</p>
 
       <h2>What to Look For</h2>
 
@@ -75,7 +75,7 @@ export const insights: InsightPost[] = [
 
       <h2>Top Recommendations</h2>
 
-      <p>For most small businesses, we recommend starting with HubSpot (free tier) or Pipedrive. Both offer excellent value and grow with your business.</p>
+      <p>For most not-for-profits, we recommend starting with HubSpot for Nonprofits (free tier) or Bloomerang. Both offer excellent value and grow with your organization.</p>
 
       <p>The best CRM is the one your team actually uses. Start simple, prove value, then add complexity as needed.</p>
     `,
