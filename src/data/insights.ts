@@ -18,7 +18,7 @@ export const insights: InsightPost[] = [
   {
     id: "1",
     slug: "ai-for-small-business-practical-guide",
-    title: "AI for Small Business: A Practical Guide for 2024",
+    title: "AI for Small Business: A Practical Guide for 2025",
     excerpt: "Cut through the hype. Here's what AI can actually do for your family-run business today, and where to start without breaking the bank.",
     content: `
       <p>The AI conversation has shifted from "will it change business?" to "how do I actually use it?" For small and mid-size businesses, the answer isn't about massive investments or rebuilding your company from scratch.</p>
@@ -46,7 +46,7 @@ export const insights: InsightPost[] = [
       <p>The key isn't adopting AI for its own sake. It's identifying where technology can solve real problems in your business.</p>
     `,
     category: "AI & Technology",
-    publishedAt: "2024-11-28",
+    publishedAt: "2025-11-28",
     author: {
       name: "Alex Rivera",
       role: "Technology Consultant",
@@ -80,7 +80,7 @@ export const insights: InsightPost[] = [
       <p>The best CRM is the one your team actually uses. Start simple, prove value, then add complexity as needed.</p>
     `,
     category: "Business Software",
-    publishedAt: "2024-11-15",
+    publishedAt: "2025-11-15",
     author: {
       name: "Jordan Chen",
       role: "Integration Specialist",
@@ -122,7 +122,7 @@ export const insights: InsightPost[] = [
       <p>Security doesn't have to be complicated. Start with these basics and build from there.</p>
     `,
     category: "Cybersecurity",
-    publishedAt: "2024-10-30",
+    publishedAt: "2025-10-30",
     author: {
       name: "Sam Martinez",
       role: "Security Consultant",
@@ -164,7 +164,7 @@ export const insights: InsightPost[] = [
       <p>The key to successful cloud migration is patience and proper planning. Rush it, and you'll spend more time fixing problems than you saved.</p>
     `,
     category: "Cloud & Infrastructure",
-    publishedAt: "2024-10-15",
+    publishedAt: "2025-10-15",
     author: {
       name: "Alex Rivera",
       role: "Technology Consultant",
