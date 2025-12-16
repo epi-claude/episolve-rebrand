@@ -151,11 +151,18 @@ export default function InsightDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="lg:col-span-3 prose prose-invert prose-lg max-w-none"
+              className="lg:col-span-3"
             >
               <div
-                className="text-muted-foreground leading-relaxed [&_h1]:text-foreground [&_h1]:font-display [&_h1]:text-3xl [&_h1]:mb-6 [&_h2]:text-foreground [&_h2]:font-display [&_h2]:text-2xl [&_h2]:mt-12 [&_h2]:mb-4 [&_h3]:text-foreground [&_h3]:font-display [&_h3]:text-xl [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:ml-6 [&_ul]:list-disc [&_li]:mb-2 [&_strong]:text-foreground"
-                dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, "<br />") }}
+                className="text-muted-foreground leading-relaxed 
+                  [&_h2]:text-foreground [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4 
+                  [&_h3]:text-foreground [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 
+                  [&_p]:mb-6 [&_p]:text-lg
+                  [&_ul]:mb-6 [&_ul]:ml-6 [&_ul]:list-disc [&_ul]:space-y-2
+                  [&_ol]:mb-6 [&_ol]:ml-6 [&_ol]:list-decimal [&_ol]:space-y-3
+                  [&_li]:text-muted-foreground
+                  [&_strong]:text-foreground [&_strong]:font-semibold"
+                dangerouslySetInnerHTML={{ __html: post.content }}
               />
 
               {/* Mobile Share */}
