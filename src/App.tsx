@@ -11,6 +11,7 @@ import Insights from "./pages/Insights";
 import InsightDetail from "./pages/InsightDetail";
 import CaseStudies from "./pages/CaseStudies";
 import RiskInsurance from "./pages/RiskInsurance";
+import FractionalTechnologyOffice from "./pages/FractionalTechnologyOffice";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/insights/:slug" element={<InsightDetail />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/solutions/risk-insurance" element={<RiskInsurance />} />
+          <Route path="/solutions/fractional-technology-office" element={<FractionalTechnologyOffice />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
