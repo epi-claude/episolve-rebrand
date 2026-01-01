@@ -55,7 +55,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to admin (you can change this to your actual admin email)
     const adminEmailResponse = await resend.emails.send({
       from: "Episolve Website <onboarding@resend.dev>",
-      to: ["admin@episolve.com"], // Update this to your actual admin email
+      to: ["contact@episolve.com"],
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
