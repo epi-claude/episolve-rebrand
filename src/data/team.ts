@@ -16,7 +16,7 @@ export const team: TeamMember[] = [
   },
   {
     id: "2",
-    name: "Sarah Chen",
+    name: "Stephanie Meininger",
     role: "Director of Client Services",
     bio: "Ensuring every project delivers measurable ROI and on-time delivery.",
     linkedin: "https://linkedin.com",
