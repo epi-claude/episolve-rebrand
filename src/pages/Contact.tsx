@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Layout } from "@/components/layout/Layout";
 import { services } from "@/data/services";
 import { toast } from "sonner";
@@ -53,13 +54,27 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  // Consultation booking state
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [bookingData, setBookingData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    preferredDate: "",
+    message: "",
+  });
+  const [isBookingSubmitting, setIsBookingSubmitting] = useState(false);
+  const [isBookingSubmitted, setIsBookingSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      // Save to database
+      const { error: dbError } = await supabase
         .from("contact_submissions")
         .insert({
           name: formData.name,
@@ -70,7 +85,24 @@ export default function Contact() {
           message: formData.message,
         });
 
-      if (error) throw error;
+      if (dbError) throw dbError;
+
+      // Send confirmation emails
+      const { error: emailError } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          company: formData.company || undefined,
+          service: formData.service || undefined,
+          message: formData.message,
+        },
+      });
+
+      if (emailError) {
+        console.error("Email error:", emailError);
+        // Don't throw - form was still submitted successfully
+      }
 
       setIsSubmitted(true);
       toast.success("Message sent! We'll be in touch within 24 hours.");
@@ -89,6 +121,60 @@ export default function Contact() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const handleBookingChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setBookingData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleBookingSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsBookingSubmitting(true);
+
+    try {
+      // Save to database
+      const { error: dbError } = await supabase
+        .from("consultation_bookings")
+        .insert({
+          name: bookingData.name,
+          email: bookingData.email,
+          phone: bookingData.phone || null,
+          company: bookingData.company || null,
+          preferred_date: bookingData.preferredDate || null,
+          message: bookingData.message || null,
+        });
+
+      if (dbError) throw dbError;
+
+      // Send confirmation emails
+      const { error: emailError } = await supabase.functions.invoke("send-booking-email", {
+        body: {
+          name: bookingData.name,
+          email: bookingData.email,
+          phone: bookingData.phone || undefined,
+          company: bookingData.company || undefined,
+          preferredDate: bookingData.preferredDate || undefined,
+          message: bookingData.message || undefined,
+        },
+      });
+
+      if (emailError) {
+        console.error("Booking email error:", emailError);
+      }
+
+      setIsBookingSubmitted(true);
+      toast.success("Consultation booked! We'll confirm your appointment soon.");
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsBookingSubmitting(false);
+    }
   };
 
   return (
@@ -193,9 +279,129 @@ export default function Contact() {
                 <p className="text-muted-foreground text-sm mb-4">
                   Schedule a 30-minute discovery call at your convenience.
                 </p>
-                <Button variant="outline" className="w-full">
-                  Book a Consultation
-                </Button>
+                <Dialog open={bookingOpen} onOpenChange={(open) => {
+                  setBookingOpen(open);
+                  if (!open) {
+                    setIsBookingSubmitted(false);
+                    setBookingData({
+                      name: "",
+                      email: "",
+                      phone: "",
+                      company: "",
+                      preferredDate: "",
+                      message: "",
+                    });
+                  }
+                }}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="w-full">
+                      <Calendar className="mr-2 h-4 w-4" />
+                      Book a Consultation
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-lg">
+                    <DialogHeader>
+                      <DialogTitle>Book a Strategic Audit</DialogTitle>
+                      <DialogDescription>
+                        Schedule a 30-minute discovery call to discuss your challenges and goals.
+                      </DialogDescription>
+                    </DialogHeader>
+                    {isBookingSubmitted ? (
+                      <div className="text-center py-8">
+                        <div className="h-16 w-16 rounded-full cta-gradient flex items-center justify-center mx-auto mb-6">
+                          <CheckCircle className="h-8 w-8 text-primary-foreground" />
+                        </div>
+                        <h3 className="text-xl font-display font-bold text-foreground mb-2">
+                          Booking Confirmed!
+                        </h3>
+                        <p className="text-muted-foreground">
+                          We'll contact you within 24 hours to confirm your appointment.
+                        </p>
+                      </div>
+                    ) : (
+                      <form onSubmit={handleBookingSubmit} className="space-y-4 mt-4">
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="booking-name">Name *</Label>
+                            <Input
+                              id="booking-name"
+                              name="name"
+                              required
+                              value={bookingData.name}
+                              onChange={handleBookingChange}
+                              placeholder="Your name"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="booking-email">Email *</Label>
+                            <Input
+                              id="booking-email"
+                              name="email"
+                              type="email"
+                              required
+                              value={bookingData.email}
+                              onChange={handleBookingChange}
+                              placeholder="you@company.com"
+                            />
+                          </div>
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="booking-phone">Phone</Label>
+                            <Input
+                              id="booking-phone"
+                              name="phone"
+                              type="tel"
+                              value={bookingData.phone}
+                              onChange={handleBookingChange}
+                              placeholder="(123) 456-7890"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="booking-company">Company</Label>
+                            <Input
+                              id="booking-company"
+                              name="company"
+                              value={bookingData.company}
+                              onChange={handleBookingChange}
+                              placeholder="Your company"
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="booking-date">Preferred Date</Label>
+                          <Input
+                            id="booking-date"
+                            name="preferredDate"
+                            type="date"
+                            value={bookingData.preferredDate}
+                            onChange={handleBookingChange}
+                            min={new Date().toISOString().split('T')[0]}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="booking-message">Additional Notes</Label>
+                          <Textarea
+                            id="booking-message"
+                            name="message"
+                            rows={3}
+                            value={bookingData.message}
+                            onChange={handleBookingChange}
+                            placeholder="Tell us briefly about your challenges..."
+                          />
+                        </div>
+                        <Button
+                          type="submit"
+                          variant="hero"
+                          className="w-full"
+                          disabled={isBookingSubmitting}
+                        >
+                          {isBookingSubmitting ? "Booking..." : "Confirm Booking"}
+                        </Button>
+                      </form>
+                    )}
+                  </DialogContent>
+                </Dialog>
               </div>
             </motion.div>
 
