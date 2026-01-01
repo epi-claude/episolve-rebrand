@@ -1,42 +1,46 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Linkedin, Globe, Building, Zap } from "lucide-react";
+import { ArrowRight, Globe, Building, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { team } from "@/data/team";
-
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
+  initial: {
+    opacity: 0,
+    y: 30
+  },
+  animate: {
+    opacity: 1,
+    y: 0
+  },
+  transition: {
+    duration: 0.6
+  }
 };
-
 const stagger = {
   animate: {
     transition: {
-      staggerChildren: 0.1,
-    },
-  },
+      staggerChildren: 0.1
+    }
+  }
 };
-
 export default function About() {
-  return (
-    <Layout>
+  return <Layout>
       {/* Hero */}
       <section className="py-32 min-h-[60vh] flex items-center relative overflow-hidden">
         {/* Background image with overlay */}
         <div className="absolute inset-0">
-          <motion.div
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute inset-0"
-          >
-            <img
-              src="/hero-about.jpg"
-              alt="Technology network background"
-              className="w-full h-full object-cover"
-            />
+          <motion.div initial={{
+          scale: 1.1,
+          opacity: 0
+        }} animate={{
+          scale: 1,
+          opacity: 1
+        }} transition={{
+          duration: 1.5,
+          ease: "easeOut"
+        }} className="absolute inset-0">
+            <img src="/hero-about.jpg" alt="Technology network background" className="w-full h-full object-cover" />
           </motion.div>
           
           {/* Gradient overlay for readability */}
@@ -44,20 +48,24 @@ export default function About() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
           
           {/* Animated accent glow */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2, delay: 0.5 }}
-            className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px]"
-          />
+          <motion.div initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} transition={{
+          duration: 2,
+          delay: 0.5
+        }} className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px]" />
         </div>
 
         <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
               Enterprise Strategy.<br />
               <span className="gradient-text">Boutique Agility.</span><br />
@@ -73,12 +81,15 @@ export default function About() {
       {/* Core Value Block */}
       <section className="py-24 bg-card">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8">
               "We Eat Our Own Cooking"
             </h2>
@@ -92,13 +103,9 @@ export default function About() {
       {/* Differentiators */}
       <section className="py-24">
         <div className="container">
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="grid md:grid-cols-3 gap-8"
-          >
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={stagger} className="grid md:grid-cols-3 gap-8">
             <motion.div variants={fadeInUp} className="p-8 rounded-2xl card-gradient border border-border">
               <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                 <Building className="h-7 w-7 text-primary" />
@@ -141,33 +148,27 @@ export default function About() {
       {/* Team Section */}
       <section className="py-24 bg-card">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
               Meet the Team
             </h2>
           </motion.div>
 
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {team.map((member) => (
-              <motion.div
-                key={member.id}
-                variants={fadeInUp}
-                className="p-6 rounded-2xl dark-gradient border border-white/10 text-center group"
-              >
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={stagger} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {team.map(member => <motion.div key={member.id} variants={fadeInUp} className="p-6 rounded-2xl dark-gradient border border-white/10 text-center group">
                 <div className="h-24 w-24 rounded-full bg-[hsl(213_37%_47%)] mx-auto mb-4 flex items-center justify-center">
                   <span className="text-2xl font-display font-bold text-white">
-                    {member.name.split(" ").map((n) => n[0]).join("")}
+                    {member.name.split(" ").map(n => n[0]).join("")}
                   </span>
                 </div>
                 <h3 className="text-lg font-display font-semibold text-white mb-1">
@@ -175,18 +176,10 @@ export default function About() {
                 </h3>
                 <p className="text-[hsl(210_47%_70%)] text-sm mb-3">{member.role}</p>
                 <p className="text-white/70 text-sm mb-4">{member.bio}</p>
-                {member.linkedin && (
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center p-2 rounded-lg bg-white/10 hover:bg-accent/20 text-white hover:text-accent transition-colors"
-                  >
-                    <Linkedin size={18} />
-                  </a>
-                )}
-              </motion.div>
-            ))}
+                {member.linkedin && <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center p-2 rounded-lg bg-white/10 hover:bg-accent/20 text-white hover:text-accent transition-colors">
+                    
+                  </a>}
+              </motion.div>)}
           </motion.div>
         </div>
       </section>
@@ -194,12 +187,15 @@ export default function About() {
       {/* CTA Section */}
       <section className="py-24">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
               Ready to Partner With Us?
             </h2>
@@ -215,6 +211,5 @@ export default function About() {
           </motion.div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 }
