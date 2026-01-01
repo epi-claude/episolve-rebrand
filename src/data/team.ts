@@ -9,7 +9,7 @@ export interface TeamMember {
 export const team: TeamMember[] = [
   {
     id: "1",
-    name: "Michael Torres",
+    name: "Richard Baldwin",
     role: "Founder & vCIO",
     bio: "20+ years making enterprise IT accessible. Michael acts as the Virtual CIO for our clients, aligning complex infrastructure with business outcomes.",
     linkedin: "https://linkedin.com",
