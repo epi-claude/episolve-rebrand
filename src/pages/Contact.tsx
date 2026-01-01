@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Layout } from "@/components/layout/Layout";
 import { services } from "@/data/services";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
   {
@@ -57,12 +58,28 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { error } = await supabase
+        .from("contact_submissions")
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          company: formData.company || null,
+          service_interest: formData.service || null,
+          message: formData.message,
+        });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast.success("Message sent! We'll be in touch within 24 hours.");
+      if (error) throw error;
+
+      setIsSubmitted(true);
+      toast.success("Message sent! We'll be in touch within 24 hours.");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
