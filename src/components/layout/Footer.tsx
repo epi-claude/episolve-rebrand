@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, MapPin, Linkedin, Twitter, ArrowRight } from "lucide-react";
+import { Phone, MapPin, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import logo from "@/assets/episolve-logo-horizontal.png";
@@ -49,9 +49,6 @@ export function Footer() {
             <div className="flex gap-3">
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-muted border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
                 <Linkedin size={18} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-muted border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
-                <Twitter size={18} />
               </a>
             </div>
           </div>
