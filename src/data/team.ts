@@ -23,7 +23,7 @@ export const team: TeamMember[] = [
   },
   {
     id: "3",
-    name: "David Okonkwo",
+    name: "Parimal Jariwala",
     role: "Lead Software Engineer",
     bio: "Specializing in 'Pragmatic Engineering'—building scalable apps that solve operational bottlenecks.",
     linkedin: "https://linkedin.com",
