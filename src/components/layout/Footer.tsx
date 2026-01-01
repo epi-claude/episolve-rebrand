@@ -47,7 +47,7 @@ export function Footer() {
               Strategic Technology Leadership for Growth-Focused Organizations. We bridge the gap between complex enterprise IT and nimble business strategy.
             </p>
             <div className="flex gap-3">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-muted border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
+              <a href="https://www.linkedin.com/company/episolve-llc/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-muted border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
                 <Linkedin size={18} />
               </a>
             </div>
