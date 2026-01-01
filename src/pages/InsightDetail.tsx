@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, Clock, Share2, Linkedin, Twitter, Link as LinkIcon } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Share2, Linkedin, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { getInsightBySlug, insights } from "@/data/insights";
@@ -24,7 +24,7 @@ export default function InsightDetail() {
 
   const otherPosts = insights.filter((p) => p.id !== post.id).slice(0, 2);
 
-  const handleShare = (platform: "linkedin" | "twitter" | "copy") => {
+  const handleShare = (platform: "linkedin" | "copy") => {
     const url = window.location.href;
     const title = post.title;
 
@@ -32,12 +32,6 @@ export default function InsightDetail() {
       case "linkedin":
         window.open(
           `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-          "_blank"
-        );
-        break;
-      case "twitter":
-        window.open(
-          `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
           "_blank"
         );
         break;
@@ -127,15 +121,6 @@ export default function InsightDetail() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleShare("twitter")}
-                    className="justify-start"
-                  >
-                    <Twitter className="h-4 w-4 mr-2" />
-                    Twitter
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
                     onClick={() => handleShare("copy")}
                     className="justify-start"
                   >
@@ -177,13 +162,6 @@ export default function InsightDetail() {
                     onClick={() => handleShare("linkedin")}
                   >
                     <Linkedin className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleShare("twitter")}
-                  >
-                    <Twitter className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
