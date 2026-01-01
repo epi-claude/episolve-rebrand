@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, MapPin, Linkedin, ArrowRight } from "lucide-react";
+import { Phone, MapPin, Linkedin, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/episolve-logo-horizontal.png";
+
 const footerLinks = {
   solutions: [{
     name: "Fractional Technology Office",
@@ -28,8 +32,52 @@ const footerLinks = {
     href: "/contact"
   }]
 };
+
 export function Footer() {
-  return <footer className="relative border-t border-border bg-card">
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes("@")) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke("subscribe-newsletter", {
+        body: { email },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Subscribed!",
+        description: data.message || "You've been added to our newsletter.",
+      });
+      setEmail("");
+    } catch (error: any) {
+      console.error("Newsletter subscription error:", error);
+      toast({
+        title: "Subscription failed",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <footer className="relative border-t border-border bg-card">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -57,11 +105,13 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4">Solutions</h4>
             <ul className="space-y-3">
-              {footerLinks.solutions.map(link => <li key={link.href}>
+              {footerLinks.solutions.map(link => (
+                <li key={link.href}>
                   <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </Link>
-                </li>)}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -69,11 +119,13 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4">Company</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map(link => <li key={link.href}>
+              {footerLinks.company.map(link => (
+                <li key={link.href}>
                   <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </Link>
-                </li>)}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -83,10 +135,17 @@ export function Footer() {
             <p className="text-sm text-muted-foreground mb-4">
               Get insights on technology strategy and risk management.
             </p>
-            <form className="flex gap-2" onSubmit={e => e.preventDefault()}>
-              <Input type="email" placeholder="Your email" className="bg-muted border-border" />
-              <Button variant="default" size="icon">
-                <ArrowRight size={16} />
+            <form className="flex gap-2" onSubmit={handleNewsletterSubmit}>
+              <Input 
+                type="email" 
+                placeholder="Your email" 
+                className="bg-muted border-border"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+              />
+              <Button variant="default" size="icon" type="submit" disabled={isLoading}>
+                {isLoading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={16} />}
               </Button>
             </form>
           </div>
@@ -95,7 +154,6 @@ export function Footer() {
         {/* Contact Info */}
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-wrap gap-6 justify-center md:justify-start text-sm text-muted-foreground">
-            
             <a href="tel:+19737400414" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Phone size={16} />
               (973) 740-0414
@@ -112,5 +170,6 @@ export function Footer() {
           <p>&copy; {new Date().getFullYear()} Episolve. All rights reserved.</p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 }
