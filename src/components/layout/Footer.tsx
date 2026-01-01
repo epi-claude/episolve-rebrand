@@ -98,8 +98,9 @@ export function Footer() {
         {/* Contact Info */}
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-wrap gap-6 justify-center md:justify-start text-sm text-muted-foreground">
-            <a href="mailto:hello@episolve.com" className="flex items-center gap-2 hover:text-primary transition-colors">info@episolve.com<Mail size={16} />
-              hello@episolve.com
+            <a href="mailto:info@episolve.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Mail size={16} />
+              info@episolve.com
             </a>
             <a href="tel:+19737400414" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Phone size={16} />
