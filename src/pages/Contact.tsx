@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Calendar } from "lucide-react";
+import { Phone, MapPin, Clock, Send, CheckCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,12 +14,6 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "hello@episolve.com",
-    href: "mailto:hello@episolve.com",
-  },
   {
     icon: Phone,
     label: "Phone",
