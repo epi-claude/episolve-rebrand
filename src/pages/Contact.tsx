@@ -81,6 +81,19 @@ export default function Contact() {
 
       if (dbError) throw dbError;
 
+      // Sync to GoHighLevel (don't block on failure)
+      supabase.functions.invoke("ghl-contact-sync", {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          company: formData.company || undefined,
+          service: formData.service || undefined,
+          message: formData.message,
+          isBooking: false,
+        },
+      }).catch((err) => console.error("GHL sync error:", err));
+
       // Send confirmation emails
       const { error: emailError } = await supabase.functions.invoke("send-contact-email", {
         body: {
@@ -144,6 +157,19 @@ export default function Contact() {
         });
 
       if (dbError) throw dbError;
+
+      // Sync to GoHighLevel with calendar event (don't block on failure)
+      supabase.functions.invoke("ghl-contact-sync", {
+        body: {
+          name: bookingData.name,
+          email: bookingData.email,
+          phone: bookingData.phone || undefined,
+          company: bookingData.company || undefined,
+          message: bookingData.message || undefined,
+          preferredDate: bookingData.preferredDate || undefined,
+          isBooking: true,
+        },
+      }).catch((err) => console.error("GHL sync error:", err));
 
       // Send confirmation emails
       const { error: emailError } = await supabase.functions.invoke("send-booking-email", {
