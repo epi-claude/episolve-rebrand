@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.subscribe-newsletter]
 verify_jwt = false
+
+[functions.ghl-contact-sync]
+verify_jwt = false
