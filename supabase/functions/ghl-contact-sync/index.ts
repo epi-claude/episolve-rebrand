@@ -138,10 +138,25 @@ async function createCalendarEvent(contactId: string, data: {
   message?: string;
 }) {
   console.log("Creating GHL calendar event for contact:", contactId);
+  console.log("Received preferredDate:", data.preferredDate);
 
-  // Use the actual selected date/time from the booking picker (30-minute slots)
-  const startTime = new Date(data.preferredDate);
+  // The frontend sends date in format "YYYY-MM-DDTHH:mm:00" in EST
+  // We need to convert this to proper UTC for GHL API
+  // EST is UTC-5, EDT is UTC-4. For simplicity, assume EST (UTC-5)
+  const localDateStr = data.preferredDate;
+  
+  // Parse the local time components
+  const [datePart, timePart] = localDateStr.split("T");
+  const [hours, minutes] = timePart.split(":").map(Number);
+  
+  // Create a date object and add 5 hours to convert EST to UTC
+  const localDate = new Date(`${datePart}T${timePart}`);
+  const utcDate = new Date(localDate.getTime() + 5 * 60 * 60 * 1000); // Add 5 hours for EST->UTC
+  
+  const startTime = utcDate;
   const endTime = new Date(startTime.getTime() + 30 * 60 * 1000); // 30-minute slots
+  
+  console.log("Converted to UTC - startTime:", startTime.toISOString(), "endTime:", endTime.toISOString());
 
   const appointmentPayload: Record<string, unknown> = {
     calendarId: GHL_CALENDAR_ID,
