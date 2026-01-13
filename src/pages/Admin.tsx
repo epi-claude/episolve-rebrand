@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
   RefreshCw, 
@@ -9,7 +10,9 @@ import {
   Settings,
   Play,
   Mail,
-  MessageSquare
+  MessageSquare,
+  LogOut,
+  User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +24,7 @@ import { toast } from "sonner";
 import { ContactsTable } from "@/components/admin/ContactsTable";
 import { NewsletterTable } from "@/components/admin/NewsletterTable";
 import { BookingsTable } from "@/components/admin/BookingsTable";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SyncResult {
   success: boolean;
@@ -31,10 +35,18 @@ interface SyncResult {
 }
 
 export default function Admin() {
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [syncResult, setSyncResult] = useState<SyncResult | null>(null);
   const [sinceDate, setSinceDate] = useState("");
   const [contactIds, setContactIds] = useState("");
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out successfully");
+    navigate("/");
+  };
 
   const runSync = async (options: { syncAll?: boolean; since?: string; contactIds?: string[] }) => {
     setIsLoading(true);
@@ -100,13 +112,25 @@ export default function Admin() {
       {/* Header */}
       <header className="border-b border-border bg-card">
         <div className="container py-6">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Settings className="h-5 w-5 text-primary" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Settings className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-display font-bold text-foreground">Admin Dashboard</h1>
+                <p className="text-sm text-muted-foreground">Manage contacts, subscribers, and sync operations</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl font-display font-bold text-foreground">Admin Dashboard</h1>
-              <p className="text-sm text-muted-foreground">Manage and run one-off tasks</p>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <User className="h-4 w-4" />
+                <span>{user?.email}</span>
+              </div>
+              <Button variant="outline" size="sm" onClick={handleSignOut}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Sign Out
+              </Button>
             </div>
           </div>
         </div>
