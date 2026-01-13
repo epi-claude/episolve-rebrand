@@ -8,7 +8,10 @@ import {
   Calendar,
   Search,
   ExternalLink,
-  MessageSquare
+  MessageSquare,
+  Upload,
+  CheckCircle,
+  AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +35,14 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+interface SyncResult {
+  success: boolean;
+  synced: number;
+  failed: number;
+  results: Array<{ email: string; action: string; contactId: string }>;
+  errors: Array<{ email: string; error: string }>;
+}
+
 interface ConsultationBooking {
   id: string;
   name: string;
@@ -47,6 +58,8 @@ interface ConsultationBooking {
 export function BookingsTable() {
   const [bookings, setBookings] = useState<ConsultationBooking[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState<SyncResult | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   const fetchBookings = async () => {
@@ -69,6 +82,40 @@ export function BookingsTable() {
   useEffect(() => {
     fetchBookings();
   }, []);
+
+  const handleSyncAllToGHL = async () => {
+    if (!confirm("Sync all bookings to GHL? This will create contacts and calendar events for all existing bookings.")) {
+      return;
+    }
+    
+    setIsSyncing(true);
+    setSyncResult(null);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke("admin-sync-bookings", {
+        body: { syncAll: true },
+      });
+
+      if (error) throw error;
+
+      setSyncResult(data);
+      
+      if (data.synced > 0) {
+        toast.success(`Successfully synced ${data.synced} booking(s) to GHL`);
+      } else {
+        toast.info("No bookings found to sync");
+      }
+      
+      if (data.failed > 0) {
+        toast.error(`Failed to sync ${data.failed} booking(s)`);
+      }
+    } catch (error: any) {
+      console.error("Sync error:", error);
+      toast.error(error.message || "Sync failed");
+    } finally {
+      setIsSyncing(false);
+    }
+  };
 
   const filteredBookings = bookings.filter((booking) => {
     const query = searchQuery.toLowerCase();
@@ -103,16 +150,57 @@ export function BookingsTable() {
             className="pl-9"
           />
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={fetchBookings}
-          disabled={isLoading}
-        >
-          <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? "animate-spin" : ""}`} />
-          Refresh
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleSyncAllToGHL}
+            disabled={isSyncing || bookings.length === 0}
+          >
+            <Upload className={`h-4 w-4 mr-2 ${isSyncing ? "animate-pulse" : ""}`} />
+            {isSyncing ? "Syncing..." : "Sync All to GHL"}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={fetchBookings}
+            disabled={isLoading}
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? "animate-spin" : ""}`} />
+            Refresh
+          </Button>
+        </div>
       </div>
+
+      {/* Sync Results */}
+      {syncResult && (
+        <div className={`p-4 rounded-lg border ${syncResult.failed > 0 ? 'bg-yellow-50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800' : 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800'}`}>
+          <div className="flex items-center gap-2 mb-2">
+            {syncResult.failed === 0 ? (
+              <CheckCircle className="h-5 w-5 text-green-600" />
+            ) : (
+              <AlertCircle className="h-5 w-5 text-yellow-600" />
+            )}
+            <span className="font-medium">
+              {syncResult.synced} synced, {syncResult.failed} failed
+            </span>
+          </div>
+          {syncResult.results.length > 0 && (
+            <div className="text-sm text-green-700 dark:text-green-400">
+              {syncResult.results.map((r, i) => (
+                <div key={i}>✓ {r.email} ({r.action})</div>
+              ))}
+            </div>
+          )}
+          {syncResult.errors.length > 0 && (
+            <div className="text-sm text-red-600 dark:text-red-400 mt-2">
+              {syncResult.errors.map((e, i) => (
+                <div key={i}>✗ {e.email}: {e.error}</div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="rounded-lg border bg-card">
         <Table>
