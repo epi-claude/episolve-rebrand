@@ -1,8 +1,9 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { format, addDays, startOfDay, isWeekend, isBefore } from "date-fns";
-import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, Clock, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 interface BookingSlotPickerProps {
   value: string;
@@ -34,6 +35,8 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
   const [weekOffset, setWeekOffset] = useState(0);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [bookedSlots, setBookedSlots] = useState<Set<string>>(new Set());
+  const [isLoadingSlots, setIsLoadingSlots] = useState(false);
 
   // Generate weekdays for the current week view
   const weekDays = useMemo(() => {
@@ -52,6 +55,50 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
     
     return days;
   }, [weekOffset]);
+
+  // Fetch booked slots when date is selected
+  useEffect(() => {
+    if (!selectedDate) return;
+
+    const fetchBookedSlots = async () => {
+      setIsLoadingSlots(true);
+      try {
+        // Query bookings for the selected date
+        const startOfSelectedDate = `${selectedDate}T00:00:00`;
+        const endOfSelectedDate = `${selectedDate}T23:59:59`;
+
+        const { data, error } = await supabase
+          .from("consultation_bookings")
+          .select("preferred_date")
+          .gte("preferred_date", startOfSelectedDate)
+          .lte("preferred_date", endOfSelectedDate)
+          .neq("status", "cancelled");
+
+        if (error) {
+          console.error("Error fetching booked slots:", error);
+          return;
+        }
+
+        // Extract booked times
+        const booked = new Set<string>();
+        data?.forEach((booking) => {
+          if (booking.preferred_date) {
+            // Extract time from the preferred_date (format: "YYYY-MM-DDTHH:MM:SS")
+            const time = booking.preferred_date.substring(11, 16);
+            booked.add(time);
+          }
+        });
+
+        setBookedSlots(booked);
+      } catch (err) {
+        console.error("Error fetching availability:", err);
+      } finally {
+        setIsLoadingSlots(false);
+      }
+    };
+
+    fetchBookedSlots();
+  }, [selectedDate]);
 
   const handleDateSelect = (date: Date) => {
     const dateStr = format(date, "yyyy-MM-dd");
@@ -144,22 +191,27 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="h-4 w-4" />
             <span>Select a time (10:00 AM - 3:00 PM EST)</span>
+            {isLoadingSlots && <Loader2 className="h-3 w-3 animate-spin" />}
           </div>
           <div className="grid grid-cols-4 gap-2">
             {TIME_SLOTS.map((time) => {
               const isSelected = selectedTime === time;
+              const isBooked = bookedSlots.has(time);
               
               return (
                 <button
                   key={time}
                   type="button"
-                  onClick={() => handleTimeSelect(time)}
+                  onClick={() => !isBooked && handleTimeSelect(time)}
+                  disabled={isBooked}
                   className={cn(
                     "py-2 px-3 rounded-lg border text-sm font-medium transition-all",
-                    "hover:border-primary hover:bg-primary/5",
-                    isSelected
+                    isBooked
+                      ? "border-border bg-muted text-muted-foreground cursor-not-allowed opacity-50 line-through"
+                      : "hover:border-primary hover:bg-primary/5",
+                    isSelected && !isBooked
                       ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-card text-foreground"
+                      : !isBooked && "border-border bg-card text-foreground"
                   )}
                 >
                   {formatTimeSlot(time)}
@@ -167,6 +219,11 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
               );
             })}
           </div>
+          {bookedSlots.size > 0 && (
+            <p className="text-xs text-muted-foreground">
+              Crossed-out times are already booked
+            </p>
+          )}
         </div>
       )}
 
