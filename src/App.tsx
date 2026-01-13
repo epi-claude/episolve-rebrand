@@ -17,6 +17,7 @@ import FractionalTechnologyOffice from "./pages/FractionalTechnologyOffice";
 import IntelligentAutomation from "./pages/IntelligentAutomation";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/solutions/fractional-technology-office" element={<FractionalTechnologyOffice />} />
             <Route path="/solutions/intelligent-automation" element={<IntelligentAutomation />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route 
               path="/admin" 
               element={

@@ -2,12 +2,19 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import { Lock, Mail, User, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Lock, Mail, User, Eye, EyeOff, ArrowLeft, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
@@ -19,10 +26,13 @@ const passwordSchema = z.string().min(6, "Password must be at least 6 characters
 export default function Auth() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, isLoading, signIn, signUp } = useAuth();
+  const { user, isLoading, signIn, signUp, resetPassword } = useAuth();
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
+  const [resetEmailSent, setResetEmailSent] = useState(false);
   
   // Login form
   const [loginEmail, setLoginEmail] = useState("");
@@ -102,6 +112,26 @@ export default function Auth() {
       }
     } else {
       toast.success("Account created successfully! You can now sign in.");
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const emailResult = emailSchema.safeParse(forgotPasswordEmail);
+    if (!emailResult.success) {
+      toast.error(emailResult.error.errors[0].message);
+      return;
+    }
+
+    setIsSubmitting(true);
+    const { error } = await resetPassword(forgotPasswordEmail);
+    setIsSubmitting(false);
+
+    if (error) {
+      toast.error(error.message || "Failed to send reset email");
+    } else {
+      setResetEmailSent(true);
     }
   };
 
@@ -192,6 +222,16 @@ export default function Auth() {
                     )}
                   </div>
 
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      onClick={() => setShowForgotPassword(true)}
+                      className="text-sm text-primary hover:underline"
+                    >
+                      Forgot password?
+                    </button>
+                  </div>
+
                   <Button type="submit" className="w-full" disabled={isSubmitting}>
                     {isSubmitting ? "Signing in..." : "Sign In"}
                   </Button>
@@ -276,6 +316,81 @@ export default function Auth() {
           </CardContent>
         </Card>
       </motion.div>
+
+      {/* Forgot Password Dialog */}
+      <Dialog open={showForgotPassword} onOpenChange={(open) => {
+        setShowForgotPassword(open);
+        if (!open) {
+          setResetEmailSent(false);
+          setForgotPasswordEmail("");
+        }
+      }}>
+        <DialogContent className="sm:max-w-md">
+          {resetEmailSent ? (
+            <div className="text-center space-y-4 py-4">
+              <div className="mx-auto w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                <CheckCircle className="h-8 w-8 text-green-600" />
+              </div>
+              <DialogHeader>
+                <DialogTitle className="text-center">Check Your Email</DialogTitle>
+                <DialogDescription className="text-center">
+                  We've sent a password reset link to <strong>{forgotPasswordEmail}</strong>. 
+                  Please check your inbox and follow the instructions.
+                </DialogDescription>
+              </DialogHeader>
+              <Button 
+                onClick={() => {
+                  setShowForgotPassword(false);
+                  setResetEmailSent(false);
+                  setForgotPasswordEmail("");
+                }}
+                className="w-full"
+              >
+                Close
+              </Button>
+            </div>
+          ) : (
+            <>
+              <DialogHeader>
+                <DialogTitle>Reset Your Password</DialogTitle>
+                <DialogDescription>
+                  Enter your email address and we'll send you a link to reset your password.
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handleForgotPassword} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="forgot-email">Email</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="forgot-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={forgotPasswordEmail}
+                      onChange={(e) => setForgotPasswordEmail(e.target.value)}
+                      className="pl-9"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setShowForgotPassword(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="flex-1" disabled={isSubmitting || !forgotPasswordEmail.trim()}>
+                    {isSubmitting ? "Sending..." : "Send Reset Link"}
+                  </Button>
+                </div>
+              </form>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
