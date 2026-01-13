@@ -370,7 +370,7 @@ export default function FractionalTechnologyOffice() {
               Let's discuss how a Fractional Technology Office can align your IT investments with your mission—at a price that makes sense.
             </p>
             <Button variant="default" size="lg" asChild className="text-base">
-              <Link to="/contact">
+              <Link to="/contact#get-in-touch">
                 Book a Strategic Risk Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

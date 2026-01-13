@@ -92,7 +92,7 @@ const IntelligentAutomation = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="text-lg px-8">
-                <Link to="/contact">Request a Workflow Assessment</Link>
+                <Link to="/contact#get-in-touch">Request a Workflow Assessment</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="text-lg px-8">
                 <Link to="/case-studies">See Our Work</Link>
@@ -314,7 +314,7 @@ const IntelligentAutomation = () => {
               automation opportunities and show you what's possible—no obligation.
             </p>
             <Button asChild size="lg" className="text-lg px-8">
-              <Link to="/contact">Book a Workflow Assessment</Link>
+              <Link to="/contact#get-in-touch">Book a Workflow Assessment</Link>
             </Button>
           </motion.div>
         </div>

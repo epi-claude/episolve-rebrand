@@ -247,7 +247,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-24">
+      <section id="get-in-touch" className="py-24 scroll-mt-24">
         <div className="container">
           <div className="grid lg:grid-cols-3 gap-16">
             {/* Contact Info */}

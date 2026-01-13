@@ -125,7 +125,7 @@ export default function Services() {
               Let's have a conversation. We'll help you identify the right technology priorities for your business.
             </p>
             <Button variant="hero" size="xl" asChild>
-              <Link to="/contact">
+              <Link to="/contact#get-in-touch">
                 Schedule a Discovery Call
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

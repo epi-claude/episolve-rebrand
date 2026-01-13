@@ -226,7 +226,7 @@ export default function RiskInsurance() {
               Get ahead of your insurance requirements with a comprehensive security audit.
             </p>
             <Button variant="default" size="lg" asChild className="text-base">
-              <Link to="/contact">
+              <Link to="/contact#get-in-touch">
                 Book Your Cyber-Insurance Readiness Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
