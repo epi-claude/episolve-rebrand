@@ -6,9 +6,10 @@ import {
   CheckCircle, 
   AlertCircle, 
   Calendar,
-  Database,
   Settings,
-  Play
+  Play,
+  Mail,
+  MessageSquare
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +18,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { ContactsTable } from "@/components/admin/ContactsTable";
+import { NewsletterTable } from "@/components/admin/NewsletterTable";
+import { BookingsTable } from "@/components/admin/BookingsTable";
 
 interface SyncResult {
   success: boolean;
@@ -110,17 +114,61 @@ export default function Admin() {
 
       {/* Main Content */}
       <main className="container py-8">
-        <Tabs defaultValue="ghl-sync" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+        <Tabs defaultValue="contacts" className="space-y-6">
+          <TabsList className="grid w-full max-w-2xl grid-cols-4">
+            <TabsTrigger value="contacts" className="flex items-center gap-2">
+              <MessageSquare className="h-4 w-4" />
+              Contacts
+            </TabsTrigger>
+            <TabsTrigger value="newsletter" className="flex items-center gap-2">
+              <Mail className="h-4 w-4" />
+              Newsletter
+            </TabsTrigger>
             <TabsTrigger value="ghl-sync" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
               GHL Sync
             </TabsTrigger>
-            <TabsTrigger value="database" className="flex items-center gap-2">
-              <Database className="h-4 w-4" />
-              Database
+            <TabsTrigger value="bookings" className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              Bookings
             </TabsTrigger>
           </TabsList>
+
+          {/* Contacts Tab */}
+          <TabsContent value="contacts">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5" />
+                  Contact Submissions
+                </CardTitle>
+                <CardDescription>
+                  View all contact form submissions from the website
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ContactsTable />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Newsletter Tab */}
+          <TabsContent value="newsletter">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Mail className="h-5 w-5" />
+                  Newsletter Subscribers
+                </CardTitle>
+                <CardDescription>
+                  View all newsletter subscriptions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <NewsletterTable />
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           {/* GHL Sync Tab */}
           <TabsContent value="ghl-sync" className="space-y-6">
@@ -269,19 +317,20 @@ export default function Admin() {
             )}
           </TabsContent>
 
-          {/* Database Tab - Placeholder for future */}
-          <TabsContent value="database">
+          {/* Bookings Tab */}
+          <TabsContent value="bookings">
             <Card>
               <CardHeader>
-                <CardTitle>Database Tools</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5" />
+                  Consultation Bookings
+                </CardTitle>
                 <CardDescription>
-                  Database management tools coming soon
+                  View all consultation booking requests from the website
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
-                  Future database operations like data exports, cleanup tasks, and more will be available here.
-                </p>
+                <BookingsTable />
               </CardContent>
             </Card>
           </TabsContent>
