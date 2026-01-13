@@ -38,16 +38,17 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
   const [bookedSlots, setBookedSlots] = useState<Set<string>>(new Set());
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
 
-  // Generate weekdays for the current week view
+  // Generate weekdays for the current week view (future dates only, not today)
   const weekDays = useMemo(() => {
     const today = startOfDay(new Date());
-    const startDate = addDays(today, weekOffset * 7);
+    const tomorrow = addDays(today, 1); // Start from tomorrow
+    const startDate = addDays(tomorrow, weekOffset * 7);
     const days: Date[] = [];
     
     // Find the next 5 weekdays from startDate
     let currentDate = startDate;
     while (days.length < 5) {
-      if (!isWeekend(currentDate) && !isBefore(currentDate, today)) {
+      if (!isWeekend(currentDate) && !isBefore(currentDate, tomorrow)) {
         days.push(currentDate);
       }
       currentDate = addDays(currentDate, 1);
