@@ -54,13 +54,13 @@ async function createOrUpdateContact(data: {
   const searchResult = await searchResponse.json();
   console.log("GHL contact search result:", JSON.stringify(searchResult));
 
-  const contactPayload = {
+  // Base contact payload (locationId only for create, not update)
+  const baseContactPayload = {
     firstName,
     lastName,
     email: data.email,
     phone: data.phone || undefined,
     companyName: data.company || undefined,
-    locationId: GHL_LOCATION_ID,
     customFields: [
       ...(data.service ? [{ key: "service_interest", value: data.service }] : []),
       ...(data.message ? [{ key: "message", value: data.message }] : []),
@@ -72,7 +72,7 @@ async function createOrUpdateContact(data: {
   let contactId: string;
 
   if (searchResult.contacts && searchResult.contacts.length > 0) {
-    // Update existing contact
+    // Update existing contact (no locationId in update payload)
     contactId = searchResult.contacts[0].id;
     console.log("Updating existing contact:", contactId);
 
@@ -86,7 +86,7 @@ async function createOrUpdateContact(data: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(contactPayload),
+        body: JSON.stringify(baseContactPayload),
       }
     );
 
@@ -97,8 +97,10 @@ async function createOrUpdateContact(data: {
       throw new Error(`Failed to update contact: ${JSON.stringify(updateResult)}`);
     }
   } else {
-    // Create new contact
+    // Create new contact (include locationId)
     console.log("Creating new contact");
+
+    const createPayload = { ...baseContactPayload, locationId: GHL_LOCATION_ID };
 
     const createResponse = await fetch(
       "https://services.leadconnectorhq.com/contacts/",
@@ -110,7 +112,7 @@ async function createOrUpdateContact(data: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(contactPayload),
+        body: JSON.stringify(createPayload),
       }
     );
 
@@ -136,9 +138,9 @@ async function createCalendarEvent(contactId: string, data: {
 }) {
   console.log("Creating GHL calendar event for contact:", contactId);
 
-  // Parse the preferred date and set a 1-hour appointment
+  // Use the actual selected date/time from the booking picker (30-minute slots)
   const startTime = new Date(data.preferredDate);
-  const endTime = new Date(startTime.getTime() + 60 * 60 * 1000); // 1 hour later
+  const endTime = new Date(startTime.getTime() + 30 * 60 * 1000); // 30-minute slots
 
   const appointmentPayload = {
     calendarId: GHL_CALENDAR_ID,
