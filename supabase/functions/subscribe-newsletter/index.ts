@@ -81,7 +81,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send welcome email
     const emailResponse = await resend.emails.send({
-      from: "Episolve <onboarding@resend.dev>",
+      from: "Episolve <noreply@notify.e-dmm.com>",
       to: [email],
       subject: "Welcome to Episolve Insights",
       html: `

@@ -69,7 +69,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the user
     const userEmailResponse = await resend.emails.send({
-      from: "Episolve <onboarding@resend.dev>",
+      from: "Episolve <noreply@notify.e-dmm.com>",
       to: [email],
       subject: "We've received your message - Episolve",
       html: `
@@ -91,7 +91,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to admin
     const adminEmailResponse = await resend.emails.send({
-      from: "Episolve Website <onboarding@resend.dev>",
+      from: "Episolve Website <noreply@notify.e-dmm.com>",
       to: ["contact@episolve.com"],
       subject: `New Contact Form Submission from ${safeName}`,
       html: `
