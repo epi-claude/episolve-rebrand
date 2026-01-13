@@ -38,46 +38,31 @@ const handler = async (req: Request): Promise<Response> => {
     const { email } = validationResult.data;
     console.log("Processing subscription for:", email);
 
-    // Initialize Supabase client
+    // Initialize Supabase client with anon key (respects RLS)
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Check if already subscribed
-    const { data: existing } = await supabase
+    // Simply try to insert - PostgreSQL will handle duplicates via unique constraint
+    const { error: insertError } = await supabase
       .from("newsletter_subscribers")
-      .select("id, unsubscribed_at")
-      .eq("email", email)
-      .single();
+      .insert({ email });
 
-    if (existing && !existing.unsubscribed_at) {
-      console.log("Email already subscribed:", email);
-      return new Response(
-        JSON.stringify({ message: "You're already subscribed!" }),
-        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
-      );
-    }
-
-    // Insert or update subscriber
-    if (existing) {
-      // Re-subscribe
-      await supabase
-        .from("newsletter_subscribers")
-        .update({ unsubscribed_at: null, subscribed_at: new Date().toISOString() })
-        .eq("id", existing.id);
-      console.log("Re-subscribed:", email);
-    } else {
-      // New subscriber
-      const { error: insertError } = await supabase
-        .from("newsletter_subscribers")
-        .insert({ email });
-
-      if (insertError) {
-        console.error("Database insert error:", insertError);
-        throw new Error("Failed to save subscription");
+    if (insertError) {
+      // Check if it's a duplicate (unique constraint violation)
+      if (insertError.code === "23505") {
+        console.log("Email already subscribed:", email);
+        return new Response(
+          JSON.stringify({ message: "You're already subscribed!" }),
+          { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
       }
-      console.log("New subscriber added:", email);
+      
+      console.error("Database insert error:", insertError);
+      throw new Error("Failed to save subscription");
     }
+
+    console.log("New subscriber added:", email);
 
     // Send welcome email
     const emailResponse = await resend.emails.send({
