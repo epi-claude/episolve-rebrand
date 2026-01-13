@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Layout } from "@/components/layout/Layout";
+import { BookingSlotPicker } from "@/components/BookingSlotPicker";
 import { services } from "@/data/services";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -319,7 +320,7 @@ export default function Contact() {
                       Book a Consultation
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-lg">
+                  <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle>Book a Strategic Audit</DialogTitle>
                       <DialogDescription>
@@ -389,14 +390,10 @@ export default function Contact() {
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="booking-date">Preferred Date</Label>
-                          <Input
-                            id="booking-date"
-                            name="preferredDate"
-                            type="date"
+                          <Label>Preferred Date & Time *</Label>
+                          <BookingSlotPicker
                             value={bookingData.preferredDate}
-                            onChange={handleBookingChange}
-                            min={new Date().toISOString().split('T')[0]}
+                            onChange={(value) => setBookingData((prev) => ({ ...prev, preferredDate: value }))}
                           />
                         </div>
                         <div className="space-y-2">
@@ -414,7 +411,7 @@ export default function Contact() {
                           type="submit"
                           variant="hero"
                           className="w-full"
-                          disabled={isBookingSubmitting}
+                          disabled={isBookingSubmitting || !bookingData.preferredDate}
                         >
                           {isBookingSubmitting ? "Booking..." : "Confirm Booking"}
                         </Button>
