@@ -32,7 +32,7 @@ export const team: TeamMember[] = [
     id: "4",
     name: "Vincent Cayenne",
     role: "Risk & Automation Specialist",
-    bio: "Lisa leverages AI to analyze cybersecurity gaps and automate compliance reporting, helping clients navigate the complex world of cyber insurance.",
+    bio: "Vincent leverages AI to analyze cybersecurity gaps and automate compliance reporting, helping clients navigate the complex world of cyber insurance.",
     linkedin: "https://linkedin.com",
   },
 ];
