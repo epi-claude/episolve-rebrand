@@ -203,7 +203,7 @@ export default function About() {
               Let's discuss how we can bring enterprise-grade technology leadership to your organization.
             </p>
             <Button variant="default" size="lg" asChild className="text-base">
-              <Link to="/contact">
+              <Link to="/contact#get-in-touch">
                 Book a Strategic Risk Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

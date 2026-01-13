@@ -35,7 +35,7 @@ export default function NotFound() {
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link to="/contact">
+                <Link to="/contact#get-in-touch">
                   Contact Support
                 </Link>
               </Button>

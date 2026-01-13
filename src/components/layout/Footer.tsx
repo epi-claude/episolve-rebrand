@@ -29,7 +29,7 @@ const footerLinks = {
     href: "/insights"
   }, {
     name: "Contact",
-    href: "/contact"
+    href: "/contact#get-in-touch"
   }]
 };
 

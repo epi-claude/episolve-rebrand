@@ -103,7 +103,7 @@ export default function ServiceDetail() {
                   Let's discuss how {service.title.toLowerCase()} can help your business.
                 </p>
                 <Button variant="hero" className="w-full" asChild>
-                  <Link to={`/contact?service=${service.slug}`}>
+                  <Link to={`/contact?service=${service.slug}#get-in-touch`}>
                     Request a Consultation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>

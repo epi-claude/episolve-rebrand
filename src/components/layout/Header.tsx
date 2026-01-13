@@ -17,7 +17,7 @@ const navLinks = [
   { name: "Case Studies", href: "/case-studies" },
   { name: "About", href: "/about" },
   { name: "Insights", href: "/insights" },
-  { name: "Contact", href: "/contact" },
+  { name: "Contact", href: "/contact#get-in-touch" },
 ];
 
 export function Header() {
@@ -117,7 +117,7 @@ export function Header() {
         {/* Desktop CTA */}
         <div className="hidden lg:block">
           <Button variant="default" size="default" asChild>
-            <Link to="/contact">
+            <Link to="/contact#get-in-touch">
               Book a Strategic Risk Audit
               <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
@@ -180,7 +180,7 @@ export function Header() {
               ))}
               <div className="mt-3 pt-3 border-t border-border">
                 <Button variant="default" className="w-full" asChild>
-                  <Link to="/contact">
+                  <Link to="/contact#get-in-touch">
                     Book a Strategic Risk Audit
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>

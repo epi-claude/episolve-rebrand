@@ -174,7 +174,7 @@ export default function CaseStudies() {
               Proactive security is always more cost-effective than crisis response. Let's assess your risk before attackers do.
             </p>
             <Button variant="default" size="lg" asChild className="text-base">
-              <Link to="/contact">
+              <Link to="/contact#get-in-touch">
                 Book a Strategic Risk Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
