@@ -4,6 +4,10 @@ import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
+const GHL_API_KEY = Deno.env.get("GHL_API_KEY");
+const GHL_LOCATION_ID = Deno.env.get("GHL_LOCATION_ID");
+const GHL_CALENDAR_ID = Deno.env.get("GHL_CALENDAR_ID");
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -30,6 +34,148 @@ function escapeHtml(text: string): string {
     "'": '&#39;',
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+// Function to sync booking to GHL
+async function syncToGHL(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  preferredDate?: string;
+  message?: string;
+}): Promise<string | null> {
+  if (!GHL_API_KEY || !GHL_LOCATION_ID) {
+    console.log("GHL not configured, skipping sync");
+    return null;
+  }
+
+  console.log("Syncing booking to GHL for:", data.email);
+
+  // Split name into first and last
+  const nameParts = data.name.trim().split(" ");
+  const firstName = nameParts[0] || "";
+  const lastName = nameParts.slice(1).join(" ") || "";
+
+  // Search for existing contact by email
+  const searchResponse = await fetch(
+    `https://services.leadconnectorhq.com/contacts/?locationId=${GHL_LOCATION_ID}&query=${encodeURIComponent(data.email)}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${GHL_API_KEY}`,
+        Version: "2021-07-28",
+        Accept: "application/json",
+      },
+    }
+  );
+
+  const searchResult = await searchResponse.json();
+  console.log("GHL contact search result:", JSON.stringify(searchResult));
+
+  const contactPayload = {
+    firstName,
+    lastName,
+    email: data.email,
+    phone: data.phone || undefined,
+    companyName: data.company || undefined,
+    locationId: GHL_LOCATION_ID,
+    customFields: data.message ? [{ key: "message", value: data.message }] : [],
+    tags: ["website-booking", "strategic-audit"],
+    source: "Episolve Website",
+  };
+
+  let contactId: string;
+
+  if (searchResult.contacts && searchResult.contacts.length > 0) {
+    // Update existing contact
+    contactId = searchResult.contacts[0].id;
+    console.log("Updating existing contact:", contactId);
+
+    const updateResponse = await fetch(
+      `https://services.leadconnectorhq.com/contacts/${contactId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${GHL_API_KEY}`,
+          Version: "2021-07-28",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(contactPayload),
+      }
+    );
+
+    if (!updateResponse.ok) {
+      const error = await updateResponse.json();
+      console.error("Failed to update GHL contact:", error);
+    }
+  } else {
+    // Create new contact
+    console.log("Creating new GHL contact");
+
+    const createResponse = await fetch(
+      "https://services.leadconnectorhq.com/contacts/",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${GHL_API_KEY}`,
+          Version: "2021-07-28",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(contactPayload),
+      }
+    );
+
+    const createResult = await createResponse.json();
+    
+    if (!createResponse.ok) {
+      console.error("Failed to create GHL contact:", createResult);
+      return null;
+    }
+
+    contactId = createResult.contact?.id;
+  }
+
+  // Create calendar event if we have a preferred date and calendar ID
+  if (data.preferredDate && GHL_CALENDAR_ID && contactId) {
+    console.log("Creating GHL calendar event");
+
+    const startTime = new Date(data.preferredDate);
+    startTime.setHours(10, 0, 0, 0); // Set to 10 AM
+    const endTime = new Date(startTime.getTime() + 60 * 60 * 1000); // 1 hour later
+
+    const appointmentPayload = {
+      calendarId: GHL_CALENDAR_ID,
+      locationId: GHL_LOCATION_ID,
+      contactId,
+      startTime: startTime.toISOString(),
+      endTime: endTime.toISOString(),
+      title: `Strategic Audit - ${data.name}`,
+      appointmentStatus: "new",
+      notes: data.message || "Strategic Audit booking from Episolve website",
+    };
+
+    const calendarResponse = await fetch(
+      "https://services.leadconnectorhq.com/calendars/events/appointments",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${GHL_API_KEY}`,
+          Version: "2021-07-28",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(appointmentPayload),
+      }
+    );
+
+    const calendarResult = await calendarResponse.json();
+    console.log("GHL calendar event result:", JSON.stringify(calendarResult));
+  }
+
+  return contactId;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -73,6 +219,22 @@ const handler = async (req: Request): Promise<Response> => {
     const safeCompany = company ? escapeHtml(company) : null;
     const safeFormattedDate = escapeHtml(formattedDate);
     const safeMessage = message ? escapeHtml(message) : null;
+
+    // Sync to GHL (non-blocking, don't fail if this fails)
+    let ghlContactId: string | null = null;
+    try {
+      ghlContactId = await syncToGHL({
+        name,
+        email,
+        phone,
+        company,
+        preferredDate,
+        message,
+      });
+      console.log("GHL sync completed, contact ID:", ghlContactId);
+    } catch (ghlError) {
+      console.error("GHL sync failed (continuing with email):", ghlError);
+    }
 
     // Send confirmation email to the user
     const userEmailResponse = await resend.emails.send({
@@ -125,7 +287,12 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Admin notification email sent:", adminEmailResponse);
 
     return new Response(
-      JSON.stringify({ success: true, userEmail: userEmailResponse, adminEmail: adminEmailResponse }),
+      JSON.stringify({ 
+        success: true, 
+        userEmail: userEmailResponse, 
+        adminEmail: adminEmailResponse,
+        ghlSync: ghlContactId ? true : false,
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
