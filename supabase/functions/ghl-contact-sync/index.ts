@@ -121,10 +121,16 @@ async function createOrUpdateContact(data: {
     console.log("GHL contact create result:", JSON.stringify(createResult));
 
     if (!createResponse.ok) {
-      throw new Error(`Failed to create contact: ${JSON.stringify(createResult)}`);
+      // Check if it's a duplicate error - if so, use the existing contact ID
+      if (createResult.statusCode === 400 && createResult.meta?.contactId) {
+        console.log("Duplicate contact detected, using existing contactId:", createResult.meta.contactId);
+        contactId = createResult.meta.contactId;
+      } else {
+        throw new Error(`Failed to create contact: ${JSON.stringify(createResult)}`);
+      }
+    } else {
+      contactId = createResult.contact?.id;
     }
-
-    contactId = createResult.contact?.id;
   }
 
   return contactId;
