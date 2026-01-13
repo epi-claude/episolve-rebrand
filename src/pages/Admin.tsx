@@ -12,7 +12,8 @@ import {
   Mail,
   MessageSquare,
   LogOut,
-  User
+  User,
+  Shield
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,7 @@ import { toast } from "sonner";
 import { ContactsTable } from "@/components/admin/ContactsTable";
 import { NewsletterTable } from "@/components/admin/NewsletterTable";
 import { BookingsTable } from "@/components/admin/BookingsTable";
+import { AdminUserManagement } from "@/components/admin/AdminUserManagement";
 import { useAuth } from "@/hooks/useAuth";
 
 interface SyncResult {
@@ -139,7 +141,7 @@ export default function Admin() {
       {/* Main Content */}
       <main className="container py-8">
         <Tabs defaultValue="contacts" className="space-y-6">
-          <TabsList className="grid w-full max-w-2xl grid-cols-4">
+          <TabsList className="grid w-full max-w-3xl grid-cols-5">
             <TabsTrigger value="contacts" className="flex items-center gap-2">
               <MessageSquare className="h-4 w-4" />
               Contacts
@@ -155,6 +157,10 @@ export default function Admin() {
             <TabsTrigger value="bookings" className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               Bookings
+            </TabsTrigger>
+            <TabsTrigger value="admins" className="flex items-center gap-2">
+              <Shield className="h-4 w-4" />
+              Admins
             </TabsTrigger>
           </TabsList>
 
@@ -355,6 +361,24 @@ export default function Admin() {
               </CardHeader>
               <CardContent>
                 <BookingsTable />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Admins Tab */}
+          <TabsContent value="admins">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Shield className="h-5 w-5" />
+                  Admin Users
+                </CardTitle>
+                <CardDescription>
+                  Manage admin access for team members
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <AdminUserManagement />
               </CardContent>
             </Card>
           </TabsContent>
