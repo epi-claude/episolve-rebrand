@@ -56,14 +56,41 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
     return days;
   }, [weekOffset]);
 
-  // Fetch booked slots when date is selected
+  // Fetch booked slots from GHL when date is selected
   useEffect(() => {
     if (!selectedDate) return;
 
     const fetchBookedSlots = async () => {
       setIsLoadingSlots(true);
       try {
-        // Query bookings for the selected date
+        // Query GHL calendar for availability
+        const { data, error } = await supabase.functions.invoke("ghl-calendar-availability", {
+          body: { date: selectedDate },
+        });
+
+        if (error) {
+          console.error("Error fetching GHL availability:", error);
+          // Fallback to Supabase if GHL fails
+          await fetchSupabaseBookings();
+          return;
+        }
+
+        if (data?.bookedSlots) {
+          setBookedSlots(new Set(data.bookedSlots));
+        } else {
+          setBookedSlots(new Set());
+        }
+      } catch (err) {
+        console.error("Error fetching availability:", err);
+        // Fallback to Supabase
+        await fetchSupabaseBookings();
+      } finally {
+        setIsLoadingSlots(false);
+      }
+    };
+
+    const fetchSupabaseBookings = async () => {
+      try {
         const startOfSelectedDate = `${selectedDate}T00:00:00`;
         const endOfSelectedDate = `${selectedDate}T23:59:59`;
 
@@ -75,15 +102,13 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
           .neq("status", "cancelled");
 
         if (error) {
-          console.error("Error fetching booked slots:", error);
+          console.error("Error fetching booked slots from Supabase:", error);
           return;
         }
 
-        // Extract booked times
         const booked = new Set<string>();
         data?.forEach((booking) => {
           if (booking.preferred_date) {
-            // Extract time from the preferred_date (format: "YYYY-MM-DDTHH:MM:SS")
             const time = booking.preferred_date.substring(11, 16);
             booked.add(time);
           }
@@ -91,9 +116,7 @@ export function BookingSlotPicker({ value, onChange }: BookingSlotPickerProps) {
 
         setBookedSlots(booked);
       } catch (err) {
-        console.error("Error fetching availability:", err);
-      } finally {
-        setIsLoadingSlots(false);
+        console.error("Supabase fallback error:", err);
       }
     };
 

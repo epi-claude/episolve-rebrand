@@ -11,3 +11,15 @@ verify_jwt = false
 
 [functions.ghl-contact-sync]
 verify_jwt = false
+
+[functions.ghl-calendar-availability]
+verify_jwt = false
+
+[functions.admin-get-data]
+verify_jwt = false
+
+[functions.admin-sync-contacts]
+verify_jwt = false
+
+[functions.admin-sync-bookings]
+verify_jwt = false
