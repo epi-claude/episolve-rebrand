@@ -22,6 +22,7 @@ const ContactSyncSchema = z.object({
 const GHL_API_KEY = Deno.env.get("GHL_API_KEY");
 const GHL_LOCATION_ID = Deno.env.get("GHL_LOCATION_ID");
 const GHL_CALENDAR_ID = Deno.env.get("GHL_CALENDAR_ID");
+const GHL_ASSIGNED_USER_ID = Deno.env.get("GHL_ASSIGNED_USER_ID");
 
 async function createOrUpdateContact(data: {
   name: string;
@@ -142,7 +143,7 @@ async function createCalendarEvent(contactId: string, data: {
   const startTime = new Date(data.preferredDate);
   const endTime = new Date(startTime.getTime() + 30 * 60 * 1000); // 30-minute slots
 
-  const appointmentPayload = {
+  const appointmentPayload: Record<string, unknown> = {
     calendarId: GHL_CALENDAR_ID,
     locationId: GHL_LOCATION_ID,
     contactId,
@@ -150,9 +151,13 @@ async function createCalendarEvent(contactId: string, data: {
     endTime: endTime.toISOString(),
     title: `Consultation with ${data.name}`,
     appointmentStatus: "new",
-    assignedUserId: undefined,
     notes: data.message || "Consultation booking from Episolve website",
   };
+
+  // Add assigned user if configured
+  if (GHL_ASSIGNED_USER_ID) {
+    appointmentPayload.assignedUserId = GHL_ASSIGNED_USER_ID;
+  }
 
   console.log("Appointment payload:", JSON.stringify(appointmentPayload));
 
