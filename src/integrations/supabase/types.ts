@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_audit_log: {
+        Row: {
+          action: string
+          created_at: string
+          details: Json | null
+          id: string
+          performed_by_email: string
+          performed_by_user_id: string
+          target_email: string
+          target_user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          performed_by_email: string
+          performed_by_user_id: string
+          target_email: string
+          target_user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          performed_by_email?: string
+          performed_by_user_id?: string
+          target_email?: string
+          target_user_id?: string
+        }
+        Relationships: []
+      }
       consultation_bookings: {
         Row: {
           company: string | null
@@ -161,6 +194,19 @@ export type Database = {
     }
     Functions: {
       add_admin_user: { Args: { target_email: string }; Returns: Json }
+      get_admin_audit_logs: {
+        Args: { limit_count?: number }
+        Returns: {
+          action: string
+          created_at: string
+          details: Json
+          id: string
+          performed_by_email: string
+          performed_by_user_id: string
+          target_email: string
+          target_user_id: string
+        }[]
+      }
       get_admin_users: {
         Args: never
         Returns: {
