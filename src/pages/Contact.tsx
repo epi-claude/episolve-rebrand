@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Phone, MapPin, Clock, Send, CheckCircle, Calendar } from "lucide-react";
@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Layout } from "@/components/layout/Layout";
 import { BookingSlotPicker } from "@/components/BookingSlotPicker";
+import { HoneypotField } from "@/components/HoneypotField";
+import { useSpamProtection } from "@/hooks/useSpamProtection";
 import { services } from "@/data/services";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -63,11 +65,41 @@ export default function Contact() {
   const [isBookingSubmitting, setIsBookingSubmitting] = useState(false);
   const [isBookingSubmitted, setIsBookingSubmitted] = useState(false);
 
+  // Spam protection for contact form
+  const contactSpam = useSpamProtection();
+  // Spam protection for booking form
+  const bookingSpam = useSpamProtection();
+
+  // Reset spam timers when forms become visible
+  useEffect(() => {
+    contactSpam.resetTimer();
+  }, []);
+
+  useEffect(() => {
+    if (bookingOpen) {
+      bookingSpam.resetTimer();
+    }
+  }, [bookingOpen]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Client-side spam check
+    const spamCheck = contactSpam.validateSubmission();
+    if (!spamCheck.isValid) {
+      console.log("Spam blocked on client:", spamCheck.reason);
+      // Pretend success to not tip off bots
+      setIsSubmitted(true);
+      toast.success("Message sent! We'll be in touch within 24 hours.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      // Get spam check payload for server-side validation
+      const spamPayload = contactSpam.getSpamCheckPayload();
+
       // Save to database
       const { error: dbError } = await supabase
         .from("contact_submissions")
@@ -95,7 +127,7 @@ export default function Contact() {
         },
       }).catch((err) => console.error("GHL sync error:", err));
 
-      // Send confirmation emails
+      // Send confirmation emails (with spam check payload)
       const { error: emailError } = await supabase.functions.invoke("send-contact-email", {
         body: {
           name: formData.name,
@@ -104,6 +136,7 @@ export default function Contact() {
           company: formData.company || undefined,
           service: formData.service || undefined,
           message: formData.message,
+          ...spamPayload,
         },
       });
 
@@ -142,9 +175,23 @@ export default function Contact() {
 
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Client-side spam check
+    const spamCheck = bookingSpam.validateSubmission();
+    if (!spamCheck.isValid) {
+      console.log("Booking spam blocked on client:", spamCheck.reason);
+      // Pretend success to not tip off bots
+      setIsBookingSubmitted(true);
+      toast.success("Consultation booked! We'll confirm your appointment soon.");
+      return;
+    }
+
     setIsBookingSubmitting(true);
 
     try {
+      // Get spam check payload for server-side validation
+      const spamPayload = bookingSpam.getSpamCheckPayload();
+
       // Save to database
       const { error: dbError } = await supabase
         .from("consultation_bookings")
@@ -172,7 +219,7 @@ export default function Contact() {
         },
       }).catch((err) => console.error("GHL sync error:", err));
 
-      // Send confirmation emails
+      // Send confirmation emails (with spam check payload)
       const { error: emailError } = await supabase.functions.invoke("send-booking-email", {
         body: {
           name: bookingData.name,
@@ -181,6 +228,7 @@ export default function Contact() {
           company: bookingData.company || undefined,
           preferredDate: bookingData.preferredDate || undefined,
           message: bookingData.message || undefined,
+          ...spamPayload,
         },
       });
 
@@ -341,6 +389,7 @@ export default function Contact() {
                       </div>
                     ) : (
                       <form onSubmit={handleBookingSubmit} className="space-y-4 mt-4">
+                        <HoneypotField onChange={bookingSpam.setHoneypot} />
                         <div className="grid sm:grid-cols-2 gap-4">
                           <div className="space-y-2">
                             <Label htmlFor="booking-name">Name *</Label>
@@ -444,6 +493,7 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  <HoneypotField onChange={contactSpam.setHoneypot} />
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name *</Label>
