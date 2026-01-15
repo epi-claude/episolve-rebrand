@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
+import { checkForSpam, extractSpamPayload } from "../_shared/spam-detection.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -18,6 +19,10 @@ const ContactEmailSchema = z.object({
   company: z.string().max(100, "Company name too long").optional(),
   service: z.string().max(100, "Service name too long").optional(),
   message: z.string().min(10, "Message must be at least 10 characters").max(2000, "Message too long").trim(),
+  // Spam check fields (optional, sent by frontend)
+  _honeypot: z.string().optional(),
+  _formTime: z.number().optional(),
+  _timestamp: z.number().optional(),
 });
 
 // HTML escape function to prevent injection
@@ -56,8 +61,29 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const { name, email, phone, company, service, message } = parseResult.data;
+    const { name, email, phone, company, service, message, _honeypot, _formTime, _timestamp } = parseResult.data;
     console.log("Received contact form submission from:", email);
+
+    // Server-side spam check
+    const spamPayload = { _honeypot, _formTime, _timestamp };
+    const spamCheck = checkForSpam({ name, email, message, company }, spamPayload);
+    
+    if (spamCheck.isSpam) {
+      console.log("Spam detected and blocked:", spamCheck.reason, "Score:", spamCheck.score);
+      // Return success to not tip off bots, but don't send emails
+      return new Response(
+        JSON.stringify({ success: true, blocked: true }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Log spam score for monitoring
+    if (spamCheck.score > 0) {
+      console.log("Spam score (passed):", spamCheck.score, "Reasons:", spamCheck.reason);
+    }
 
     // Escape all user inputs for safe HTML rendering
     const safeName = escapeHtml(name);

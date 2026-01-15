@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
+import { checkForSpam } from "../_shared/spam-detection.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -22,6 +23,10 @@ const BookingEmailSchema = z.object({
   company: z.string().max(100, "Company name too long").optional(),
   preferredDate: z.string().max(50, "Date too long").optional(),
   message: z.string().max(2000, "Message too long").optional(),
+  // Spam check fields (optional, sent by frontend)
+  _honeypot: z.string().optional(),
+  _formTime: z.number().optional(),
+  _timestamp: z.number().optional(),
 });
 
 // HTML escape function to prevent injection
@@ -205,8 +210,29 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const { name, email, phone, company, preferredDate, message } = parseResult.data;
+    const { name, email, phone, company, preferredDate, message, _honeypot, _formTime, _timestamp } = parseResult.data;
     console.log("Received booking request from:", email);
+
+    // Server-side spam check
+    const spamPayload = { _honeypot, _formTime, _timestamp };
+    const spamCheck = checkForSpam({ name, email, message, company }, spamPayload);
+    
+    if (spamCheck.isSpam) {
+      console.log("Booking spam detected and blocked:", spamCheck.reason, "Score:", spamCheck.score);
+      // Return success to not tip off bots, but don't send emails or sync to GHL
+      return new Response(
+        JSON.stringify({ success: true, blocked: true }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Log spam score for monitoring
+    if (spamCheck.score > 0) {
+      console.log("Booking spam score (passed):", spamCheck.score, "Reasons:", spamCheck.reason);
+    }
 
     const formattedDate = preferredDate ? new Date(preferredDate).toLocaleDateString('en-US', {
       weekday: 'long',
