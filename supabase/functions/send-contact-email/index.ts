@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 import { checkForSpam, extractSpamPayload } from "../_shared/spam-detection.ts";
+import { checkRateLimit, getClientIP, rateLimitResponse } from "../_shared/rate-limiter.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -46,6 +47,15 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Rate limiting check
+    const clientIP = getClientIP(req);
+    const rateLimitResult = checkRateLimit(clientIP, "send-contact-email");
+    
+    if (!rateLimitResult.allowed) {
+      console.log(`Rate limited: ${clientIP}, remaining: ${rateLimitResult.remaining}`);
+      return rateLimitResponse(rateLimitResult, corsHeaders);
+    }
+
     const body = await req.json();
     
     // Validate input
