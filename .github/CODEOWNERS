@@ -1,0 +1,29 @@
+# Episolve Code Owners
+# These owners will be requested for review on PRs that modify these paths
+
+# Default owners for everything
+* @episolve/core-team
+
+# Documentation
+*.md @episolve/core-team
+/docs/ @episolve/core-team
+
+# Frontend code
+/src/ @episolve/frontend-team
+
+# UI Components
+/src/components/ui/ @episolve/frontend-team
+
+# Backend / Edge Functions
+/supabase/ @episolve/backend-team
+
+# Security-sensitive files
+/supabase/functions/_shared/spam-detection.ts @episolve/security-team
+/supabase/functions/_shared/rate-limiter.ts @episolve/security-team
+/src/hooks/useAuth.tsx @episolve/security-team
+/src/components/auth/ @episolve/security-team
+
+# Configuration files
+/.github/ @episolve/core-team
+/tailwind.config.ts @episolve/frontend-team
+/vite.config.ts @episolve/frontend-team

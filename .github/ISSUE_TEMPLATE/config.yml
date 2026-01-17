@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/episolve/website/blob/main/DOCUMENTATION.md
+    about: Check the full documentation before creating an issue
+  - name: 💬 Team Discussion
+    url: https://github.com/episolve/website/discussions
+    about: Ask questions or discuss ideas with the team
