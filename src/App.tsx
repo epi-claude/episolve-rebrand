@@ -51,6 +51,7 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
+            <Route path="/diametica" element={<Diametica />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
