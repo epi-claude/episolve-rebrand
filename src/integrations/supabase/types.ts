@@ -116,6 +116,153 @@ export type Database = {
         }
         Relationships: []
       }
+      credit_card_authorizations: {
+        Row: {
+          authorization_date: string
+          authorization_purpose: string | null
+          authorized_amount: string | null
+          billing_address: string
+          billing_city: string
+          billing_country: string
+          billing_state: string
+          billing_zip: string
+          card_last_four: string
+          card_type: string
+          cardholder_name: string
+          company_name: string | null
+          created_at: string
+          expiration_month: string
+          expiration_year: string
+          id: string
+          print_name: string
+          signature_data: string | null
+          status: string
+        }
+        Insert: {
+          authorization_date: string
+          authorization_purpose?: string | null
+          authorized_amount?: string | null
+          billing_address: string
+          billing_city: string
+          billing_country?: string
+          billing_state: string
+          billing_zip: string
+          card_last_four: string
+          card_type: string
+          cardholder_name: string
+          company_name?: string | null
+          created_at?: string
+          expiration_month: string
+          expiration_year: string
+          id?: string
+          print_name: string
+          signature_data?: string | null
+          status?: string
+        }
+        Update: {
+          authorization_date?: string
+          authorization_purpose?: string | null
+          authorized_amount?: string | null
+          billing_address?: string
+          billing_city?: string
+          billing_country?: string
+          billing_state?: string
+          billing_zip?: string
+          card_last_four?: string
+          card_type?: string
+          cardholder_name?: string
+          company_name?: string | null
+          created_at?: string
+          expiration_month?: string
+          expiration_year?: string
+          id?: string
+          print_name?: string
+          signature_data?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
+      flight_authorizations: {
+        Row: {
+          approved_by: string | null
+          authorization_date: string
+          budget_per_person: string | null
+          cabin_class: string
+          company_name: string | null
+          created_at: string
+          department: string | null
+          departure_airport: string
+          departure_date: string
+          destination_airport: string
+          first_name: string
+          flexible_dates: boolean | null
+          id: string
+          last_name: string
+          num_travelers: string
+          preferred_airline: string | null
+          print_name: string
+          return_date: string | null
+          signature_data: string | null
+          special_requests: string | null
+          specific_flight_numbers: string | null
+          status: string
+          travel_policy_link: string | null
+          trip_purpose: string | null
+        }
+        Insert: {
+          approved_by?: string | null
+          authorization_date: string
+          budget_per_person?: string | null
+          cabin_class: string
+          company_name?: string | null
+          created_at?: string
+          department?: string | null
+          departure_airport: string
+          departure_date: string
+          destination_airport: string
+          first_name: string
+          flexible_dates?: boolean | null
+          id?: string
+          last_name: string
+          num_travelers: string
+          preferred_airline?: string | null
+          print_name: string
+          return_date?: string | null
+          signature_data?: string | null
+          special_requests?: string | null
+          specific_flight_numbers?: string | null
+          status?: string
+          travel_policy_link?: string | null
+          trip_purpose?: string | null
+        }
+        Update: {
+          approved_by?: string | null
+          authorization_date?: string
+          budget_per_person?: string | null
+          cabin_class?: string
+          company_name?: string | null
+          created_at?: string
+          department?: string | null
+          departure_airport?: string
+          departure_date?: string
+          destination_airport?: string
+          first_name?: string
+          flexible_dates?: boolean | null
+          id?: string
+          last_name?: string
+          num_travelers?: string
+          preferred_airline?: string | null
+          print_name?: string
+          return_date?: string | null
+          signature_data?: string | null
+          special_requests?: string | null
+          specific_flight_numbers?: string | null
+          status?: string
+          travel_policy_link?: string | null
+          trip_purpose?: string | null
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           confirmed: boolean
@@ -164,6 +311,87 @@ export type Database = {
           id?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      travel_profiles: {
+        Row: {
+          created_at: string
+          date_of_birth: string | null
+          email: string
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          emergency_contact_relationship: string | null
+          first_name: string
+          frequent_flyer_programs: string | null
+          gender: string | null
+          global_entry: string | null
+          id: string
+          known_traveler_number: string | null
+          last_name: string
+          meal_preference: string | null
+          medical_conditions: string | null
+          passport_country: string | null
+          passport_expiry: string | null
+          passport_number: string | null
+          phone: string | null
+          redress_number: string | null
+          seat_preference: string | null
+          special_assistance: string | null
+          status: string
+          tsa_precheck: string | null
+        }
+        Insert: {
+          created_at?: string
+          date_of_birth?: string | null
+          email: string
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          emergency_contact_relationship?: string | null
+          first_name: string
+          frequent_flyer_programs?: string | null
+          gender?: string | null
+          global_entry?: string | null
+          id?: string
+          known_traveler_number?: string | null
+          last_name: string
+          meal_preference?: string | null
+          medical_conditions?: string | null
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_number?: string | null
+          phone?: string | null
+          redress_number?: string | null
+          seat_preference?: string | null
+          special_assistance?: string | null
+          status?: string
+          tsa_precheck?: string | null
+        }
+        Update: {
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          emergency_contact_relationship?: string | null
+          first_name?: string
+          frequent_flyer_programs?: string | null
+          gender?: string | null
+          global_entry?: string | null
+          id?: string
+          known_traveler_number?: string | null
+          last_name?: string
+          meal_preference?: string | null
+          medical_conditions?: string | null
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_number?: string | null
+          phone?: string | null
+          redress_number?: string | null
+          seat_preference?: string | null
+          special_assistance?: string | null
+          status?: string
+          tsa_precheck?: string | null
         }
         Relationships: []
       }

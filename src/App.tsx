@@ -19,6 +19,7 @@ import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
+import Diametica from "./pages/Diametica";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
+            <Route path="/diametica" element={<Diametica />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
