@@ -1,0 +1,445 @@
+{
+  "backup_date": "2026-03-26T21:07:16.786406",
+  "tables": {
+    "contact_submissions": [
+      {
+        "id": "8f37bb17-5b4f-46b1-a9ce-8684dba3d5d6",
+        "name": "Randall Blades",
+        "email": "richbaldwin@protonmail.com",
+        "phone": "9737401923",
+        "company": "ATTSMARO LLC",
+        "service_interest": "cybersecurity",
+        "message": "I need help, please help.",
+        "created_at": "2026-01-01T05:58:06.993495+00:00"
+      },
+      {
+        "id": "71196aff-3b63-4b37-80c1-be11596eefd1",
+        "name": "Marshall Butler",
+        "email": "Marshall.Butler@goldenyearsbiz.com",
+        "phone": "(360) 750-6860",
+        "company": "goldenyearsbiz.com",
+        "service_interest": "cybersecurity",
+        "message": "Hi there,\n\nI wanted to check in to see if you're still interested in exploring the proposal of crafting an insightful piece for your readers on aligning passions with market needs. If you have any thoughts or specific topics in mind, I'd love to hear them.\n\nIf you already responded, thanks for that and sorry for the repeat.\n\nBest regards,\nMarshall Butler",
+        "created_at": "2026-01-09T21:03:00.254347+00:00"
+      },
+      {
+        "id": "f7e568b6-142e-4f86-9acc-00bc18b0f230",
+        "name": "Joseph O'Hayon",
+        "email": "info@franchisecreatorexpansion.com",
+        "phone": "7543064609",
+        "company": "Franchise Creator",
+        "service_interest": "software-development",
+        "message": "Hello.\nI'm Joseph O\u2019Hayon, Vice President of Franchise Development with Franchise Creator.\nHave you ever considered expanding your business through franchising?\nOur proven all-in-one solution has helped close to 800 businesses like yours achieve remarkable growth. Let's explore how we can transform your brand into a successful franchise in just 15-30 minutes.\nSchedule your call here:\nhttps://calendly.com/fc-franchise-development/cf-franchise-development\n\n\nBest Regards,\nJoseph O\u2019Hayon\n754-306-4609\ninfo@franchisecreatorexpansion.com",
+        "created_at": "2026-01-11T15:43:12.726913+00:00"
+      },
+      {
+        "id": "b86176e3-3f21-4e15-9227-8e40d3d0be3f",
+        "name": "Randall Blades",
+        "email": "iamrandallblades@gmail.com",
+        "phone": "973-544-8787",
+        "company": "Randy @ Home",
+        "service_interest": "cybersecurity",
+        "message": "We've been hacked and need help",
+        "created_at": "2026-01-12T23:26:09.613219+00:00"
+      },
+      {
+        "id": "6d2e2174-dd10-421e-93af-d15f97a51104",
+        "name": "Randall Blades",
+        "email": "iamrandallblades@gmail.com",
+        "phone": "973-544-8787",
+        "company": "ATTSMARO LLC",
+        "service_interest": "managed-it",
+        "message": "Can you guys hook me up with some IT love.",
+        "created_at": "2026-01-13T13:57:20.988124+00:00"
+      },
+      {
+        "id": "d8b8fee6-7598-492a-9795-2ae964c5aea6",
+        "name": "Christon Ramlogan",
+        "email": "christon.ramlogan@gmail.com",
+        "phone": "8683711782",
+        "company": "A@W",
+        "service_interest": "it-consulting",
+        "message": "N/A",
+        "created_at": "2026-01-13T15:33:39.46915+00:00"
+      },
+      {
+        "id": "06822750-8b30-4907-b782-ec2335e79af3",
+        "name": "Hanysa Diaz",
+        "email": "hanysa.diaz12@gmail.com",
+        "phone": "18687124580",
+        "company": "Admins@Work",
+        "service_interest": "it-consulting",
+        "message": "Testing",
+        "created_at": "2026-01-13T15:35:23.12108+00:00"
+      },
+      {
+        "id": "deb99ba9-a52a-43c7-a6cb-9eb4644c3fbc",
+        "name": "Christon Diaz",
+        "email": "company@email.com",
+        "phone": "8683034399",
+        "company": "A@W Ltd",
+        "service_interest": "integration",
+        "message": "We need some tech help",
+        "created_at": "2026-01-13T15:37:45.680396+00:00"
+      },
+      {
+        "id": "09c96ecb-9c12-42b3-a5d6-02bc68df4b6b",
+        "name": "Young Brother",
+        "email": "young@bredda.com",
+        "phone": "868-555-9999",
+        "company": "Young Brother Ltd.",
+        "service_interest": "cybersecurity",
+        "message": "We got hacked...again - send help!!",
+        "created_at": "2026-01-13T19:13:02.622681+00:00"
+      },
+      {
+        "id": "9c21c749-5323-4228-a9c8-a469fd8db036",
+        "name": "Christon Ramlogan",
+        "email": "christon.ramlogan@gmail.com",
+        "phone": "8683711782",
+        "company": "A@W",
+        "service_interest": "it-consulting",
+        "message": "N/A",
+        "created_at": "2026-01-14T13:57:06.329814+00:00"
+      },
+      {
+        "id": "999e7bd1-60d8-47c3-9e19-8487c87964e9",
+        "name": "Hanysa",
+        "email": "hanysa.diaz12@gmail.com",
+        "phone": "8687124580",
+        "company": "Admins@Work",
+        "service_interest": "managed-it",
+        "message": "Need Help",
+        "created_at": "2026-01-14T14:54:48.088677+00:00"
+      },
+      {
+        "id": "ce7c7cad-9185-477f-8556-fe2b6d235a04",
+        "name": "hanysa diaz",
+        "email": "hanysa.diaz12@gmail.com",
+        "phone": "8685559999",
+        "company": "Me@Home",
+        "service_interest": "cloud-services",
+        "message": "I want to see how this works",
+        "created_at": "2026-01-14T15:16:47.238092+00:00"
+      },
+      {
+        "id": "40e58742-e5c0-44a2-8d7f-7add7b8ed081",
+        "name": "David Turner",
+        "email": "david.turner@jmailservice.com",
+        "phone": "8054002077",
+        "company": "David Turner",
+        "service_interest": "software-development",
+        "message": "Within 24 hours, we can have your brand appearing when people search for your top keywords.\nWant to see what kind of reach we can get you?",
+        "created_at": "2026-01-15T04:14:17.208487+00:00"
+      },
+      {
+        "id": "636ce9e6-eb09-4a3b-bb27-40d71e33b5ff",
+        "name": "Parimal",
+        "email": "pjariwala@episolve.com",
+        "phone": "1234567890",
+        "company": "Epi",
+        "service_interest": "software-development",
+        "message": "Testing....",
+        "created_at": "2026-01-15T10:53:20.9455+00:00"
+      },
+      {
+        "id": "d21f09fb-eb35-4da6-b006-fa8c87aa9116",
+        "name": " steph",
+        "email": "smeiniger@grouptogo.com",
+        "phone": "888333333",
+        "company": "AW",
+        "service_interest": "managed-it",
+        "message": "we need help",
+        "created_at": "2026-01-15T15:48:58.245246+00:00"
+      },
+      {
+        "id": "8d386c1d-4c04-46ee-99c0-0d2f20c5ea01",
+        "name": "Rich Baldwin",
+        "email": "rdb@thebaldwins.org",
+        "phone": "9736265353",
+        "company": "NOVO",
+        "service_interest": "managed-it",
+        "message": "Testing bot removal",
+        "created_at": "2026-01-15T18:43:32.16191+00:00"
+      },
+      {
+        "id": "1a723555-b305-4f7a-b0c7-a233590ae318",
+        "name": "Gabrielle Simmons",
+        "email": "gabrielle.simmons@jmailservice.com",
+        "phone": "8054002077",
+        "company": "Gabrielle Simmons",
+        "service_interest": "software-development",
+        "message": "We make it easy for your business to be seen first and chosen first. You pick the keywords, and we put your banner at the top of search results - usually live within 24 hours.\n\nNo contracts, no long setup - just traffic and visibility.\nWould you like me to prepare a few keyword options for your business?",
+        "created_at": "2026-01-25T03:36:19.864354+00:00"
+      },
+      {
+        "id": "9013b31f-9a7d-40a5-a8d0-b1c64299a314",
+        "name": "David Turner",
+        "email": "david.turner@jmailservice.com",
+        "phone": "8054002077",
+        "company": "David Turner",
+        "service_interest": "software-development",
+        "message": "Our system drives targeted traffic to your website within 24 hours of setup. You pick the keywords, we do the rest.\nIs there a good time to connect?",
+        "created_at": "2026-02-03T16:22:02.651194+00:00"
+      },
+      {
+        "id": "213a0724-794e-4853-bf2d-d15e50cbaf44",
+        "name": "Maureen Rucker",
+        "email": "Maureen.r@theprofessionalprofiles.com",
+        "phone": "8149805065",
+        "company": "The Professional Profiles",
+        "service_interest": "infrastructure",
+        "message": "Wikipedia is considered to be the World\u2019s most significant tool for reference material. The Wiki links show up on the 1st page of Google 97% of the time. With a Page on one of the most revered reference tools, you are sure to get yourself or your business noticed. So if you're thinking of getting a Wikipedia Page created, it's the best time of the year.\n\nIf you are interested in getting more information just respond back to this email.\n\nThanks,\n\nMaureen Rucker\nThe Professional Profiles\nMaureen.r@theprofessionalprofiles.com\n\nRespond with stop to optout.",
+        "created_at": "2026-02-04T14:21:19.722483+00:00"
+      },
+      {
+        "id": "f2e5818f-f391-42cb-a93a-46d566215599",
+        "name": "Test User",
+        "email": "testuser@example.com",
+        "phone": null,
+        "company": null,
+        "service_interest": null,
+        "message": "This is a test message to verify the contact form is working properly end to end.",
+        "created_at": "2026-02-17T04:50:24.775224+00:00"
+      },
+      {
+        "id": "527917fb-6476-44ff-9ba2-b3867f21310b",
+        "name": "Davis Jameson",
+        "email": "djameson@businessisfun.net",
+        "phone": "(864) 461-9306",
+        "company": "businessisfun.net",
+        "service_interest": "cloud-services",
+        "message": "Hey there,\n\nAre you considering launching an e-commerce venture? It\u2019s an exciting path, but building a successful online business takes more than enthusiasm \u2014 it requires the right resources, strategic planning, and a strong entrepreneurial mindset.\n\nI\u2019d like to offer an article for your site that highlights the must-have tools and platforms every new e-commerce business owner should know about. From choosing a reliable platform to handling payments and crafting effective marketing campaigns, this guide will provide actionable advice to help beginners hit the ground running.\n\nIf you think your audience would find this valuable, I\u2019d be glad to send it over for your review. Looking forward to the possibility of collaborating!\n\nWarm regards,\nDavis Jameson\n\n\nP.S. My goal is to create content that readers love and that smart tools can easily find. I\u2019d be happy to take topic requests, but if you\u2019d prefer not to hear from me again, just say the word.",
+        "created_at": "2026-02-19T02:11:01.87444+00:00"
+      },
+      {
+        "id": "25688076-4140-43ac-815a-823cf8df7529",
+        "name": "Gabrielle Simmons",
+        "email": "gabrielle.simmons@jmailservice.com",
+        "phone": "8054002077",
+        "company": "Gabrielle Simmons",
+        "service_interest": "software-development",
+        "message": "If I could get your business in front of hundreds of local searchers by tomorrow - would you be open to a short call today?",
+        "created_at": "2026-03-01T16:44:44.6521+00:00"
+      },
+      {
+        "id": "e92c696e-84a6-47f9-8522-bfdc075f295d",
+        "name": "Dave Hawkins",
+        "email": "DHawkins@bizbuildershub.com",
+        "phone": "406-251-5210",
+        "company": "BizBuildersHub.com",
+        "service_interest": "integration",
+        "message": "Hi,\n\nJust circling back to see if you had a chance to review my idea for an article on helping small business owners manage tech tasks. Let me know if there's any interest or if you have other topics in mind.\n\nIf you\u2019ve already replied, I apologize for the repeat.\n\nBest,\nDave",
+        "created_at": "2026-03-10T15:03:56.896547+00:00"
+      },
+      {
+        "id": "759d5562-c30c-49e9-8d13-c42945290dfb",
+        "name": "Gena Kotarsky",
+        "email": "gena@janpronorthernnj.com",
+        "phone": "9733197417",
+        "company": "Jan-Pro of Northern New Jersey",
+        "service_interest": "software-development",
+        "message": "Hi,\n \nI was recently in the area and wanted to reach out.We help businesses around Northern New Jersey keep their offices clean, healthy, and looking professional. Our team focuses on reliable service and strong attention to detail.\n \nWould you be open to a quick, no-obligation cleaning quote for your facility?\n \nBest regards,\n \nGena Kotarsky\nSales Associate\nJan-Pro of Northern New Jersey\ngena@janpronorthernnj.com\n\n\"Amazing services! Very good attention to detail. Will definitely use their services again!\" \u2014Serenity Sewell\n\nRespond with stop to optout.",
+        "created_at": "2026-03-10T15:57:53.776731+00:00"
+      },
+      {
+        "id": "805a5833-2187-4aac-bd11-044ab08991f1",
+        "name": "Richard Lawson",
+        "email": "richard.lawson@jmailservice.com",
+        "phone": "8054002077",
+        "company": "Richard Lawson",
+        "service_interest": "software-development",
+        "message": "Let me be direct.\n\nEvery day people are searching for your services.\nSomeone is getting that traffic.\n\nIt can be you.\n\nWe allow you to secure specific keyword phrases in your industry. When someone searches that term, your banner appears and sends them straight to your website.\n\nKeyword placements are limited. Once secured, they are no longer available to competitors.\n\nIf you're serious about growth, send me:\n - Your website\n - The keywords you want to control\n\nI'll respond with availability and guaranteed traffic numbers.",
+        "created_at": "2026-03-18T12:09:14.75673+00:00"
+      }
+    ],
+    "consultation_bookings": [
+      {
+        "id": "4db76213-6a9b-4100-8f12-f9e2e8d571fe",
+        "name": "Randy Blades",
+        "email": "iamrandallblades@gmail.com",
+        "phone": "718-333-2345",
+        "company": "Randy Dandy Co.",
+        "preferred_date": "2026-01-13",
+        "message": "This Randy aint Dandying!",
+        "status": "pending",
+        "created_at": "2026-01-13T20:23:39.185851+00:00"
+      },
+      {
+        "id": "01892746-30bb-458a-b899-57e8bd9e04c8",
+        "name": "Randy Blades",
+        "email": "iamrandallblades@gmail.com",
+        "phone": "718-333-2345",
+        "company": "Randy Dandy Co.",
+        "preferred_date": "2026-01-14",
+        "message": "Need to get this website done",
+        "status": "pending",
+        "created_at": "2026-01-13T20:36:10.519941+00:00"
+      },
+      {
+        "id": "53305198-3ff6-41a4-b87d-26dceea53de1",
+        "name": "Richard Baldwin",
+        "email": "rdb@episolve.com",
+        "phone": "9737400414",
+        "company": "Episolve llc",
+        "preferred_date": "2026-01-15",
+        "message": "We need the website working",
+        "status": "pending",
+        "created_at": "2026-01-13T20:48:08.556997+00:00"
+      },
+      {
+        "id": "c9076ddf-7611-4625-8ab5-137186add91a",
+        "name": "Richard Baldwin",
+        "email": "rdbaldwin@gmail.com",
+        "phone": "9737400414",
+        "company": "Episolve llc",
+        "preferred_date": "2026-01-14",
+        "message": "Last call - if this doesn't work tomorrow is a new day",
+        "status": "pending",
+        "created_at": "2026-01-13T20:52:50.266303+00:00"
+      },
+      {
+        "id": "a3853c0c-0df3-44eb-8e76-36e408b6393c",
+        "name": "Richard Baldwin",
+        "email": "rdb@thebaldwins.org",
+        "phone": "9735448787",
+        "company": "Episolve llc",
+        "preferred_date": "2026-01-15",
+        "message": "Developing websites is a bit tedious using AI but its rock solid once it works\n",
+        "status": "pending",
+        "created_at": "2026-01-13T20:56:14.725305+00:00"
+      },
+      {
+        "id": "d9cd0ae0-9c0b-419f-9bb0-6f719047ff45",
+        "name": "Christon Ramlogan",
+        "email": "christon.ramlogan@gmail.com",
+        "phone": "8683711782",
+        "company": "A@W",
+        "preferred_date": "2026-01-20",
+        "message": "NA",
+        "status": "pending",
+        "created_at": "2026-01-14T13:57:47.920107+00:00"
+      },
+      {
+        "id": "9008be4f-11ed-4e05-a476-9a8979d1e5f0",
+        "name": "Hanysa",
+        "email": "hanysa.diaz12@gmail.com",
+        "phone": "8687124580",
+        "company": "Admins@Work",
+        "preferred_date": "2026-01-19",
+        "message": "would love to have a meeting to discuss.",
+        "status": "pending",
+        "created_at": "2026-01-14T14:55:46.334489+00:00"
+      },
+      {
+        "id": "a66fd9ce-87ed-479b-8018-ddc373dcae1a",
+        "name": "hanysa diaz",
+        "email": "hanysa.diaz12@gmail.com",
+        "phone": "8689991212",
+        "company": "Me@Home",
+        "preferred_date": "2026-01-19",
+        "message": "Need to follow up",
+        "status": "pending",
+        "created_at": "2026-01-14T15:20:31.935825+00:00"
+      },
+      {
+        "id": "4561680d-5ef4-4d92-a2e7-aec802f9f440",
+        "name": "Parimal",
+        "email": "pjariwala@episolve.com",
+        "phone": "1234567890",
+        "company": "Epi",
+        "preferred_date": "2026-01-19",
+        "message": "Testing appointment....",
+        "status": "pending",
+        "created_at": "2026-01-15T10:54:16.850146+00:00"
+      },
+      {
+        "id": "dfe56646-d705-48ca-b468-a00dfb03723d",
+        "name": "steph",
+        "email": "stephanie@grouptogo.com",
+        "phone": "999-999-6758",
+        "company": "AW",
+        "preferred_date": "2026-01-20",
+        "message": "we need more help",
+        "status": "pending",
+        "created_at": "2026-01-15T15:50:42.978093+00:00"
+      },
+      {
+        "id": "f2c700c8-2ee4-48b6-934b-afbeda55f9f6",
+        "name": "Rich Baldwin",
+        "email": "rdb@thebaldwins.org",
+        "phone": "9736265353",
+        "company": "NOVO",
+        "preferred_date": "2026-01-21",
+        "message": "We don't want to be hacked",
+        "status": "pending",
+        "created_at": "2026-01-15T18:45:13.284556+00:00"
+      },
+      {
+        "id": "403e9964-8fbf-412d-b13e-9e92495bba1a",
+        "name": "Test Booker",
+        "email": "testbooker@example.com",
+        "phone": null,
+        "company": null,
+        "preferred_date": "2026-02-18",
+        "message": null,
+        "status": "pending",
+        "created_at": "2026-02-17T04:51:40.550937+00:00"
+      }
+    ],
+    "newsletter_subscribers": [],
+    "profiles": [
+      {
+        "id": "39609300-3bc9-44c9-a195-f1c6fe9ae8bd",
+        "user_id": "15d9d5d1-fbd7-406f-814f-80705f2082db",
+        "email": "rbaldwin@episolve.com",
+        "full_name": "Richard Baldwin",
+        "created_at": "2026-01-13T19:47:41.128258+00:00",
+        "updated_at": "2026-01-13T19:47:41.128258+00:00"
+      },
+      {
+        "id": "69aa45dd-66e6-457f-8e65-ee989c9b9cd4",
+        "user_id": "0675a2c7-c559-436b-b760-d57ff2ccbb39",
+        "email": "pjariwala@episolve.com",
+        "full_name": "Parimal Jariwala",
+        "created_at": "2026-01-16T16:23:31.587501+00:00",
+        "updated_at": "2026-01-16T16:23:31.587501+00:00"
+      },
+      {
+        "id": "f269793f-002f-4b70-ab4b-eeb156043636",
+        "user_id": "30fb7a1f-91e6-4310-86e2-f2b7e264d32f",
+        "email": "hdiaz@adminsat.work",
+        "full_name": "Hanysa Diaz",
+        "created_at": "2026-03-23T15:29:37.787968+00:00",
+        "updated_at": "2026-03-23T15:29:37.787968+00:00"
+      }
+    ],
+    "user_roles": [
+      {
+        "id": "f01aab2f-59b8-4b8c-b0e7-e5173efba1be",
+        "user_id": "15d9d5d1-fbd7-406f-814f-80705f2082db",
+        "role": "user",
+        "created_at": "2026-01-13T19:47:41.128258+00:00"
+      },
+      {
+        "id": "341468bf-b6fc-40b6-a8c8-73317d13246b",
+        "user_id": "15d9d5d1-fbd7-406f-814f-80705f2082db",
+        "role": "admin",
+        "created_at": "2026-01-13T19:49:01.844394+00:00"
+      },
+      {
+        "id": "c30bbe0c-d580-4f34-8eac-a689e6832196",
+        "user_id": "0675a2c7-c559-436b-b760-d57ff2ccbb39",
+        "role": "user",
+        "created_at": "2026-01-16T16:23:31.587501+00:00"
+      },
+      {
+        "id": "fbe1ace1-e82c-4be9-894e-9b4e83ceea61",
+        "user_id": "30fb7a1f-91e6-4310-86e2-f2b7e264d32f",
+        "role": "user",
+        "created_at": "2026-03-23T15:29:37.787968+00:00"
+      }
+    ],
+    "admin_audit_log": []
+  }
+}
