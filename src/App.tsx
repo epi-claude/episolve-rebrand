@@ -53,6 +53,14 @@ const App = () => (
               } 
             />
             <Route path="/diametica" element={<Diametica />} />
+            <Route
+              path="/diametica/admin"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <DiameticaAdmin />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
