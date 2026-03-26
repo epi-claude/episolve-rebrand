@@ -20,6 +20,7 @@ import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Diametica from "./pages/Diametica";
+import DiameticaAdmin from "./pages/DiameticaAdmin";
 
 const queryClient = new QueryClient();
 
