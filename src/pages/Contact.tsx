@@ -39,7 +39,9 @@ const contactInfo = [
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
-  const preselectedService = searchParams.get("service") || "";
+  const hash = typeof window !== "undefined" ? window.location.hash.replace("#", "").toLowerCase() : "";
+  const preselectedService =
+    searchParams.get("service") || (hash === "facilitiesdb" ? "facilities-db" : "");
   
   const [formData, setFormData] = useState({
     name: "",
@@ -565,6 +567,7 @@ export default function Contact() {
                             {service.title}
                           </SelectItem>
                         ))}
+                        <SelectItem value="facilities-db">epiSolve Facilities DB</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
