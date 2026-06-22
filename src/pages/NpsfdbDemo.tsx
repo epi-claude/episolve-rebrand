@@ -9,6 +9,7 @@ const NpsfdbDemo = () => {
     <iframe
       src="https://episolve-nps-showcase.lovable.app"
       title="NPS FDB Demo"
+      allow="fullscreen; autoplay; clipboard-write"
       style={{
         position: "fixed",
         inset: 0,
