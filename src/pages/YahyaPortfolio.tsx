@@ -8,30 +8,32 @@ import serifLogo from "@/assets/yahya/serif-logo.png.asset.json";
 import goldStorefront from "@/assets/yahya/gold-storefront.png.asset.json";
 import goldLogo from "@/assets/yahya/gold-logo.png.asset.json";
 
+const assetUrl = (path: string) => `https://episolve-rebrand.lovable.app${path}`;
+
 const logoConcepts = [
   {
     name: "Playful Boutique",
     note: "Soft, welcoming, and youthful with an approachable boutique personality.",
-    logo: playfulLogo.url,
-    storefront: playfulStorefront.url,
+    logo: assetUrl(playfulLogo.url),
+    storefront: assetUrl(playfulStorefront.url),
   },
   {
     name: "Signature Script",
     note: "Elegant handwritten motion with a refined resort-style luxury feel.",
-    logo: scriptLogo.url,
-    storefront: scriptStorefront.url,
+    logo: assetUrl(scriptLogo.url),
+    storefront: assetUrl(scriptStorefront.url),
   },
   {
     name: "Refined Serif",
     note: "Clean, elevated, and fashion-led for a polished premium retail impression.",
-    logo: serifLogo.url,
-    storefront: serifStorefront.url,
+    logo: assetUrl(serifLogo.url),
+    storefront: assetUrl(serifStorefront.url),
   },
   {
     name: "Gold Prestige",
     note: "High-end and timeless with stronger luxury cues and upscale visibility.",
-    logo: goldLogo.url,
-    storefront: goldStorefront.url,
+    logo: assetUrl(goldLogo.url),
+    storefront: assetUrl(goldStorefront.url),
   },
 ];
 
