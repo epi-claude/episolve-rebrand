@@ -65,16 +65,11 @@ const YahyaPortfolio = () => {
       </header>
 
       <section id="logo-designs" className="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
-        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-              Logo Designs
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-foreground md:text-4xl">
-              Presented with both logo artwork and storefront application.
-            </h2>
-          </div>
-          <p className="max-w-xl text-sm leading-6 text-muted-foreground md:text-right">
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl font-semibold text-foreground md:text-4xl">
+            Presented with both logo artwork and storefront application.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
             Each direction pairs the flat logo treatment with a real-world storefront visualization to help assess presence, legibility, and brand character.
           </p>
         </div>
