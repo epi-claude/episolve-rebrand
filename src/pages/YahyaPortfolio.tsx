@@ -25,7 +25,7 @@ const logoConcepts = [
   },
   {
     name: "Refined Serif",
-    note: "Clean, elevated, and fashion-led for a polished premium retail impression.",
+    note: "Cean, elevated, and fashion-led for a polished premium retail impression.",
     logo: assetUrl(serifLogo.url),
     storefront: assetUrl(serifStorefront.url),
   },
@@ -68,14 +68,14 @@ const YahyaPortfolio = () => {
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:px-10 lg:py-16">
           <div className="space-y-6">
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-              Logo Exploration
+              {"\n"}
             </p>
             <div className="space-y-4">
               <h2 className="max-w-3xl text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-                A focused one-page review of Yahya brand directions and storefront mockups.
+                {"\n"}
               </h2>
               <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-                Four distinct visual directions are presented below to compare tone, elegance, and real-world signage presence for the Yahya Swimwear Boutique brand.
+                {"\n"}
               </p>
             </div>
           </div>
