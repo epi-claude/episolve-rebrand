@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
+  if (typeof window !== "undefined" && window.location.pathname === "/portfolio/yahya") {
+    return null;
+  }
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const theme = params.get('theme');
