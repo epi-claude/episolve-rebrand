@@ -45,18 +45,18 @@ const YahyaPortfolio = () => {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-3 px-4 py-3 sm:flex-row sm:items-center sm:gap-0 sm:px-6 sm:py-4 lg:px-10">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
               {"\n"}
             </p>
-            <h1 className="mt-2 text-2xl font-semibold text-foreground">Yahya Swimwear Boutique</h1>
+            <h1 className="mt-1 text-lg font-semibold text-foreground sm:mt-2 sm:text-2xl">Yahya Swimwear Boutique</h1>
           </div>
 
           <nav aria-label="Page menu">
             <a
               href="#logo-designs"
-              className="text-sm font-semibold uppercase tracking-[0.28em] text-foreground transition-opacity hover:opacity-70"
+              className="text-xs font-semibold uppercase tracking-[0.28em] text-foreground transition-opacity hover:opacity-70 sm:text-sm"
             >
               Logo Designs
             </a>
