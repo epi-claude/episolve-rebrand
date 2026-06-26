@@ -48,9 +48,9 @@ const YahyaPortfolio = () => {
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-              Client Presentation
+              {"\n"}
             </p>
-            <h1 className="mt-2 text-2xl font-semibold text-foreground">Yahya</h1>
+            <h1 className="mt-2 text-2xl font-semibold text-foreground">Yahya Swimwear Boutique</h1>
           </div>
 
           <nav aria-label="Page menu">
