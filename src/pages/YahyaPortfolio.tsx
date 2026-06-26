@@ -45,18 +45,18 @@ const YahyaPortfolio = () => {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-3 px-4 py-3 sm:flex-row sm:items-center sm:gap-0 sm:px-6 sm:py-4 lg:px-10">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
               {"\n"}
             </p>
-            <h1 className="mt-2 text-2xl font-semibold text-foreground">Yahya Swimwear Boutique</h1>
+            <h1 className="mt-1 text-lg font-semibold text-foreground sm:mt-2 sm:text-2xl">Yahya Swimwear Boutique</h1>
           </div>
 
           <nav aria-label="Page menu">
             <a
               href="#logo-designs"
-              className="text-sm font-semibold uppercase tracking-[0.28em] text-foreground transition-opacity hover:opacity-70"
+              className="text-xs font-semibold uppercase tracking-[0.28em] text-foreground transition-opacity hover:opacity-70 sm:text-sm"
             >
               Logo Designs
             </a>
@@ -64,11 +64,11 @@ const YahyaPortfolio = () => {
         </div>
       </header>
 
-      <section id="logo-designs" className="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
+      <section id="logo-designs" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-16">
         <div className="mb-10 text-center">
-          <h2 className="text-3xl font-semibold text-foreground md:text-4xl">
+          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl md:text-4xl">
             Presented with both logo artwork and{"\u00a0"}
-            <br />
+            <br className="hidden sm:block" />
             storefront application.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
@@ -79,38 +79,38 @@ const YahyaPortfolio = () => {
         <div className="space-y-8">
           {logoConcepts.map((concept, index) => (
             <article key={concept.name} className="overflow-hidden rounded-lg border border-border/70 bg-card shadow-sm">
-              <div className="grid gap-px bg-border/60 xl:grid-cols-[0.92fr_1.08fr]">
-                <div className="bg-card p-6 md:p-8">
-                  <div className="mb-6 flex items-start justify-between gap-4">
+              <div className="grid grid-cols-1 gap-px bg-border/60 xl:grid-cols-[0.92fr_1.08fr]">
+                <div className="bg-card p-4 sm:p-6 md:p-8">
+                  <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
                         Option {index + 1}
                       </p>
-                      <h3 className="mt-3 text-2xl font-semibold text-foreground">{concept.name}</h3>
+                      <h3 className="mt-2 text-xl font-semibold text-foreground sm:mt-3 sm:text-2xl">{concept.name}</h3>
                     </div>
-                    <span className="rounded-full border border-border px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                    <span className="self-start rounded-full border border-border px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                       Logo + Mockup
                     </span>
                   </div>
 
-                  <p className="mb-6 max-w-xl text-base leading-7 text-muted-foreground">{concept.note}</p>
+                  <p className="mb-4 max-w-xl text-sm leading-7 text-muted-foreground sm:mb-6 sm:text-base">{concept.note}</p>
 
                   <div className="overflow-hidden rounded-md border border-border/70 bg-secondary/45">
                     <img
                       src={concept.logo}
                       alt={`${concept.name} Yahya Swimwear Boutique logo concept`}
-                      className="h-full w-full object-cover"
+                      className="aspect-[4/3] w-full object-cover"
                       loading="lazy"
                     />
                   </div>
                 </div>
 
-                <div className="bg-card p-3 md:p-4">
+                <div className="bg-card p-2 sm:p-3 md:p-4">
                   <div className="overflow-hidden rounded-md border border-border/70 bg-secondary/35">
                     <img
                       src={concept.storefront}
                       alt={`${concept.name} logo shown on Yahya storefront signage`}
-                      className="h-full w-full object-cover"
+                      className="aspect-[4/3] w-full object-cover"
                       loading="lazy"
                     />
                   </div>
