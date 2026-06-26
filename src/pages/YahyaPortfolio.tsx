@@ -95,11 +95,11 @@ const YahyaPortfolio = () => {
 
                   <p className="mb-4 max-w-xl text-sm leading-7 text-muted-foreground sm:mb-6 sm:text-base">{concept.note}</p>
 
-                  <div className="overflow-hidden rounded-md border border-border/70 bg-secondary/45">
+                  <div className="overflow-hidden rounded-md border border-border/70 bg-white">
                     <img
                       src={concept.logo}
                       alt={`${concept.name} Yahya Swimwear Boutique logo concept`}
-                      className="aspect-[4/3] w-full object-cover"
+                      className="aspect-[4/3] w-full object-contain"
                       loading="lazy"
                     />
                   </div>
