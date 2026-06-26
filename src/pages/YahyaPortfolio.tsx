@@ -64,36 +64,6 @@ const YahyaPortfolio = () => {
         </div>
       </header>
 
-      <section className="border-b border-border/60">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:px-10 lg:py-16">
-          <div className="space-y-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-              {"\n"}
-            </p>
-            <div className="space-y-4">
-              <h2 className="max-w-3xl text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-                {"\n"}
-              </h2>
-              <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-                {"\n"}
-              </p>
-            </div>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {logoConcepts.map((concept, index) => (
-              <div key={concept.name} className="rounded-lg border border-border/70 bg-card p-5 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                  Option {index + 1}
-                </p>
-                <p className="mt-3 text-lg font-semibold text-foreground">{concept.name}</p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{concept.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="logo-designs" className="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
         <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
