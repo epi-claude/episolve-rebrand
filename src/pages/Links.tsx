@@ -22,6 +22,24 @@ const groups: {
   links: { label: string; href: string; icon: typeof Globe; external?: boolean }[];
 }[] = [
   {
+    label: "Connect",
+    links: [
+      { label: "Contact", href: "https://episolve.com/contact#get-in-touch", icon: Mail, external: true },
+      {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/company/episolve-llc/",
+        icon: Linkedin,
+        external: true,
+      },
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/profile.php?id=61574314388662",
+        icon: Facebook,
+        external: true,
+      },
+    ],
+  },
+  {
     label: "Start Here",
     links: [
       { label: "Website", href: "https://episolve.com", icon: Globe, external: true },
@@ -48,24 +66,6 @@ const groups: {
         label: "Custom Workflows",
         href: "https://episolve.com/solutions/intelligent-automation",
         icon: Cog,
-        external: true,
-      },
-    ],
-  },
-  {
-    label: "Connect",
-    links: [
-      { label: "Contact", href: "https://episolve.com/contact#get-in-touch", icon: Mail, external: true },
-      {
-        label: "LinkedIn",
-        href: "https://www.linkedin.com/company/episolve-llc/",
-        icon: Linkedin,
-        external: true,
-      },
-      {
-        label: "Facebook",
-        href: "https://www.facebook.com/profile.php?id=61574314388662",
-        icon: Facebook,
         external: true,
       },
     ],
