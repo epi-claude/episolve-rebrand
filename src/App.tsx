@@ -20,6 +20,7 @@ import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import NpsfdbDemo from "./pages/NpsfdbDemo";
 import YahyaPortfolio from "./pages/YahyaPortfolio";
+import Links from "./pages/Links";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/portfolio/npsfdb-demo" element={<NpsfdbDemo />} />
             <Route path="/portfolio/yahya" element={<YahyaPortfolio />} />
+            <Route path="/links" element={<Links />} />
             <Route 
               path="/admin" 
               element={
