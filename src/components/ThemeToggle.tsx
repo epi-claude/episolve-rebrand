@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
-  if (typeof window !== "undefined" && window.location.pathname === "/portfolio/yahya") {
+  if (
+    typeof window !== "undefined" &&
+    (window.location.pathname === "/portfolio/yahya" ||
+      window.location.pathname === "/links")
+  ) {
     return null;
   }
 
