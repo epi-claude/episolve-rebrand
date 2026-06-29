@@ -116,8 +116,8 @@ export default function Links() {
             Strategic technology leadership for growth-focused organizations.
           </h1>
           <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-[440px]">
-            Secure your data, modernize your workflows, and reduce operational risk. Built for
-            businesses and non-profits that value relationships over transactions.
+            Secure data, modern workflows, reduced risk — for organizations that value relationships
+            over transactions.
           </p>
         </header>
 
