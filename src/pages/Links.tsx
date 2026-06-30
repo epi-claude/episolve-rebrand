@@ -25,18 +25,6 @@ const groups: {
     label: "Connect",
     links: [
       { label: "Contact", href: "https://episolve.com/contact#get-in-touch", icon: Mail, external: true },
-      {
-        label: "LinkedIn",
-        href: "https://www.linkedin.com/company/episolve-llc/",
-        icon: Linkedin,
-        external: true,
-      },
-      {
-        label: "Facebook",
-        href: "https://www.facebook.com/profile.php?id=61574314388662",
-        icon: Facebook,
-        external: true,
-      },
     ],
   },
   {
@@ -121,8 +109,30 @@ export default function Links() {
           </p>
         </header>
 
+        {/* Social icons */}
+        <div className="mt-6 flex items-center justify-end gap-3">
+          <a
+            href="https://www.linkedin.com/company/episolve-llc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-card/50 text-foreground transition-all hover:border-primary/40 hover:bg-card hover:text-primary"
+          >
+            <Linkedin className="h-4.5 w-4.5" />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61574314388662"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-card/50 text-foreground transition-all hover:border-primary/40 hover:bg-card hover:text-primary"
+          >
+            <Facebook className="h-4.5 w-4.5" />
+          </a>
+        </div>
+
         {/* Primary CTA block */}
-        <section className="mt-10 space-y-3">
+        <section className="mt-6 space-y-3">
           <a
             href="https://episolve.com/contact#get-in-touch"
             target="_blank"
