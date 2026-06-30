@@ -14,6 +14,8 @@ import {
   Briefcase,
   Cog,
   Shield,
+  Instagram,
+  Twitter,
 } from "lucide-react";
 import logo from "@/assets/episolve-logo-horizontal.png";
 
