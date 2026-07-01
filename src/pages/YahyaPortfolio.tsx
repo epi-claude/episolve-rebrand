@@ -204,17 +204,6 @@ const YahyaPortfolio = () => {
           </div>
         </section>
 
-        {/* Personality */}
-        <section>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-muted-foreground sm:tracking-[0.4em] sm:text-xs">06 — Brand Personality</p>
-          <div className="mt-5 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
-            {personality.map((p) => (
-              <span key={p} className="rounded-full border border-border/60 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-foreground sm:px-4 sm:py-1.5 sm:text-sm sm:tracking-[0.2em]">
-                {p}
-              </span>
-            ))}
-          </div>
-        </section>
       </section>
 
       {/* Lightbox */}
