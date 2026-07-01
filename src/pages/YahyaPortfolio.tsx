@@ -23,10 +23,10 @@ const palette = [
 ];
 
 const storefronts = [
-  { name: "Deep Teal Facade", hex: "#0C3D3E", src: assetUrl(storeTeal.url) },
-  { name: "Terracotta Facade", hex: "#C88E6B", src: assetUrl(storeTerracotta.url) },
-  { name: "Seafoam Facade", hex: "#5FA79B", src: assetUrl(storeSeafoam.url) },
-  { name: "Cocoa Facade", hex: "#6A4F3F", src: assetUrl(storeCocoa.url) },
+  { name: "Deep Teal\u00a0", hex: "#0C3D3E", src: assetUrl(storeTeal.url) },
+  { name: "Terracotta\u00a0", hex: "#C88E6B", src: assetUrl(storeTerracotta.url) },
+  { name: "Seafoam Green", hex: "#5FA79B", src: assetUrl(storeSeafoam.url) },
+  { name: "Cocoa Brown", hex: "#6A4F3F", src: assetUrl(storeCocoa.url) },
 ];
 
 const typography = [
@@ -163,7 +163,7 @@ const YahyaPortfolio = () => {
         {/* Storefronts */}
         <section className="mb-12 sm:mb-24">
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-muted-foreground sm:tracking-[0.4em] sm:text-xs">04 — Storefront Applications</p>
-          <h3 className="mt-2 font-serif text-xl text-foreground sm:mt-3 sm:text-3xl">The mark, in the world.</h3>
+          <h3 className="mt-2 font-serif text-xl text-foreground sm:mt-3 sm:text-3xl">{"\n"}</h3>
           <p className="mt-2 text-[12px] text-muted-foreground sm:text-sm">Tap any image to view fullscreen.</p>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-6">
             {storefronts.map((s) => (
