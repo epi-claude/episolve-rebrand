@@ -30,7 +30,7 @@ const storefronts = [
 ];
 
 const typography = [
-  { role: "Logotype", face: "Custom — inspired by Canela Display", note: "Use vector logo only. Never retype.", sample: "YAHYA", className: "font-serif tracking-[0.08em]" },
+  { role: "Logotype", face: "Custom, inspired by Canela Display", note: "Use vector logo only. Never retype.", sample: "YAHYA", className: "font-serif tracking-[0.08em]" },
   { role: "Headlines", face: "Canela Display", note: "Editorial titles & luxury headlines.", sample: "The Resort Edit", className: "font-serif" },
   { role: "Subheads", face: "Cormorant Garamond", note: "Quotes, accents, refined captions.", sample: "Effortless coastal luxury", className: "font-serif italic" },
   { role: "Body & UI", face: "Inter", note: "Web, product copy, interface.", sample: "Elevated swimwear, thoughtfully composed.", className: "font-sans" },
@@ -66,7 +66,7 @@ const YahyaPortfolio = () => {
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground sm:text-xs">
               Brand Identity
             </p>
-            <h1 className="mt-1 text-lg font-serif tracking-wide text-foreground sm:mt-2 sm:text-2xl">YAHYA — Swim &amp; Resort Wear</h1>
+            <h1 className="mt-1 text-lg font-serif tracking-wide text-foreground sm:mt-2 sm:text-2xl">YAHYA - Swim &amp; Resort Wear</h1>
           </div>
           <nav aria-label="Page menu">
             <a href="#brand-kit" className="text-xs font-semibold uppercase tracking-[0.28em] text-foreground transition-opacity hover:opacity-70 sm:text-sm">
@@ -81,7 +81,7 @@ const YahyaPortfolio = () => {
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-24">
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-muted-foreground sm:tracking-[0.4em] sm:text-xs">Brand Identity</p>
           <h2 className="mt-3 font-serif text-[2rem] leading-[1.1] text-foreground sm:mt-4 sm:text-5xl md:text-6xl">
-            Coastal luxury,<br />quietly composed.
+            YAHYA
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[13px] leading-6 text-muted-foreground sm:mt-6 sm:text-base sm:leading-7">
             The visual foundation for Yahya Swim &amp; Resort Wear — logotype, palette, typography, and applications.
@@ -95,7 +95,7 @@ const YahyaPortfolio = () => {
             <img src={logoOnTeal} alt="Yahya Swim & Resort Wear logotype" className="w-full object-contain" loading="lazy" />
           </div>
           <p className="mt-4 max-w-2xl text-[13px] leading-6 text-muted-foreground sm:text-sm sm:leading-7">
-            A bespoke high-contrast serif wordmark. Always use the official vector — never retype.
+            {"\n"}
           </p>
         </section>
 
@@ -145,7 +145,7 @@ const YahyaPortfolio = () => {
         {/* Palette */}
         <section className="mb-12 sm:mb-24">
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-muted-foreground sm:tracking-[0.4em] sm:text-xs">03 — Colour Palette</p>
-          <h3 className="mt-2 font-serif text-xl text-foreground sm:mt-3 sm:text-3xl">Five colours. One coastline.</h3>
+          <h3 className="mt-2 font-serif text-xl text-foreground sm:mt-3 sm:text-3xl">Five colours.{"\u00a0"}</h3>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
             {palette.map((c, i) => (
               <div key={c.hex} className="overflow-hidden rounded-lg">
