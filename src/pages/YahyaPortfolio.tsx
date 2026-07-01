@@ -36,7 +36,7 @@ const typography = [
   { role: "Body & UI", face: "Inter", note: "Web, product copy, interface.", sample: "Elevated swimwear, thoughtfully composed.", className: "font-sans" },
 ];
 
-const personality = ["Luxury", "Coastal", "Elegant", "Sophisticated", "Timeless", "Modern", "Relaxed", "Minimal", "Editorial", "Premium"];
+
 
 const YahyaPortfolio = () => {
   const [active, setActive] = useState(palette[0]);
