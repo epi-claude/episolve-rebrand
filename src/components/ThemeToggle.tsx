@@ -7,7 +7,7 @@ export function ThemeToggle() {
 
   if (
     typeof window !== "undefined" &&
-    (window.location.pathname === "/portfolio/yahya" ||
+    (window.location.pathname.startsWith("/portfolio/yahya") ||
       window.location.pathname === "/links")
   ) {
     return null;
