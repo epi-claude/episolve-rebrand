@@ -156,11 +156,61 @@ const YahyaBrandAssets = () => {
         </div>
 
         {/* Palette card */}
+        {/* Transparent PNG card */}
         <div className="mt-10 rounded-2xl border border-black/10 bg-white shadow-sm">
           <div className="flex flex-col justify-between gap-3 border-b border-black/10 px-6 py-5 sm:flex-row sm:items-center">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/50">
-                02 · Colour Palette
+                02 · Logo — Transparent PNG
+              </p>
+              <h2 className="mt-1 font-serif text-xl">High-resolution · no background</h2>
+              <p className="mt-1 text-xs text-black/55">3840 × 1280 px · text only, transparent background.</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                onClick={() => handleDownloadPng("white")}
+                className="gap-2 bg-[#0C3D3E] text-white hover:bg-[#0C3D3E]/90"
+              >
+                <Download size={16} /> White (.png)
+              </Button>
+              <Button
+                onClick={() => handleDownloadPng("black")}
+                variant="outline"
+                className="gap-2 border-black/20"
+              >
+                <Download size={16} /> Black (.png)
+              </Button>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
+            <div
+              className="flex items-center justify-center p-8"
+              style={{ backgroundColor: "#0C3D3E" }}
+            >
+              <img
+                src={assetUrl(logoWhiteTransparent.url)}
+                alt="Yahya white logo, transparent background"
+                className="w-full max-w-md object-contain"
+              />
+            </div>
+            <div
+              className="flex items-center justify-center p-8"
+              style={{ backgroundColor: "#E6DED3" }}
+            >
+              <img
+                src={assetUrl(logoBlackTransparent.url)}
+                alt="Yahya black logo, transparent background"
+                className="w-full max-w-md object-contain"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 rounded-2xl border border-black/10 bg-white shadow-sm">
+          <div className="flex flex-col justify-between gap-3 border-b border-black/10 px-6 py-5 sm:flex-row sm:items-center">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/50">
+                03 · Colour Palette
               </p>
               <h2 className="mt-1 font-serif text-xl">Approved brand hex codes</h2>
             </div>
