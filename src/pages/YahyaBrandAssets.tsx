@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Download, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { YahyaLogoSvg, yahyaLogoSvgString } from "@/components/yahya/YahyaLogoSvg";
 import logoWhiteTransparent from "@/assets/yahya/logo-white-transparent.png.asset.json";
 import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asset.json";
+import logoWhiteSvg from "@/assets/yahya/logo-white.svg.asset.json";
+import logoWhiteTransparentSvg from "@/assets/yahya/logo-white-transparent.svg.asset.json";
+import logoBlackTransparentSvg from "@/assets/yahya/logo-black-transparent.svg.asset.json";
 
 const assetUrl = (path: string) => `https://episolve-rebrand.lovable.app${path}`;
 
@@ -27,21 +29,12 @@ const triggerDownload = (blob: Blob, filename: string) => {
 };
 
 const YahyaBrandAssets = () => {
-  const [savedSvg, setSavedSvg] = useState(false);
   const [savedPng, setSavedPng] = useState(false);
   const paletteRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     document.title = "YAHYA — Brand Assets Dashboard";
   }, []);
-
-  const handleDownloadSvg = () => {
-    const svg = yahyaLogoSvgString();
-    const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
-    triggerDownload(blob, "yahya-logo.svg");
-    setSavedSvg(true);
-    setTimeout(() => setSavedSvg(false), 1600);
-  };
 
   const handleDownloadPalette = () => {
     const W = 1600;
@@ -106,6 +99,20 @@ const YahyaBrandAssets = () => {
     triggerDownload(blob, `yahya-logo-${variant}-transparent.png`);
   };
 
+  const handleDownloadSvgFile = async (
+    variant: "white-teal" | "white-transparent" | "black-transparent",
+  ) => {
+    const map = {
+      "white-teal": logoWhiteSvg,
+      "white-transparent": logoWhiteTransparentSvg,
+      "black-transparent": logoBlackTransparentSvg,
+    } as const;
+    const asset = map[variant];
+    const res = await fetch(assetUrl(asset.url));
+    const blob = await res.blob();
+    triggerDownload(blob, asset.original_filename);
+  };
+
   return (
     <main className="min-h-screen bg-[#FAFAF7] text-[#111111]">
       <header className="border-b border-black/10">
@@ -133,25 +140,88 @@ const YahyaBrandAssets = () => {
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/50">
                 01 · Primary Logo
               </p>
-              <h2 className="mt-1 font-serif text-xl">Inline SVG · fully editable</h2>
+              <h2 className="mt-1 font-serif text-xl">Approved vector · SVG</h2>
+              <p className="mt-1 text-xs text-black/55">
+                Scalable vector files — three approved variants.
+              </p>
             </div>
-            <Button
-              onClick={handleDownloadSvg}
-              className="gap-2 bg-[#0C3D3E] text-white hover:bg-[#0C3D3E]/90"
-            >
-              {savedSvg ? <Check size={16} /> : <Download size={16} />}
-              {savedSvg ? "Saved" : "Download Logo (.svg)"}
-            </Button>
           </div>
-          <div className="p-6 sm:p-10">
-            <YahyaLogoSvg className="mx-auto w-full max-w-3xl" />
-            <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-5 text-black/55">
-              Rendered from{" "}
-              <code className="rounded bg-black/5 px-1.5 py-0.5 font-mono text-[11px]">
-                src/components/yahya/YahyaLogoSvg.tsx
-              </code>{" "}
-              — edit strokes, letter-spacing, or colour tokens directly in code.
-            </p>
+          <div className="grid grid-cols-1 gap-0 sm:grid-cols-3">
+            <div className="flex flex-col">
+              <div
+                className="flex flex-1 items-center justify-center p-8"
+                style={{ backgroundColor: "#0C3D3E" }}
+              >
+                <img
+                  src={assetUrl(logoWhiteSvg.url)}
+                  alt="Yahya logo on deep teal"
+                  className="w-full max-w-xs object-contain"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-2 border-t border-black/10 px-4 py-3">
+                <span className="text-[11px] font-medium text-black/70">
+                  White on Teal
+                </span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="gap-2 border-black/20"
+                  onClick={() => handleDownloadSvgFile("white-teal")}
+                >
+                  <Download size={14} /> .svg
+                </Button>
+              </div>
+            </div>
+            <div className="flex flex-col border-t border-black/10 sm:border-l sm:border-t-0">
+              <div
+                className="flex flex-1 items-center justify-center p-8"
+                style={{ backgroundColor: "#6A4F3F" }}
+              >
+                <img
+                  src={assetUrl(logoWhiteTransparentSvg.url)}
+                  alt="Yahya white logo, transparent SVG"
+                  className="w-full max-w-xs object-contain"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-2 border-t border-black/10 px-4 py-3">
+                <span className="text-[11px] font-medium text-black/70">
+                  White · transparent
+                </span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="gap-2 border-black/20"
+                  onClick={() => handleDownloadSvgFile("white-transparent")}
+                >
+                  <Download size={14} /> .svg
+                </Button>
+              </div>
+            </div>
+            <div className="flex flex-col border-t border-black/10 sm:border-l sm:border-t-0">
+              <div
+                className="flex flex-1 items-center justify-center p-8"
+                style={{ backgroundColor: "#E6DED3" }}
+              >
+                <img
+                  src={assetUrl(logoBlackTransparentSvg.url)}
+                  alt="Yahya black logo, transparent SVG"
+                  className="w-full max-w-xs object-contain"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-2 border-t border-black/10 px-4 py-3">
+                <span className="text-[11px] font-medium text-black/70">
+                  Black · transparent
+                </span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="gap-2 border-black/20"
+                  onClick={() => handleDownloadSvgFile("black-transparent")}
+                >
+                  <Download size={14} /> .svg
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
 
