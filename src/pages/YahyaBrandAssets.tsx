@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Download, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { YahyaLogoSvg, yahyaLogoSvgString } from "@/components/yahya/YahyaLogoSvg";
+import logoWhiteTransparent from "@/assets/yahya/logo-white-transparent.png.asset.json";
+import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asset.json";
+
+const assetUrl = (path: string) => `https://episolve-rebrand.lovable.app${path}`;
 
 const palette = [
   { name: "Deep Teal", hex: "#0C3D3E", role: "Primary", ink: "#FFFFFF" },
@@ -91,6 +95,15 @@ const YahyaBrandAssets = () => {
       setSavedPng(true);
       setTimeout(() => setSavedPng(false), 1600);
     }, "image/png");
+  };
+
+  const handleDownloadPng = async (variant: "white" | "black") => {
+    const src = assetUrl(
+      variant === "white" ? logoWhiteTransparent.url : logoBlackTransparent.url,
+    );
+    const res = await fetch(src);
+    const blob = await res.blob();
+    triggerDownload(blob, `yahya-logo-${variant}-transparent.png`);
   };
 
   return (
