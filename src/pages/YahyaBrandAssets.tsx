@@ -6,6 +6,8 @@ import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asse
 import logoWhiteSvg from "@/assets/yahya/logo-white.svg.asset.json";
 import logoWhiteTransparentSvg from "@/assets/yahya/logo-white-transparent.svg.asset.json";
 import logoBlackTransparentSvg from "@/assets/yahya/logo-black-transparent.svg.asset.json";
+import cormorantFont from "@/assets/yahya/cormorant-garamond.ttf.asset.json";
+import interFont from "@/assets/yahya/inter.ttf.asset.json";
 
 const assetUrl = (path: string) => `https://episolve-rebrand.lovable.app${path}`;
 
@@ -111,6 +113,35 @@ const YahyaBrandAssets = () => {
     const res = await fetch(assetUrl(asset.url));
     const blob = await res.blob();
     triggerDownload(blob, asset.original_filename);
+  };
+
+  const fonts = [
+    {
+      role: "Headlines & Subheads",
+      name: "Cormorant Garamond",
+      note: "Free stand-in for the licensed Canela Display used in the logotype. Use for editorial titles, quotes, and refined captions.",
+      asset: cormorantFont,
+      filename: "CormorantGaramond-Variable.ttf",
+      license: "SIL Open Font License 1.1",
+      preview: "The Resort Edit",
+      previewClass: "font-serif",
+    },
+    {
+      role: "Body & UI",
+      name: "Inter",
+      note: "Web, product copy, and interface.",
+      asset: interFont,
+      filename: "Inter-Variable.ttf",
+      license: "SIL Open Font License 1.1",
+      preview: "Elevated swimwear, thoughtfully composed.",
+      previewClass: "font-sans",
+    },
+  ];
+
+  const handleDownloadFont = async (asset: { url: string }, filename: string) => {
+    const res = await fetch(assetUrl(asset.url));
+    const blob = await res.blob();
+    triggerDownload(blob, filename);
   };
 
   return (
@@ -323,6 +354,69 @@ const YahyaBrandAssets = () => {
         <p className="mt-8 text-center text-[11px] uppercase tracking-[0.28em] text-black/40">
           Internal · Not linked from public navigation
         </p>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-14">
+        <div className="rounded-2xl border border-black/10 bg-white shadow-sm">
+          <div className="flex flex-col justify-between gap-3 border-b border-black/10 px-6 py-5 sm:flex-row sm:items-center">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/50">
+                04 · Typography
+              </p>
+              <h2 className="mt-1 font-serif text-xl">Approved brand fonts</h2>
+              <p className="mt-1 text-xs text-black/55">
+                Open-source font files used across the Yahya brand system.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2">
+            {fonts.map((f, i) => (
+              <div
+                key={f.name}
+                className={`flex flex-col p-6 sm:p-8 ${i === 0 ? "" : "border-t border-black/10 sm:border-l sm:border-t-0"}`}
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-black/50">
+                  {f.role}
+                </p>
+                <p className="mt-2 font-serif text-2xl">{f.name}</p>
+                <p
+                  className={`mt-6 text-3xl leading-tight text-[#0C3D3E] ${f.previewClass}`}
+                >
+                  {f.preview}
+                </p>
+                <p className="mt-6 text-xs leading-5 text-black/60">{f.note}</p>
+                <p className="mt-2 text-[10px] uppercase tracking-[0.24em] text-black/40">
+                  {f.license}
+                </p>
+                <div className="mt-6">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="gap-2 border-black/20"
+                    onClick={() => handleDownloadFont(f.asset, f.filename)}
+                  >
+                    <Download size={14} /> {f.filename}
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="border-t border-black/10 px-6 py-5 text-xs leading-5 text-black/60">
+            <span className="font-semibold text-black/80">Canela Display</span>{" "}
+            (used in the logotype) is a commercial typeface licensed from
+            Commercial Type and is not included here. Purchase a license at{" "}
+            <a
+              href="https://commercialtype.com/catalog/canela"
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-black/30 underline-offset-2 hover:text-black"
+            >
+              commercialtype.com
+            </a>
+            . For all other uses, the logo vector should be used instead of
+            retyping.
+          </div>
+        </div>
       </section>
     </main>
   );
