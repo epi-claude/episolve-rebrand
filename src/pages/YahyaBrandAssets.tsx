@@ -200,6 +200,36 @@ const YahyaBrandAssets = () => {
 
       const fetchBlob = async (url: string) => (await fetch(assetUrl(url))).blob();
 
+      // Composite a transparent PNG onto a solid background colour and return a PNG blob.
+      const compositeOnBackground = (blob: Blob, bg: string) =>
+        new Promise<Blob | null>((resolve) => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          const objectUrl = URL.createObjectURL(blob);
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) {
+              URL.revokeObjectURL(objectUrl);
+              return resolve(null);
+            }
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            canvas.toBlob((out) => {
+              URL.revokeObjectURL(objectUrl);
+              resolve(out);
+            }, "image/png");
+          };
+          img.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            resolve(null);
+          };
+          img.src = objectUrl;
+        });
+
       // Logos — SVG
       const svgDir = root.folder("logos/svg")!;
       const svgAssets: Array<{ label: string; asset: typeof logoWhiteSvg; path: string }> = [
@@ -214,14 +244,23 @@ const YahyaBrandAssets = () => {
 
       // Logos — PNG
       const pngDir = root.folder("logos/png")!;
-      const pngAssets = [
-        { asset: logoWhiteTransparent, path: "yahya-logo-white-transparent.png" },
-        { asset: logoBlackTransparent, path: "yahya-logo-black-transparent.png" },
-        { asset: logoWhiteNoTaglinePng, path: "yahya-logo-white-on-teal-no-tagline.png" },
-        { asset: logoWhiteTransparentNoTaglinePng, path: "yahya-logo-white-transparent-no-tagline.png" },
-        { asset: logoBlackTransparentNoTaglinePng, path: "yahya-logo-black-transparent-no-tagline.png" },
+      const whiteTransparentBlob = await fetchBlob(logoWhiteTransparent.url);
+      const whiteTransparentNoTaglineBlob = await fetchBlob(logoWhiteTransparentNoTaglinePng.url);
+      const whiteOnTealBlob = await compositeOnBackground(whiteTransparentBlob, "#0C3D3E");
+      const whiteOnTealNoTaglineBlob = await compositeOnBackground(
+        whiteTransparentNoTaglineBlob,
+        "#0C3D3E",
+      );
+
+      const pngAssets: Array<{ path: string; blob: Blob | null }> = [
+        { path: "yahya-logo-white-on-teal.png", blob: whiteOnTealBlob },
+        { path: "yahya-logo-white-transparent.png", blob: whiteTransparentBlob },
+        { path: "yahya-logo-black-transparent.png", blob: await fetchBlob(logoBlackTransparent.url) },
+        { path: "yahya-logo-white-on-teal-no-tagline.png", blob: whiteOnTealNoTaglineBlob },
+        { path: "yahya-logo-white-transparent-no-tagline.png", blob: whiteTransparentNoTaglineBlob },
+        { path: "yahya-logo-black-transparent-no-tagline.png", blob: await fetchBlob(logoBlackTransparentNoTaglinePng.url) },
       ];
-      for (const p of pngAssets) pngDir.file(p.path, await fetchBlob(p.asset.url));
+      for (const p of pngAssets) if (p.blob) pngDir.file(p.path, p.blob);
 
       // Fonts
       const fontDir = root.folder("fonts")!;
@@ -278,7 +317,14 @@ const YahyaBrandAssets = () => {
         )
         .join("");
 
-      const logoCards = [...svgAssets.map((s) => ({ ...s, dir: "svg" })), ...pngAssets.map((p) => ({ label: p.path.replace(/\.png$/, "").replace(/-/g, " "), path: p.path, dir: "png", asset: p.asset }))]
+      const logoCards = [
+        ...svgAssets.map((s) => ({ label: s.label, path: s.path, dir: "svg" })),
+        ...pngAssets.map((p) => ({
+          label: p.path.replace(/\.png$/, "").replace(/-/g, " "),
+          path: p.path,
+          dir: "png",
+        })),
+      ]
         .map(
           (s) => `      <li><a href="logos/${s.dir}/${s.path}" download>${s.dir.toUpperCase()} · ${s.label}</a></li>`,
         )
