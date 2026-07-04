@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Download, Check } from "lucide-react";
+import { Download, Check, Package } from "lucide-react";
+import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import logoWhiteTransparent from "@/assets/yahya/logo-white-transparent.png.asset.json";
 import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asset.json";
@@ -15,7 +16,9 @@ import logoBlackTransparentNoTaglinePng from "@/assets/yahya/logo-black-transpar
 import cormorantFont from "@/assets/yahya/cormorant-garamond.ttf.asset.json";
 import interFont from "@/assets/yahya/inter.ttf.asset.json";
 
-const assetUrl = (path: string) => `https://episolve-rebrand.lovable.app${path}`;
+// Same-origin relative path — served by Lovable infra in preview and production.
+// Using a relative URL avoids CORS issues that broke fetch/download in preview.
+const assetUrl = (path: string) => path;
 
 const palette = [
   { name: "Deep Teal", hex: "#0C3D3E", role: "Primary", ink: "#FFFFFF" },
