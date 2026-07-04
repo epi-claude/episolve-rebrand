@@ -6,6 +6,12 @@ import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asse
 import logoWhiteSvg from "@/assets/yahya/logo-white.svg.asset.json";
 import logoWhiteTransparentSvg from "@/assets/yahya/logo-white-transparent.svg.asset.json";
 import logoBlackTransparentSvg from "@/assets/yahya/logo-black-transparent.svg.asset.json";
+import logoWhiteNoTaglineSvg from "@/assets/yahya/logo-white-no-tagline.svg.asset.json";
+import logoWhiteTransparentNoTaglineSvg from "@/assets/yahya/logo-white-transparent-no-tagline.svg.asset.json";
+import logoBlackTransparentNoTaglineSvg from "@/assets/yahya/logo-black-transparent-no-tagline.svg.asset.json";
+import logoWhiteNoTaglinePng from "@/assets/yahya/logo-white-no-tagline.png.asset.json";
+import logoWhiteTransparentNoTaglinePng from "@/assets/yahya/logo-white-transparent-no-tagline.png.asset.json";
+import logoBlackTransparentNoTaglinePng from "@/assets/yahya/logo-black-transparent-no-tagline.png.asset.json";
 import cormorantFont from "@/assets/yahya/cormorant-garamond.ttf.asset.json";
 import interFont from "@/assets/yahya/inter.ttf.asset.json";
 
