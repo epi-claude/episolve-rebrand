@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Download, Check } from "lucide-react";
+import { Download, Check, Package } from "lucide-react";
+import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import logoWhiteTransparent from "@/assets/yahya/logo-white-transparent.png.asset.json";
 import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asset.json";
@@ -15,7 +16,9 @@ import logoBlackTransparentNoTaglinePng from "@/assets/yahya/logo-black-transpar
 import cormorantFont from "@/assets/yahya/cormorant-garamond.ttf.asset.json";
 import interFont from "@/assets/yahya/inter.ttf.asset.json";
 
-const assetUrl = (path: string) => `https://episolve-rebrand.lovable.app${path}`;
+// Same-origin relative path — served by Lovable infra in preview and production.
+// Using a relative URL avoids CORS issues that broke fetch/download in preview.
+const assetUrl = (path: string) => path;
 
 const palette = [
   { name: "Deep Teal", hex: "#0C3D3E", role: "Primary", ink: "#FFFFFF" },
@@ -38,6 +41,8 @@ const triggerDownload = (blob: Blob, filename: string) => {
 
 const YahyaBrandAssets = () => {
   const [savedPng, setSavedPng] = useState(false);
+  const [bundling, setBundling] = useState(false);
+  const [bundled, setBundled] = useState(false);
   const paletteRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -150,6 +155,226 @@ const YahyaBrandAssets = () => {
     triggerDownload(blob, filename);
   };
 
+  const renderPaletteBlob = () =>
+    new Promise<Blob | null>((resolve) => {
+      const W = 1600;
+      const H = 900;
+      const canvas = document.createElement("canvas");
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return resolve(null);
+      ctx.fillStyle = "#FAFAF7";
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#111111";
+      ctx.font = "600 26px 'Inter', system-ui, sans-serif";
+      ctx.fillText("YAHYA — BRAND COLOUR PALETTE", 80, 100);
+      ctx.fillStyle = "#666666";
+      ctx.font = "400 20px 'Inter', system-ui, sans-serif";
+      ctx.fillText("Swim & Resort Wear · Approved Brand System", 80, 132);
+      const gap = 32;
+      const swatchW = (W - 160 - gap * (palette.length - 1)) / palette.length;
+      const swatchH = 520;
+      const top = 200;
+      palette.forEach((c, i) => {
+        const x = 80 + i * (swatchW + gap);
+        ctx.fillStyle = c.hex;
+        ctx.fillRect(x, top, swatchW, swatchH);
+        ctx.fillStyle = "#111111";
+        ctx.font = "600 14px 'Inter', system-ui, sans-serif";
+        ctx.fillText(`0${i + 1} · ${c.role.toUpperCase()}`, x, top + swatchH + 40);
+        ctx.font = "500 22px 'Inter', system-ui, sans-serif";
+        ctx.fillText(c.name, x, top + swatchH + 72);
+        ctx.fillStyle = "#666666";
+        ctx.font = "400 18px 'JetBrains Mono', 'SF Mono', monospace";
+        ctx.fillText(c.hex.toUpperCase(), x, top + swatchH + 100);
+      });
+      canvas.toBlob((blob) => resolve(blob), "image/png");
+    });
+
+  const handleDownloadBundle = async () => {
+    setBundling(true);
+    try {
+      const zip = new JSZip();
+      const root = zip.folder("yahya-brand-assets")!;
+
+      const fetchBlob = async (url: string) => (await fetch(assetUrl(url))).blob();
+
+      // Logos — SVG
+      const svgDir = root.folder("logos/svg")!;
+      const svgAssets: Array<{ label: string; asset: typeof logoWhiteSvg; path: string }> = [
+        { label: "White on Teal", asset: logoWhiteSvg, path: "yahya-logo-white-on-teal.svg" },
+        { label: "White · transparent", asset: logoWhiteTransparentSvg, path: "yahya-logo-white-transparent.svg" },
+        { label: "Black · transparent", asset: logoBlackTransparentSvg, path: "yahya-logo-black-transparent.svg" },
+        { label: "White on Teal · no tagline", asset: logoWhiteNoTaglineSvg, path: "yahya-logo-white-on-teal-no-tagline.svg" },
+        { label: "White · transparent · no tagline", asset: logoWhiteTransparentNoTaglineSvg, path: "yahya-logo-white-transparent-no-tagline.svg" },
+        { label: "Black · transparent · no tagline", asset: logoBlackTransparentNoTaglineSvg, path: "yahya-logo-black-transparent-no-tagline.svg" },
+      ];
+      for (const s of svgAssets) svgDir.file(s.path, await fetchBlob(s.asset.url));
+
+      // Logos — PNG
+      const pngDir = root.folder("logos/png")!;
+      const pngAssets = [
+        { asset: logoWhiteTransparent, path: "yahya-logo-white-transparent.png" },
+        { asset: logoBlackTransparent, path: "yahya-logo-black-transparent.png" },
+        { asset: logoWhiteNoTaglinePng, path: "yahya-logo-white-on-teal-no-tagline.png" },
+        { asset: logoWhiteTransparentNoTaglinePng, path: "yahya-logo-white-transparent-no-tagline.png" },
+        { asset: logoBlackTransparentNoTaglinePng, path: "yahya-logo-black-transparent-no-tagline.png" },
+      ];
+      for (const p of pngAssets) pngDir.file(p.path, await fetchBlob(p.asset.url));
+
+      // Fonts
+      const fontDir = root.folder("fonts")!;
+      for (const f of fonts) fontDir.file(f.filename, await fetchBlob(f.asset.url));
+
+      // Colours
+      const colorDir = root.folder("colors")!;
+      const paletteBlob = await renderPaletteBlob();
+      if (paletteBlob) colorDir.file("yahya-brand-palette.png", paletteBlob);
+      const paletteCss = palette
+        .map((c) => `  --yahya-${c.name.toLowerCase().replace(/\s+/g, "-")}: ${c.hex}; /* ${c.role} */`)
+        .join("\n");
+      colorDir.file(
+        "palette.css",
+        `:root {\n${paletteCss}\n}\n`,
+      );
+      colorDir.file(
+        "palette.json",
+        JSON.stringify(palette, null, 2),
+      );
+
+      // README + index.html
+      root.file(
+        "README.txt",
+        [
+          "YAHYA — Approved Brand Kit",
+          "Swim & Resort Wear",
+          "",
+          "Open brand-assets.html in a browser for a visual index.",
+          "",
+          "Contents:",
+          "  logos/svg/   Vector logos (scalable, print-safe)",
+          "  logos/png/   Raster logos (transparent PNG, 3840 wide)",
+          "  fonts/       Approved open-source typefaces",
+          "  colors/      Palette reference (PNG, CSS, JSON)",
+          "",
+          "Canela Display (used in the logotype) is a commercial",
+          "typeface from Commercial Type — not distributed here.",
+          "License it at https://commercialtype.com/catalog/canela",
+        ].join("\n"),
+      );
+
+      const swatchCards = palette
+        .map(
+          (c, i) => `
+      <li class="swatch">
+        <div class="chip" style="background:${c.hex};color:${c.ink}"><span>${c.hex}</span></div>
+        <div class="meta">
+          <p class="role">0${i + 1} · ${c.role}</p>
+          <p class="name">${c.name}</p>
+          <p class="hex">${c.hex}</p>
+        </div>
+      </li>`,
+        )
+        .join("");
+
+      const logoCards = [...svgAssets.map((s) => ({ ...s, dir: "svg" })), ...pngAssets.map((p) => ({ label: p.path.replace(/\.png$/, "").replace(/-/g, " "), path: p.path, dir: "png", asset: p.asset }))]
+        .map(
+          (s) => `      <li><a href="logos/${s.dir}/${s.path}" download>${s.dir.toUpperCase()} · ${s.label}</a></li>`,
+        )
+        .join("\n");
+
+      const fontLinks = fonts
+        .map((f) => `      <li><a href="fonts/${f.filename}" download>${f.name} — ${f.filename}</a><span> · ${f.license}</span></li>`)
+        .join("\n");
+
+      const indexHtml = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>YAHYA — Approved Brand Kit</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif; color: #111; background: #FAFAF7; }
+  header { padding: 48px 32px 24px; border-bottom: 1px solid rgba(0,0,0,.08); }
+  header p.eyebrow { margin: 0; font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: rgba(0,0,0,.5); font-weight: 600; }
+  header h1 { margin: 8px 0 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 40px; letter-spacing: -.01em; }
+  header p.sub { margin: 6px 0 0; color: rgba(0,0,0,.6); }
+  main { max-width: 1080px; margin: 0 auto; padding: 32px; }
+  section { margin-top: 40px; background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 16px; padding: 28px 32px; }
+  section h2 { margin: 0 0 4px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 24px; font-weight: 500; }
+  section p.eyebrow { margin: 0 0 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: rgba(0,0,0,.5); font-weight: 600; }
+  ul { list-style: none; padding: 0; margin: 16px 0 0; }
+  ul li { padding: 10px 0; border-top: 1px solid rgba(0,0,0,.06); font-size: 14px; }
+  ul li:first-child { border-top: 0; }
+  ul li a { color: #0C3D3E; text-decoration: none; font-weight: 500; }
+  ul li a:hover { text-decoration: underline; }
+  ul li span { color: rgba(0,0,0,.5); font-size: 12px; }
+  ul.swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  ul.swatches li { border: 0; padding: 0; }
+  ul.swatches .chip { aspect-ratio: 3/4; border-radius: 12px; display: flex; align-items: flex-end; padding: 12px; font-family: ui-monospace, "SF Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  ul.swatches .meta { padding: 10px 2px 0; }
+  ul.swatches .role { margin: 0; font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: rgba(0,0,0,.5); font-weight: 600; }
+  ul.swatches .name { margin: 4px 0 2px; font-size: 14px; font-weight: 500; }
+  ul.swatches .hex { margin: 0; font-family: ui-monospace, "SF Mono", monospace; font-size: 11px; color: rgba(0,0,0,.5); text-transform: uppercase; }
+  footer { text-align: center; padding: 32px; color: rgba(0,0,0,.4); font-size: 10px; letter-spacing: .28em; text-transform: uppercase; }
+  @media (max-width: 720px){ ul.swatches { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Approved Brand Kit</p>
+    <h1>YAHYA</h1>
+    <p class="sub">Swim &amp; Resort Wear — Final deliverable</p>
+  </header>
+  <main>
+    <section>
+      <p class="eyebrow">01 · Logos</p>
+      <h2>Vector &amp; raster files</h2>
+      <ul>
+${logoCards}
+      </ul>
+    </section>
+    <section>
+      <p class="eyebrow">02 · Colour</p>
+      <h2>Approved palette</h2>
+      <ul class="swatches">${swatchCards}
+      </ul>
+      <ul style="margin-top:20px">
+        <li><a href="colors/yahya-brand-palette.png" download>Palette board (.png)</a></li>
+        <li><a href="colors/palette.css" download>CSS variables (.css)</a></li>
+        <li><a href="colors/palette.json" download>Palette (.json)</a></li>
+      </ul>
+    </section>
+    <section>
+      <p class="eyebrow">03 · Typography</p>
+      <h2>Approved typefaces</h2>
+      <ul>
+${fontLinks}
+      </ul>
+      <p style="margin-top:16px;color:rgba(0,0,0,.6);font-size:13px">
+        <strong>Canela Display</strong> (used in the logotype) is a commercial typeface from
+        <a href="https://commercialtype.com/catalog/canela" style="color:#0C3D3E">Commercial Type</a>
+        and is not distributed in this kit.
+      </p>
+    </section>
+  </main>
+  <footer>Internal · YAHYA Brand Kit</footer>
+</body>
+</html>
+`;
+      root.file("brand-assets.html", indexHtml);
+
+      const blob = await zip.generateAsync({ type: "blob" });
+      triggerDownload(blob, "yahya-brand-assets.zip");
+      setBundled(true);
+      setTimeout(() => setBundled(false), 2000);
+    } finally {
+      setBundling(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#FAFAF7] text-[#111111]">
       <header className="border-b border-black/10">
@@ -162,10 +387,27 @@ const YahyaBrandAssets = () => {
               YAHYA — Approved Brand Kit
             </h1>
           </div>
-          <p className="max-w-sm text-xs leading-5 text-black/60">
-            Working files for our internal file system. Not published on the
-            main website.
-          </p>
+          <div className="flex flex-col items-start gap-3 sm:items-end">
+            <Button
+              onClick={handleDownloadBundle}
+              disabled={bundling}
+              className="gap-2 bg-[#0C3D3E] text-white hover:bg-[#0C3D3E]/90"
+            >
+              {bundled ? <Check size={16} /> : <Package size={16} />}
+              {bundling
+                ? "Packaging…"
+                : bundled
+                  ? "Bundle saved"
+                  : "Download complete kit (.zip)"}
+            </Button>
+            <p className="max-w-sm text-xs leading-5 text-black/60 sm:text-right">
+              One zip · logos, fonts, palette, and an offline
+              <code className="mx-1 rounded bg-black/5 px-1 py-0.5 text-[10px]">
+                brand-assets.html
+              </code>
+              index. Final client deliverable.
+            </p>
+          </div>
         </div>
       </header>
 
