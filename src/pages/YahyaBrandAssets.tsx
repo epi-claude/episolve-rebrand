@@ -317,7 +317,14 @@ const YahyaBrandAssets = () => {
         )
         .join("");
 
-      const logoCards = [...svgAssets.map((s) => ({ ...s, dir: "svg" })), ...pngAssets.map((p) => ({ label: p.path.replace(/\.png$/, "").replace(/-/g, " "), path: p.path, dir: "png", asset: p.asset }))]
+      const logoCards = [
+        ...svgAssets.map((s) => ({ label: s.label, path: s.path, dir: "svg" })),
+        ...pngAssets.map((p) => ({
+          label: p.path.replace(/\.png$/, "").replace(/-/g, " "),
+          path: p.path,
+          dir: "png",
+        })),
+      ]
         .map(
           (s) => `      <li><a href="logos/${s.dir}/${s.path}" download>${s.dir.toUpperCase()} · ${s.label}</a></li>`,
         )
