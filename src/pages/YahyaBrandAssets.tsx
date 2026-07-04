@@ -6,6 +6,12 @@ import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asse
 import logoWhiteSvg from "@/assets/yahya/logo-white.svg.asset.json";
 import logoWhiteTransparentSvg from "@/assets/yahya/logo-white-transparent.svg.asset.json";
 import logoBlackTransparentSvg from "@/assets/yahya/logo-black-transparent.svg.asset.json";
+import logoWhiteNoTaglineSvg from "@/assets/yahya/logo-white-no-tagline.svg.asset.json";
+import logoWhiteTransparentNoTaglineSvg from "@/assets/yahya/logo-white-transparent-no-tagline.svg.asset.json";
+import logoBlackTransparentNoTaglineSvg from "@/assets/yahya/logo-black-transparent-no-tagline.svg.asset.json";
+import logoWhiteNoTaglinePng from "@/assets/yahya/logo-white-no-tagline.png.asset.json";
+import logoWhiteTransparentNoTaglinePng from "@/assets/yahya/logo-white-transparent-no-tagline.png.asset.json";
+import logoBlackTransparentNoTaglinePng from "@/assets/yahya/logo-black-transparent-no-tagline.png.asset.json";
 import cormorantFont from "@/assets/yahya/cormorant-garamond.ttf.asset.json";
 import interFont from "@/assets/yahya/inter.ttf.asset.json";
 
@@ -258,6 +264,63 @@ const YahyaBrandAssets = () => {
 
         {/* Palette card */}
         {/* Transparent PNG card */}
+        <div className="mt-10 rounded-2xl border border-black/10 bg-white shadow-sm">
+          <div className="flex flex-col justify-between gap-3 border-b border-black/10 px-6 py-5 sm:flex-row sm:items-center">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/50">
+                01b · Logo — No Tagline
+              </p>
+              <h2 className="mt-1 font-serif text-xl">Wordmark only · SVG + PNG</h2>
+              <p className="mt-1 text-xs text-black/55">
+                Tagline-free variants for compact placements — three approved lockups.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-0 sm:grid-cols-3">
+            {[
+              { label: "White on Teal", bg: "#0C3D3E", svg: logoWhiteNoTaglineSvg, png: logoWhiteNoTaglinePng },
+              { label: "White · transparent", bg: "#6A4F3F", svg: logoWhiteTransparentNoTaglineSvg, png: logoWhiteTransparentNoTaglinePng },
+              { label: "Black · transparent", bg: "#E6DED3", svg: logoBlackTransparentNoTaglineSvg, png: logoBlackTransparentNoTaglinePng },
+            ].map((v, i) => (
+              <div
+                key={v.label}
+                className={`flex flex-col ${i === 0 ? "" : "border-t border-black/10 sm:border-l sm:border-t-0"}`}
+              >
+                <div className="flex flex-1 items-center justify-center p-8" style={{ backgroundColor: v.bg }}>
+                  <img src={assetUrl(v.svg.url)} alt={`Yahya wordmark — ${v.label}`} className="w-full max-w-xs object-contain" />
+                </div>
+                <div className="flex items-center justify-between gap-2 border-t border-black/10 px-4 py-3">
+                  <span className="text-[11px] font-medium text-black/70">{v.label}</span>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="gap-2 border-black/20"
+                      onClick={async () => {
+                        const res = await fetch(assetUrl(v.svg.url));
+                        triggerDownload(await res.blob(), v.svg.original_filename);
+                      }}
+                    >
+                      <Download size={14} /> .svg
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="gap-2 border-black/20"
+                      onClick={async () => {
+                        const res = await fetch(assetUrl(v.png.url));
+                        triggerDownload(await res.blob(), v.png.original_filename);
+                      }}
+                    >
+                      <Download size={14} /> .png
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-10 rounded-2xl border border-black/10 bg-white shadow-sm">
           <div className="flex flex-col justify-between gap-3 border-b border-black/10 px-6 py-5 sm:flex-row sm:items-center">
             <div>
