@@ -167,6 +167,60 @@ export type Database = {
         }
         Relationships: []
       }
+      questionnaire_responses: {
+        Row: {
+          created_at: string
+          data: Json
+          form_key: string
+          last_updated_by: string | null
+          last_updated_by_email: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          form_key: string
+          last_updated_by?: string | null
+          last_updated_by_email?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          form_key?: string
+          last_updated_by?: string | null
+          last_updated_by_email?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      questionnaire_revisions: {
+        Row: {
+          created_at: string
+          data: Json
+          form_key: string
+          id: string
+          updated_by: string | null
+          updated_by_email: string | null
+        }
+        Insert: {
+          created_at?: string
+          data: Json
+          form_key: string
+          id?: string
+          updated_by?: string | null
+          updated_by_email?: string | null
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          form_key?: string
+          id?: string
+          updated_by?: string | null
+          updated_by_email?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
