@@ -21,6 +21,8 @@ import ResetPassword from "./pages/ResetPassword";
 import NpsfdbDemo from "./pages/NpsfdbDemo";
 import YahyaPortfolio from "./pages/YahyaPortfolio";
 import YahyaBrandAssets from "./pages/YahyaBrandAssets";
+import BwmechDashboard from "./pages/BwmechDashboard";
+import BwmechForm from "./pages/BwmechForm";
 import Links from "./pages/Links";
 import NotFound from "./pages/NotFound";
 
@@ -49,6 +51,22 @@ const App = () => (
             <Route path="/portfolio/npsfdb-demo" element={<NpsfdbDemo />} />
             <Route path="/portfolio/yahya" element={<YahyaPortfolio />} />
             <Route path="/portfolio/yahya/brand-assets" element={<YahyaBrandAssets />} />
+            <Route
+              path="/projects/bwmech/dashboard"
+              element={
+                <ProtectedRoute>
+                  <BwmechDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/projects/bwmech/forms/:slug"
+              element={
+                <ProtectedRoute>
+                  <BwmechForm />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/links" element={<Links />} />
             <Route 
               path="/admin" 
