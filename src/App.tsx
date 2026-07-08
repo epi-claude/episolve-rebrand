@@ -24,6 +24,7 @@ import YahyaBrandAssets from "./pages/YahyaBrandAssets";
 import BwmechDashboard from "./pages/BwmechDashboard";
 import BwmechForm from "./pages/BwmechForm";
 import Links from "./pages/Links";
+import Logout from "./pages/Logout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
