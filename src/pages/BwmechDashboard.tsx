@@ -10,6 +10,7 @@ import {
 } from "@/lib/forms/client";
 import { FORMS, FORM_ORDER, FORM_META, computeProgress } from "@/lib/forms";
 import type { FormKey } from "@/lib/forms/types";
+import { BwmechShell } from "@/components/bwmech/BwmechShell";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -66,17 +67,21 @@ export default function BwmechDashboard() {
 
   if (error) {
     return (
-      <main className="mx-auto max-w-6xl px-6 py-10">
-        <p className="text-destructive">Failed to load: {error}</p>
-      </main>
+      <BwmechShell>
+        <main className="mx-auto max-w-6xl px-6 py-10">
+          <p className="text-destructive">Failed to load: {error}</p>
+        </main>
+      </BwmechShell>
     );
   }
 
   if (!rows) {
     return (
-      <main className="mx-auto max-w-6xl px-6 py-10">
-        <p className="text-muted-foreground">Loading…</p>
-      </main>
+      <BwmechShell>
+        <main className="mx-auto max-w-6xl px-6 py-10">
+          <p className="text-muted-foreground">Loading…</p>
+        </main>
+      </BwmechShell>
     );
   }
 
@@ -85,7 +90,8 @@ export default function BwmechDashboard() {
   );
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-10">
+    <BwmechShell>
+      <main className="mx-auto max-w-6xl px-6 py-10">
       <div className="space-y-10">
         <section className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-4">
@@ -119,7 +125,8 @@ export default function BwmechDashboard() {
           ))}
         </section>
       </div>
-    </main>
+      </main>
+    </BwmechShell>
   );
 }
 
