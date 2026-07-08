@@ -12,7 +12,7 @@ export function BwmechShell({ children }: Props) {
       <header className="border-b border-border/60 bg-background/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
           <Link to="/" className="flex items-center" aria-label="Episolve home">
-            <img src={episolveLogo} alt="Episolve" className="h-10 w-auto" />
+            <img src={episolveLogo} alt="Episolve" className="h-20 w-auto" />
           </Link>
           <Link
             to="/projects/bwmech/dashboard"
