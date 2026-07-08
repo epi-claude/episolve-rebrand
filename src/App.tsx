@@ -69,7 +69,8 @@ const App = () => (
               }
             />
             <Route path="/links" element={<Links />} />
-            <Route 
+            <Route path="/logout" element={<Logout />} />
+            <Route
               path="/admin" 
               element={
                 <ProtectedRoute requireAdmin>
