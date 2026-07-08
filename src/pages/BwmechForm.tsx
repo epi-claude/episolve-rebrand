@@ -5,6 +5,7 @@ import { loadResponse, type QuestionnaireRecord } from "@/lib/forms/client";
 import { FORMS, slugToKey, FORM_META } from "@/lib/forms";
 import { QuestionnaireForm } from "@/components/forms/QuestionnaireForm";
 import { Button } from "@/components/ui/button";
+import { BwmechShell } from "@/components/bwmech/BwmechShell";
 
 export default function BwmechForm() {
   const { slug } = useParams<{ slug: string }>();
@@ -26,7 +27,8 @@ export default function BwmechForm() {
   const meta = FORM_META[key];
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-8">
+    <BwmechShell>
+      <main className="mx-auto max-w-6xl px-6 py-8">
       <div className="space-y-6">
         <div>
           <Button asChild variant="ghost" size="sm" className="mb-3 -ml-2">
@@ -51,6 +53,7 @@ export default function BwmechForm() {
           <p className="text-muted-foreground">Loading…</p>
         )}
       </div>
-    </main>
+      </main>
+    </BwmechShell>
   );
 }
