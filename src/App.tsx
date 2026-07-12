@@ -23,6 +23,7 @@ import YahyaPortfolio from "./pages/YahyaPortfolio";
 import YahyaBrandAssets from "./pages/YahyaBrandAssets";
 import BwmechDashboard from "./pages/BwmechDashboard";
 import BwmechForm from "./pages/BwmechForm";
+import BwmechReport from "./pages/BwmechReport";
 import Links from "./pages/Links";
 import Logout from "./pages/Logout";
 import NotFound from "./pages/NotFound";
@@ -65,6 +66,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <BwmechForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/projects/bwmech/report"
+              element={
+                <ProtectedRoute>
+                  <BwmechReport />
                 </ProtectedRoute>
               }
             />

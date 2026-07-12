@@ -108,14 +108,22 @@ export default function BwmechDashboard() {
                 automatically as you go — anyone on the team can return and update them.
               </p>
             </div>
-            <Button variant="outline" onClick={handleExportAll} disabled={exportingAll}>
-              {exportingAll ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Download className="mr-2 h-4 w-4" />
-              )}
-              Export everything
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button asChild variant="outline">
+                <Link to="/projects/bwmech/report">
+                  <FileText className="mr-2 h-4 w-4" />
+                  View report
+                </Link>
+              </Button>
+              <Button variant="outline" onClick={handleExportAll} disabled={exportingAll}>
+                {exportingAll ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="mr-2 h-4 w-4" />
+                )}
+                Export everything
+              </Button>
+            </div>
           </div>
         </section>
 
