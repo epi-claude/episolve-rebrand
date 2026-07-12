@@ -26,6 +26,7 @@ import BwmechForm from "./pages/BwmechForm";
 import BwmechReport from "./pages/BwmechReport";
 import Links from "./pages/Links";
 import Logout from "./pages/Logout";
+import TabithasHome from "./pages/TabithasHome";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -79,6 +80,7 @@ const App = () => (
             />
             <Route path="/links" element={<Links />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/projects/tabithas-home" element={<TabithasHome />} />
             <Route
               path="/admin" 
               element={
