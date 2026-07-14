@@ -4,6 +4,7 @@ import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import logoWhiteTransparent from "@/assets/yahya/logo-white-transparent.png.asset.json";
 import logoBlackTransparent from "@/assets/yahya/logo-black-transparent.png.asset.json";
+import logoTealTransparent from "@/assets/yahya/logo-teal-transparent.png.asset.json";
 import logoWhiteSvg from "@/assets/yahya/logo-white.svg.asset.json";
 import logoWhiteTransparentSvg from "@/assets/yahya/logo-white-transparent.svg.asset.json";
 import logoBlackTransparentSvg from "@/assets/yahya/logo-black-transparent.svg.asset.json";
@@ -103,10 +104,13 @@ const YahyaBrandAssets = () => {
     }, "image/png");
   };
 
-  const handleDownloadPng = async (variant: "white" | "black") => {
-    const src = assetUrl(
-      variant === "white" ? logoWhiteTransparent.url : logoBlackTransparent.url,
-    );
+  const handleDownloadPng = async (variant: "white" | "black" | "teal") => {
+    const map = {
+      white: logoWhiteTransparent.url,
+      black: logoBlackTransparent.url,
+      teal: logoTealTransparent.url,
+    } as const;
+    const src = assetUrl(map[variant]);
     const res = await fetch(src);
     const blob = await res.blob();
     triggerDownload(blob, `yahya-logo-${variant}-transparent.png`);
@@ -626,6 +630,13 @@ ${fontLinks}
                 <Download size={16} /> White (.png)
               </Button>
               <Button
+                onClick={() => handleDownloadPng("teal")}
+                variant="outline"
+                className="gap-2 border-black/20"
+              >
+                <Download size={16} /> Teal (.png)
+              </Button>
+              <Button
                 onClick={() => handleDownloadPng("black")}
                 variant="outline"
                 className="gap-2 border-black/20"
@@ -634,7 +645,7 @@ ${fontLinks}
               </Button>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-0 sm:grid-cols-3">
             <div
               className="flex items-center justify-center p-8"
               style={{ backgroundColor: "#0C3D3E" }}
@@ -646,7 +657,17 @@ ${fontLinks}
               />
             </div>
             <div
-              className="flex items-center justify-center p-8"
+              className="flex items-center justify-center border-t border-black/10 p-8 sm:border-l sm:border-t-0"
+              style={{ backgroundColor: "#FAFAF7" }}
+            >
+              <img
+                src={assetUrl(logoTealTransparent.url)}
+                alt="Yahya teal logo with tagline, transparent background"
+                className="w-full max-w-md object-contain"
+              />
+            </div>
+            <div
+              className="flex items-center justify-center border-t border-black/10 p-8 sm:border-l sm:border-t-0"
               style={{ backgroundColor: "#E6DED3" }}
             >
               <img
