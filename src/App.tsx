@@ -27,6 +27,7 @@ import BwmechReport from "./pages/BwmechReport";
 import Links from "./pages/Links";
 import Logout from "./pages/Logout";
 import TabithasHome from "./pages/TabithasHome";
+import ContentCalendar from "./pages/ContentCalendar";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -81,6 +82,7 @@ const App = () => (
             <Route path="/links" element={<Links />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/projects/tabithas-home" element={<TabithasHome />} />
+            <Route path="/projects/content-calendar" element={<ContentCalendar />} />
             <Route
               path="/admin" 
               element={
