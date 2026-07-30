@@ -28,6 +28,7 @@ import Links from "./pages/Links";
 import Logout from "./pages/Logout";
 import TabithasHome from "./pages/TabithasHome";
 import ContentCalendar from "./pages/ContentCalendar";
+import GreenwichDesignStudio from "./pages/GreenwichDesignStudio";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -83,6 +84,7 @@ const App = () => (
             <Route path="/logout" element={<Logout />} />
             <Route path="/projects/tabithas-home" element={<TabithasHome />} />
             <Route path="/projects/content-calendar" element={<ContentCalendar />} />
+            <Route path="/projects/greenwichdesignstudio" element={<GreenwichDesignStudio />} />
             <Route
               path="/admin" 
               element={
