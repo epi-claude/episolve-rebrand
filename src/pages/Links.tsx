@@ -256,7 +256,7 @@ export default function Links() {
             </li>
             <li className="flex items-center gap-3">
               <MapPin className="h-4 w-4 text-primary" />
-              Newark, NJ — serving the Tri-State Area
+              1 Gateway Center, Suite 2600, Newark, NJ 07102
             </li>
             <li className="flex items-center gap-3">
               <Clock className="h-4 w-4 text-primary" />

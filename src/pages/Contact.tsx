@@ -26,7 +26,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Newark, NJ",
+    value: "1 Gateway Center, Suite 2600, Newark, NJ 07102",
     href: null,
   },
   {
