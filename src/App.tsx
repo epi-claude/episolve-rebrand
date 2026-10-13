@@ -29,6 +29,7 @@ import Logout from "./pages/Logout";
 import TabithasHome from "./pages/TabithasHome";
 import ContentCalendar from "./pages/ContentCalendar";
 import GreenwichDesignStudio from "./pages/GreenwichDesignStudio";
+import NJCELCPlatformQuestionnaire from "./pages/NJCELCPlatformQuestionnaire";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -93,6 +94,7 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
+            <Route path="/njcelc-platform-questionnaire" element={<NJCELCPlatformQuestionnaire />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
