@@ -140,6 +140,30 @@ export type Database = {
         }
         Relationships: []
       }
+      njcelc_questionnaire_responses: {
+        Row: {
+          answers: Json
+          created_at: string
+          id: string
+          organization: string | null
+          respondent_name: string | null
+        }
+        Insert: {
+          answers: Json
+          created_at?: string
+          id?: string
+          organization?: string | null
+          respondent_name?: string | null
+        }
+        Update: {
+          answers?: Json
+          created_at?: string
+          id?: string
+          organization?: string | null
+          respondent_name?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
