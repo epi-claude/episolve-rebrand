@@ -15,6 +15,7 @@ import CaseStudies from "./pages/CaseStudies";
 import RiskInsurance from "./pages/RiskInsurance";
 import FractionalTechnologyOffice from "./pages/FractionalTechnologyOffice";
 import IntelligentAutomation from "./pages/IntelligentAutomation";
+import AiDevelopment from "./pages/AiDevelopment";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/solutions/risk-insurance" element={<RiskInsurance />} />
             <Route path="/solutions/fractional-technology-office" element={<FractionalTechnologyOffice />} />
             <Route path="/solutions/intelligent-automation" element={<IntelligentAutomation />} />
+            <Route path="/solutions/ai-development" element={<AiDevelopment />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/portfolio/npsfdb-demo" element={<NpsfdbDemo />} />

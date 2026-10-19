@@ -1,4 +1,4 @@
-import { Briefcase, Shield, Cog } from "lucide-react";
+import { Briefcase, Shield, Cog, Sparkles } from "lucide-react";
 
 export interface Solution {
   id: string;
@@ -7,6 +7,7 @@ export interface Solution {
   shortDescription: string;
   icon: React.ComponentType<{ className?: string }>;
   featured: boolean;
+  cta?: string;
 }
 
 export const solutions: Solution[] = [
@@ -25,6 +26,15 @@ export const solutions: Solution[] = [
     shortDescription: "Cyber insurance requirements are skyrocketing. We use advanced Adaptive Trust AI to analyze your communication patterns, sandbox threats, and guarantee compliance for your next insurance renewal.",
     icon: Shield,
     featured: true,
+  },
+  {
+    id: "4",
+    slug: "ai-development",
+    title: "AI & Custom Application Engineering",
+    shortDescription: "From intelligent workflow automation to bespoke internal copilots and portals. We build modern, production-ready AI applications that eliminate operational bottlenecks and scale your business.",
+    icon: Sparkles,
+    featured: true,
+    cta: "Explore AI Solutions",
   },
   {
     id: "3",
