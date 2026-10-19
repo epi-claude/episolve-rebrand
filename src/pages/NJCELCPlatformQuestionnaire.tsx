@@ -263,6 +263,32 @@ function Radios({
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
 
+// Keep the section component stable so editing answers does not remount inputs.
+function PartShell({
+  part,
+  title,
+  intro,
+  children,
+}: {
+  part: number;
+  title: string;
+  intro?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section id={`part-${part}`} className="scroll-mt-24">
+      <div className="mb-4 border-b border-slate-200 pb-3">
+        <p className="text-xs font-bold tracking-widest text-[#005EA8] uppercase">
+          Part {part} of 9
+        </p>
+        <h2 className="mt-1 text-2xl font-bold text-slate-900">{title}</h2>
+        {intro && <p className="mt-1 text-sm text-slate-600">{intro}</p>}
+      </div>
+      <div className="grid gap-4">{children}</div>
+    </section>
+  );
+}
+
 export default function QuestionnairePage() {
   useEffect(() => {
     document.title = "NJCELC Platform Questionnaire — Help plan the new learning platform";
@@ -379,29 +405,6 @@ export default function QuestionnairePage() {
     setActivePart(part);
     document.getElementById(`part-${part}`)?.scrollIntoView({ behavior: "smooth" });
   };
-
-  const PartShell = ({
-    part,
-    title,
-    intro,
-    children,
-  }: {
-    part: number;
-    title: string;
-    intro?: string;
-    children: React.ReactNode;
-  }) => (
-    <section id={`part-${part}`} className="scroll-mt-24">
-      <div className="mb-4 border-b border-slate-200 pb-3">
-        <p className="text-xs font-bold tracking-widest text-[#005EA8] uppercase">
-          Part {part} of 9
-        </p>
-        <h2 className="mt-1 text-2xl font-bold text-slate-900">{title}</h2>
-        {intro && <p className="mt-1 text-sm text-slate-600">{intro}</p>}
-      </div>
-      <div className="grid gap-4">{children}</div>
-    </section>
-  );
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
