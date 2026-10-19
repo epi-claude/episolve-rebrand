@@ -19,8 +19,6 @@ const stagger = {
   },
 };
 
-const solutionIcons = [Briefcase, Shield, Cog];
-
 export default function Index() {
   return (
     <Layout>
@@ -169,10 +167,10 @@ export default function Index() {
             whileInView="animate"
             viewport={{ once: true }}
             variants={stagger}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {solutions.map((solution, index) => {
-              const Icon = solutionIcons[index];
+              const Icon = solution.icon;
               return (
                 <motion.div key={solution.id} variants={fadeInUp}>
                   <Link
@@ -188,10 +186,43 @@ export default function Index() {
                     <p className="text-muted-foreground leading-relaxed">
                       {solution.shortDescription}
                     </p>
+                    {solution.cta && (
+                      <div className="mt-6 flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all">
+                        {solution.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </div>
+                    )}
                   </Link>
                 </motion.div>
               );
             })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* AI-Accelerated Engineering Band */}
+      <section className="py-20 bg-card border-y border-border">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Engineered for Speed &amp; Precision</span>
+            <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
+              Modern AI-Accelerated Engineering
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              We leverage cutting-edge AI development environments—including Claude Code, Lovable, Gemini, and ChatGPT—paired with full-stack engineering discipline to take custom software from concept to production in days and weeks, not quarters.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {["Claude Code", "Lovable", "OpenAI / ChatGPT", "Google Gemini", "Secure Cloud Architecture"].map((t) => (
+                <span key={t} className="px-4 py-2 rounded-full text-sm font-medium bg-background border border-border text-foreground">
+                  {t}
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
