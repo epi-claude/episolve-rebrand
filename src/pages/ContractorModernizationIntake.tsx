@@ -192,9 +192,9 @@ export default function ContractorModernizationIntake() {
       <div className="mx-auto max-w-2xl overflow-hidden rounded-xl border border-border bg-card shadow-sm">
         <div className="bg-primary px-6 py-8 text-primary-foreground">
           <div className="mb-3 inline-block rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-foreground">
-            Discovery Intake
+            Needs Assessment
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Operational Management &amp; Field-to-Financials Snapshot</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-primary-foreground">Operational Management &amp; Field-to-Financials Snapshot</h1>
           <p className="mt-2 text-sm leading-relaxed opacity-85">
             Estimated time: 3 minutes. Please tell us where your biggest operational bottlenecks occur today so we can tailor our walkthrough strictly to the features that move the needle for your business.
           </p>
