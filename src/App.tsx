@@ -31,6 +31,7 @@ import TabithasHome from "./pages/TabithasHome";
 import ContentCalendar from "./pages/ContentCalendar";
 import GreenwichDesignStudio from "./pages/GreenwichDesignStudio";
 import NJCELCPlatformQuestionnaire from "./pages/NJCELCPlatformQuestionnaire";
+import ContractorModernizationIntake from "./pages/ContractorModernizationIntake";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -97,6 +98,7 @@ const App = () => (
               } 
             />
             <Route path="/njcelc-platform-questionnaire" element={<NJCELCPlatformQuestionnaire />} />
+            <Route path="/contractor-modernization-intake" element={<ContractorModernizationIntake />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

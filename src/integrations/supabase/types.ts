@@ -116,6 +116,36 @@ export type Database = {
         }
         Relationships: []
       }
+      contractor_intake_submissions: {
+        Row: {
+          answers: Json
+          client_email: string
+          client_name: string
+          company_name: string
+          created_at: string
+          email_sent: boolean
+          id: string
+        }
+        Insert: {
+          answers?: Json
+          client_email: string
+          client_name: string
+          company_name: string
+          created_at?: string
+          email_sent?: boolean
+          id?: string
+        }
+        Update: {
+          answers?: Json
+          client_email?: string
+          client_name?: string
+          company_name?: string
+          created_at?: string
+          email_sent?: boolean
+          id?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           confirmed: boolean

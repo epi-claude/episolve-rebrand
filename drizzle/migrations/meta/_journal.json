@@ -8,6 +8,13 @@
       "when": 1791852923242,
       "tag": "0000_create_njcelc_questionnaire_responses",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792527327476,
+      "tag": "0001_contractor_intake_submissions",
+      "breakpoints": true
     }
   ]
 }

@@ -23,3 +23,6 @@ verify_jwt = false
 
 [functions.admin-sync-bookings]
 verify_jwt = false
+
+[functions.contractor-intake]
+verify_jwt = false
