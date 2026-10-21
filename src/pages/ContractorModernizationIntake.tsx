@@ -145,7 +145,7 @@ function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="mx-auto flex max-w-4xl flex-col gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
-          <a href="https://episolve.com" aria-label="epiSolve home"><img src={logo} alt="epiSolve" className="h-8 w-auto opacity-90" /></a>
+          <a href="https://episolve.com" aria-label="epiSolve home"><img src={logo} alt="epiSolve" className="h-11 w-auto opacity-90" /></a>
           <div className="text-xs leading-relaxed">
             <p>An epiSolve discovery project</p>
             <p>Your responses are confidential and used only to prepare for our conversation.</p>
@@ -308,7 +308,7 @@ export default function ContractorModernizationIntake() {
     <div className="flex min-h-screen flex-col bg-muted/40 text-foreground">
       <header className="border-b border-border bg-card">
         <div className="mx-auto flex max-w-4xl items-center px-5 py-3">
-          <a href="https://episolve.com" aria-label="epiSolve home"><img src={logo} alt="epiSolve" className="h-7 w-auto" /></a>
+          <a href="https://episolve.com" aria-label="epiSolve home"><img src={logo} alt="epiSolve" className="h-10 w-auto" /></a>
         </div>
       </header>
 
