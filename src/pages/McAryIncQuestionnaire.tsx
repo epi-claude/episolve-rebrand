@@ -195,7 +195,7 @@ function Footer() {
 
 /* ---------------- page ---------------- */
 
-export default function ContractorModernizationIntake() {
+export default function McAryIncQuestionnaire() {
   const [st, setSt] = useState<State>(EMPTY);
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
   const [maxMsg, setMaxMsg] = useState<Record<string, string>>({});
