@@ -2,9 +2,9 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Check, CheckCircle2, Clock, Loader2, RotateCcw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/episolve-logo-horizontal.png";
-import { SECTIONS, type Answers, type Q } from "@/data/contractorDiscovery";
+import { SECTIONS, matrixKey, type Answers, type Q } from "@/data/contractorDiscovery";
 
-const STORE_KEY = "episolve-contractor-discovery-v1";
+const STORE_KEY = "episolve-contractor-discovery-v2";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type NumberedQ = Q & { id: string; num: string; section: string };
@@ -27,6 +27,29 @@ const ALL_Q: NumberedQ[] = NUMBERED.flatMap((s) => s.items.flatMap((i) => (i.kin
 const REQUIRED = ALL_Q.filter((q) => q.required);
 
 const isAnswered = (v: unknown) => (Array.isArray(v) ? v.length > 0 : v !== "" && v != null);
+const qAnswered = (q: Q & { id: string }, a: Answers) =>
+  q.type === "matrix" ? (q.rows || []).some((_, i) => isAnswered(a[matrixKey(q.id, i)])) : isAnswered(a[q.id]);
+
+function Tier({ tier }: { tier?: number }) {
+  if (tier === 1) return <span className="ml-1.5 inline-block whitespace-nowrap rounded-full bg-primary/10 px-2 py-px align-[2px] text-[11px] font-semibold tracking-wide text-primary">Priority</span>;
+  if (tier === 3) return <span className="ml-1.5 inline-block whitespace-nowrap rounded-full bg-muted px-2 py-px align-[2px] text-[11px] font-semibold tracking-wide text-muted-foreground">Optional</span>;
+  return null;
+}
+
+function ScaleRow({ name, value, onChange }: { name: string; value?: string; onChange: (v: string) => void }) {
+  return (
+    <div className="grid grid-cols-5 gap-1.5" role="radiogroup">
+      {[1, 2, 3, 4, 5].map((n) => {
+        const on = value === String(n);
+        return (
+          <label key={n} className={`cursor-pointer rounded-lg border py-2 text-center text-sm font-medium tabular-nums transition-colors ${on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-foreground hover:border-primary/40"}`}>
+            <input type="radio" name={name} value={n} checked={on} onChange={() => onChange(String(n))} className="sr-only" />{n}
+          </label>
+        );
+      })}
+    </div>
+  );
+}
 const isVisible = (q: Q, a: Answers) => !q.showIf || q.showIf(a);
 
 const inputCls =
@@ -46,11 +69,30 @@ function Panel({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-function Control({ q, value, other, onChange, onOther, maxMsg }: {
+function Control({ q, value, other, onChange, onOther, maxMsg, answers, onKey }: {
   q: NumberedQ; value: string | string[] | undefined; other: string;
   onChange: (v: string | string[]) => void; onOther: (v: string) => void; maxMsg?: string;
+  answers: Answers; onKey: (key: string, v: string) => void;
 }) {
   const id = `q_${q.id}`;
+  if (q.type === "matrix")
+    return (
+      <div>
+        <div className="hidden grid-cols-[1fr_minmax(220px,300px)] gap-3.5 pb-1 text-xs text-muted-foreground sm:grid">
+          <span /><span className="flex justify-between"><span>1 · {q.low}</span><span>{q.high} · 5</span></span>
+        </div>
+        <p className="pb-1 text-xs text-muted-foreground sm:hidden">1 = {q.low?.toLowerCase()} · 5 = {q.high?.toLowerCase()}</p>
+        {q.rows!.map((row, i) => {
+          const k = matrixKey(q.id, i);
+          return (
+            <div key={row} className="grid items-center gap-1.5 border-t border-border py-1.5 sm:grid-cols-[1fr_minmax(220px,300px)] sm:gap-3.5">
+              <span className="text-sm text-foreground">{row}</span>
+              <ScaleRow name={`${id}__${i}`} value={answers[k] as string} onChange={(v) => onKey(k, v)} />
+            </div>
+          );
+        })}
+      </div>
+    );
   if (["text", "email", "tel", "url", "number"].includes(q.type)) {
     const ac: Record<string, string> = { full_name: "name", email: "email", phone: "tel", company: "organization", title: "organization-title", website: "url" };
     return <input id={id} type={q.type} className={inputCls} placeholder={q.placeholder} autoComplete={ac[q.id] || "off"}
@@ -68,16 +110,7 @@ function Control({ q, value, other, onChange, onOther, maxMsg }: {
   if (q.type === "scale")
     return (
       <div className="max-w-md">
-        <div className="grid grid-cols-5 gap-1.5" role="radiogroup">
-          {[1, 2, 3, 4, 5].map((n) => {
-            const on = value === String(n);
-            return (
-              <label key={n} className={`cursor-pointer rounded-lg border py-2 text-center text-sm font-medium tabular-nums transition-colors ${on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-foreground hover:border-primary/40"}`}>
-                <input type="radio" name={id} value={n} checked={on} onChange={() => onChange(String(n))} className="sr-only" />{n}
-              </label>
-            );
-          })}
-        </div>
+        <ScaleRow name={id} value={value as string} onChange={onChange} />
         <div className="mt-1.5 flex justify-between text-xs text-muted-foreground"><span>1 · {q.low}</span><span>{q.high} · 5</span></div>
       </div>
     );
@@ -110,22 +143,22 @@ function Control({ q, value, other, onChange, onOther, maxMsg }: {
   );
 }
 
-function Question({ q, st, invalid, maxMsg, setAnswer, setOther, setComment }: {
+function Question({ q, st, invalid, maxMsg, setAnswer, setKey, setOther, setComment }: {
   q: NumberedQ; st: State; invalid: boolean; maxMsg?: string;
-  setAnswer: (q: NumberedQ, v: string | string[]) => void; setOther: (id: string, v: string) => void; setComment: (k: string, v: string) => void;
+  setAnswer: (q: NumberedQ, v: string | string[]) => void; setKey: (k: string, v: string) => void; setOther: (id: string, v: string) => void; setComment: (k: string, v: string) => void;
 }) {
   const showComment = q.comment !== false && q.type !== "textarea";
   return (
     <div id={`wrap_${q.id}`} className="border-b border-border px-5 py-5 last:border-b-0 sm:px-7">
       <label htmlFor={`q_${q.id}`} className="flex gap-2.5 text-[15px] font-medium text-foreground">
         <span className="min-w-[30px] shrink-0 tabular-nums text-muted-foreground">{q.num}</span>
-        <span>{q.label}{q.required && <span className="text-destructive"> *</span>}</span>
+        <span>{q.label}{q.required ? <span className="text-destructive"> *</span> : <Tier tier={q.tier} />}</span>
       </label>
       <div className="mt-2 sm:ml-10">
         {q.help && <p className="mb-2.5 text-sm text-muted-foreground">{q.help}</p>}
         <div className={invalid ? "[&_input]:border-destructive" : ""}>
           <Control q={q} value={st.answers[q.id]} other={st.others[q.id] || ""} maxMsg={maxMsg}
-            onChange={(v) => setAnswer(q, v)} onOther={(v) => setOther(q.id, v)} />
+            onChange={(v) => setAnswer(q, v)} onOther={(v) => setOther(q.id, v)} answers={st.answers} onKey={setKey} />
         </div>
         {invalid && <p className="mt-1.5 text-sm text-destructive">This field is required{q.type === "email" ? " and must be a valid email" : ""}.</p>}
         {showComment && (
@@ -176,7 +209,7 @@ export default function ContractorModernizationIntake() {
   const timer = useRef<number>();
 
   useEffect(() => {
-    document.title = "Contractor Operations Discovery | epiSolve";
+    document.title = "Operations Discovery Questionnaire | epiSolve";
     try {
       const saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
       if (saved?.v === 3 && saved.state) {
@@ -226,6 +259,7 @@ export default function ContractorModernizationIntake() {
     touch();
     setSt((p) => ({ ...p, answers: { ...p.answers, [q.id]: v } }));
   };
+  const setKey = (k: string, v: string) => { touch(); setSt((p) => ({ ...p, answers: { ...p.answers, [k]: v } })); };
   const setOther = (id: string, v: string) => { touch(); setSt((p) => ({ ...p, others: { ...p.others, [id]: v } })); };
   const setComment = (k: string, v: string) => { touch(); setSt((p) => ({ ...p, comments: { ...p.comments, [k]: v } })); };
 
@@ -236,7 +270,7 @@ export default function ContractorModernizationIntake() {
       per[q.section] ||= { t: 0, d: 0 };
       if (!isVisible(q, st.answers)) continue;
       total++; per[q.section].t++;
-      if (isAnswered(st.answers[q.id])) { doneN++; per[q.section].d++; }
+      if (qAnswered(q, st.answers)) { doneN++; per[q.section].d++; }
     }
     return { total, done: doneN, per, pct: total ? Math.round((doneN / total) * 100) : 0 };
   }, [st.answers]);
@@ -252,10 +286,12 @@ export default function ContractorModernizationIntake() {
         section_comments: (st.comments[`section_${s.id}`] || "").trim(),
         answers: ALL_Q.filter((q) => q.section === s.id && isVisible(q, a)).map((q) => {
           const other = (st.others[q.id] || "").trim();
-          let ans = a[q.id] ?? (q.type === "checkbox" ? [] : "");
+          let ans: string | string[] = q.type === "matrix"
+            ? q.rows!.flatMap((row, i) => (a[matrixKey(q.id, i)] ? [`${row}: ${a[matrixKey(q.id, i)]} / 5`] : []))
+            : a[q.id] ?? (q.type === "checkbox" ? [] : "");
           if (Array.isArray(ans)) ans = ans.map((v) => (v === "__other" ? `Other: ${other}` : v));
           else ans = ans === "__other" ? `Other: ${other}` : String(ans).trim();
-          return { id: q.id, number: q.num, question: q.label, answer: ans, comments: (st.comments[q.id] || "").trim() };
+          return { id: q.id, number: q.num, tier: q.tier, question: q.label, answer: ans, comments: (st.comments[q.id] || "").trim() };
         }),
       })),
     };
@@ -271,7 +307,7 @@ export default function ContractorModernizationIntake() {
     setInvalid(bad);
     const first = REQUIRED.find((q) => bad[q.id]);
     if (first) {
-      setFormError("Please complete the required fields marked with * in Section 1 (About You & Your Company).");
+      setFormError("Please complete the required fields marked with * in Section 1 (About You & Your Companies).");
       const el = document.getElementById(`q_${first.id}`);
       el?.scrollIntoView({ behavior: "smooth", block: "center" });
       el?.focus({ preventScroll: true });
@@ -323,13 +359,13 @@ export default function ContractorModernizationIntake() {
         ) : (
           <>
             <div className="mx-auto max-w-4xl px-5 pb-4 pt-10 sm:pt-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary/80">Operations &amp; Job Cost Discovery</p>
-              <h1 className="mt-2 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">Mechanical Contractor Operations Questionnaire</h1>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary/80">Prepared for M. Cary, Inc. &amp; M. Cary Markings</p>
+              <h1 className="mt-2 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">Operations Discovery Questionnaire</h1>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-                Before we talk, we'd like to understand how your business actually runs today: how jobs are set up, how labor and material costs flow from the field to the office, how change orders and billing are handled, and where things slow down or slip through. Your answers shape a focused follow-up conversation about the problems you're facing and how you'd like to approach them.
+                Thanks for taking the time to speak with us. These questions help us understand how M. Cary runs day to day, from bidding and buyout through field coordination, cost control and billing, so our next conversation focuses on what matters most to you.
               </p>
               <ul className="mt-5 flex flex-wrap gap-2">
-                {[[Check, "Saves as you type"], [RotateCcw, "Come back any time to finish"], [Clock, "About 20 minutes for the whole form"]].map(([Icon, t]) => {
+                {[[Check, "Saves as you type"], [RotateCcw, "Come back any time to finish"], [Clock, "About 10 minutes for the whole form"]].map(([Icon, t]) => {
                   const I = Icon as typeof Check;
                   return <li key={t as string} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground"><I className="h-4 w-4 text-primary" />{t as string}</li>;
                 })}
@@ -340,6 +376,7 @@ export default function ContractorModernizationIntake() {
                     <li>There are no right or wrong answers. Describe things as they really are, not as they're supposed to be.</li>
                     <li>Skip anything that doesn't apply. Only your name, company and email are required.</li>
                     <li>Each question about your operations has a comments box. Use it for context, exceptions or examples; this is often the most useful part.</li>
+                    <li>Short on time? Start with the questions marked <Tier tier={1} />. Anything marked <Tier tier={3} /> can wait for our call.</li>
                     <li>Your answers save automatically in this browser as you type. Close the page whenever you like and reopen this link on the same device and browser to pick up where you left off.</li>
                   </ul>
                 </Panel>
@@ -391,7 +428,7 @@ export default function ContractorModernizationIntake() {
                       <p className="mt-1 text-sm text-muted-foreground">{s.intro}</p>
                     </div>
                     {s.items.map((it, k) => {
-                      const props = { st, setAnswer, setOther, setComment };
+                      const props = { st, setAnswer, setKey, setOther, setComment };
                       if (it.kind === "heading") return <div key={k} className="border-b border-border bg-muted/50 px-5 pb-2.5 pt-3.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground sm:px-7">{it.label}</div>;
                       if (it.kind === "pair") return (
                         <div key={k} className="grid border-b border-border sm:grid-cols-2 [&>div]:border-b-0">

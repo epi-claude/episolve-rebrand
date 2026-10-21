@@ -17,6 +17,7 @@ const str = (max: number) => z.string().trim().max(max);
 const Answer = z.object({
   id: str(60),
   number: str(10),
+  tier: z.number().int().min(1).max(3).optional(),
   question: str(400),
   answer: z.union([str(3000), z.array(str(500)).max(20)]),
   comments: str(3000).optional().default(""),
@@ -79,20 +80,31 @@ serve(async (req) => {
     }).join("");
 
     const c = d.contact;
-    const html = `<div style="font-family:Arial,sans-serif;max-width:720px;margin:0 auto">
+    const wrap = (title: string, intro: string) => `<div style="font-family:Arial,sans-serif;max-width:720px;margin:0 auto">
       <div style="background:#254071;color:#fff;padding:20px 24px;border-radius:8px 8px 0 0">
-        <h2 style="margin:0">New Contractor Operations Discovery</h2>
+        <h2 style="margin:0;color:#fff">${title}</h2>
         <p style="margin:6px 0 0;opacity:.85">${esc(c.company)} — ${esc(c.name)}${c.title ? ` (${esc(c.title)})` : ""} · ${esc(c.email)}</p>
-      </div>${sectionsHtml}
+      </div>${intro}${sectionsHtml}
       <p style="color:#6b7280;font-size:12px;margin-top:20px">Submitted ${new Date().toUTCString()}</p></div>`;
+    const html = wrap("New Operations Discovery Submission", "");
+    const copyHtml = wrap("Your Operations Discovery Responses",
+      `<p style="font-size:14px;color:#1f2937;line-height:1.6;margin:20px 0 0">Hi ${esc(c.name)},<br><br>Thank you for completing the Operations Discovery Questionnaire. A copy of your responses is below for your records. Our team will review them and reach out within two business days to schedule a follow-up conversation.<br><br>— The epiSolve team · <a href="https://episolve.com" style="color:#254071">episolve.com</a></p>`);
 
     const { error: mailErr } = await resend.emails.send({
       from: "Episolve Website <noreply@notify.e-dmm.com>",
       to: RECIPIENTS,
       replyTo: c.email,
-      subject: `Contractor Discovery: ${c.company} (${c.name})`,
+      subject: `Operations Discovery: ${c.company} (${c.name})`,
       html,
     });
+    const { error: copyErr } = await resend.emails.send({
+      from: "epiSolve <noreply@notify.e-dmm.com>",
+      to: [c.email],
+      replyTo: RECIPIENTS[0],
+      subject: "Your Operations Discovery responses — epiSolve",
+      html: copyHtml,
+    });
+    if (copyErr) console.error("Submitter copy failed:", copyErr);
     if (mailErr) console.error("Email send failed:", mailErr);
     else await admin.from("contractor_intake_submissions").update({ email_sent: true }).eq("id", row.id);
     return json({ success: true });
