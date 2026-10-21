@@ -10,7 +10,7 @@ export function ThemeToggle() {
     (window.location.pathname.startsWith("/portfolio/yahya") ||
       window.location.pathname === "/links" ||
       window.location.pathname === "/njcelc-platform-questionnaire" ||
-      window.location.pathname === "/contractor-modernization-intake")
+      window.location.pathname === "/mcaryinc-questionnaire")
   ) {
     return null;
   }

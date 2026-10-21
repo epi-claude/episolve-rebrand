@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
@@ -31,7 +31,7 @@ import TabithasHome from "./pages/TabithasHome";
 import ContentCalendar from "./pages/ContentCalendar";
 import GreenwichDesignStudio from "./pages/GreenwichDesignStudio";
 import NJCELCPlatformQuestionnaire from "./pages/NJCELCPlatformQuestionnaire";
-import ContractorModernizationIntake from "./pages/ContractorModernizationIntake";
+import McAryIncQuestionnaire from "./pages/McAryIncQuestionnaire";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -98,7 +98,8 @@ const App = () => (
               } 
             />
             <Route path="/njcelc-platform-questionnaire" element={<NJCELCPlatformQuestionnaire />} />
-            <Route path="/contractor-modernization-intake" element={<ContractorModernizationIntake />} />
+            <Route path="/mcaryinc-questionnaire" element={<McAryIncQuestionnaire />} />
+            <Route path="/contractor-modernization-intake" element={<Navigate to="/mcaryinc-questionnaire" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
