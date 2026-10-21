@@ -91,14 +91,14 @@ serve(async (req) => {
       `<p style="font-size:14px;color:#1f2937;line-height:1.6;margin:20px 0 0">Hi ${esc(c.name)},<br><br>Thank you for completing the Operations Discovery Questionnaire. A copy of your responses is below for your records. Our team will review them and reach out within two business days to schedule a follow-up conversation.<br><br>— The epiSolve team · <a href="https://episolve.com" style="color:#254071">episolve.com</a></p>`);
 
     const { error: mailErr } = await resend.emails.send({
-      from: "Episolve Website <noreply@notify.e-dmm.com>",
+      from: "epiSolve Operations <noreply@notify.e-dmm.com>",
       to: RECIPIENTS,
       replyTo: c.email,
       subject: `Operations Discovery: ${c.company} (${c.name})`,
       html,
     });
     const { error: copyErr } = await resend.emails.send({
-      from: "epiSolve <noreply@notify.e-dmm.com>",
+      from: "epiSolve Operations <noreply@notify.e-dmm.com>",
       to: [c.email],
       replyTo: RECIPIENTS[0],
       subject: "Your Operations Discovery responses — epiSolve",
