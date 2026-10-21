@@ -98,8 +98,8 @@ const App = () => (
               } 
             />
             <Route path="/njcelc-platform-questionnaire" element={<NJCELCPlatformQuestionnaire />} />
-            <Route path="/mcaryinc-questionnaire" element={<McAryIncQuestionnaire />} />
-            <Route path="/contractor-modernization-intake" element={<Navigate to="/mcaryinc-questionnaire" replace />} />
+            <Route path="/mcary-operations-discovery" element={<McAryIncQuestionnaire />} />
+            <Route path="/contractor-modernization-intake" element={<Navigate to="/mcary-operations-discovery" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
