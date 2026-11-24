@@ -1,5 +1,7 @@
 import { BwmechShell } from "@/components/bwmech/BwmechShell";
-import { ExternalLink, GitBranch, ListChecks } from "lucide-react";
+import { ExternalLink, GitBranch, ListChecks, FileText } from "lucide-react";
+import checklistPdf from "@/assets/bwmech/broadway-checklists-letter.pdf.asset.json";
+import processMapPdf from "@/assets/bwmech/broadway-process-map-11x17.pdf.asset.json";
 
 const documents = [
   {
@@ -15,6 +17,27 @@ const documents = [
       "Printable checklists for each stage of a job so nothing falls through the cracks — estimating, buyout, submittals, closeout, and more.",
     href: "/bwmech/process-checklists.html",
     icon: ListChecks,
+  },
+  {
+    title: "Process Map — 11 × 17 PDF",
+    description:
+      "A large-format overview of job stages, responsibilities, and handoffs, including the purchase-order trail and job-site versus billing addresses. Prepared for printing and team review.",
+    href: processMapPdf.url,
+    icon: GitBranch,
+  },
+  {
+    title: "Checklists — Letter-size PDF",
+    description:
+      "Four printable checklists covering bid won, startup, ongoing work, and closeout. Each identifies who owns the task and includes space for corrections and notes.",
+    href: checklistPdf.url,
+    icon: ListChecks,
+  },
+  {
+    title: "Checklists — Google Docs-friendly HTML",
+    description:
+      "A simplified text version of all four checklists, with task owners and purchase-order and address markers. Suitable for copying into Google Docs for collaborative editing.",
+    href: "/bwmech/process-checklists-for-google-docs.html",
+    icon: FileText,
   },
 ];
 
