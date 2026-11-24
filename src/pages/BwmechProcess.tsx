@@ -6,7 +6,7 @@ const documents = [
     title: "How a Job Runs",
     description:
       "End-to-end process map of a Broadway Mechanical job — from first call through closeout — across the office, project management, and field lanes.",
-    href: "/process-map.html",
+    href: "/bwmech/process-map.html",
     icon: GitBranch,
   },
   {
