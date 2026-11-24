@@ -43,7 +43,7 @@ const documents = [
 
 const BwmechProcess = () => {
   return (
-    <BwmechShell>
+    <BwmechShell showDashboardLink={false}>
       <main className="mx-auto max-w-6xl px-6 py-12">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Broadway Mechanical Work Flows

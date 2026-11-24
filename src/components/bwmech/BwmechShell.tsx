@@ -4,9 +4,11 @@ import episolveLogo from "@/assets/episolve-logo-horizontal.png";
 
 interface Props {
   children: ReactNode;
+  /** Show the "Discovery" dashboard link in the header (requires sign-in). */
+  showDashboardLink?: boolean;
 }
 
-export function BwmechShell({ children }: Props) {
+export function BwmechShell({ children, showDashboardLink = true }: Props) {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border/60 bg-background/80 backdrop-blur-sm">
@@ -14,12 +16,14 @@ export function BwmechShell({ children }: Props) {
           <Link to="/" className="flex items-center" aria-label="Episolve home">
             <img src={episolveLogo} alt="Episolve" className="h-20 w-auto" />
           </Link>
-          <Link
-            to="/projects/bwmech/dashboard"
-            className="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Broadway Mechanical · Discovery
-          </Link>
+          {showDashboardLink && (
+            <Link
+              to="/projects/bwmech/dashboard"
+              className="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Broadway Mechanical · Discovery
+            </Link>
+          )}
         </div>
       </header>
       {children}

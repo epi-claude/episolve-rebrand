@@ -85,14 +85,7 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/projects/bwmech/process"
-              element={
-                <ProtectedRoute>
-                  <BwmechProcess />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/projects/bwmech/process" element={<BwmechProcess />} />
             <Route path="/links" element={<Links />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/projects/tabithas-home" element={<TabithasHome />} />
