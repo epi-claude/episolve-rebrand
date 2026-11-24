@@ -13,7 +13,7 @@ const documents = [
     title: "Don't Forget Checklists",
     description:
       "Printable checklists for each stage of a job so nothing falls through the cracks — estimating, buyout, submittals, closeout, and more.",
-    href: "/process-checklists.html",
+    href: "/bwmech/process-checklists.html",
     icon: ListChecks,
   },
 ];
