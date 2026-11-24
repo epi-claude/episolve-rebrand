@@ -45,11 +45,8 @@ const BwmechProcess = () => {
   return (
     <BwmechShell>
       <main className="mx-auto max-w-6xl px-6 py-12">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-          Broadway Mechanical
-        </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
-          Process Reference
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Broadway Mechanical Work Flows
         </h1>
         <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
           Working documents that describe how jobs run today. Each opens as a
