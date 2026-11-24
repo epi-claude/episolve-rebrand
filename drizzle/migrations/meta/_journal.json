@@ -15,6 +15,13 @@
       "when": 1792527327476,
       "tag": "0001_contractor_intake_submissions",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795488290637,
+      "tag": "0002_restrict_bwmech_questionnaires_to_admins",
+      "breakpoints": true
     }
   ]
 }
