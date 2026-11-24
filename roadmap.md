@@ -1,2 +1,3 @@
-- [ ] Add the three Broadway Mechanical documents and descriptions to the process page.
-- [ ] Apply the epiSolve favicon to app and standalone pages; verify document links.
+- [x] Add the three Broadway Mechanical documents and descriptions to the process page.
+- [x] Apply the epiSolve favicon to app and standalone HTML pages; verify public documents and PDF contents.
+- Signed-in process-page interaction was not verified because test-account creation was declined. Native PDF tabs use the browser's document viewer icon.
