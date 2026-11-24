@@ -25,6 +25,7 @@ import YahyaBrandAssets from "./pages/YahyaBrandAssets";
 import BwmechDashboard from "./pages/BwmechDashboard";
 import BwmechForm from "./pages/BwmechForm";
 import BwmechReport from "./pages/BwmechReport";
+import BwmechProcess from "./pages/BwmechProcess";
 import Links from "./pages/Links";
 import Logout from "./pages/Logout";
 import TabithasHome from "./pages/TabithasHome";
@@ -81,6 +82,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <BwmechReport />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/projects/bwmech/process"
+              element={
+                <ProtectedRoute>
+                  <BwmechProcess />
                 </ProtectedRoute>
               }
             />
