@@ -28,14 +28,14 @@ const documents = [
   {
     title: "Checklists — Letter-size PDF",
     description:
-      "Four printable checklists covering bid won, startup, ongoing work, and closeout. Each identifies who owns the task and includes space for corrections and notes.",
+      "Five printable checklists covering bid won, startup, ongoing work, closeout, and a who-owns-it worksheet for every handoff. Each identifies who owns the task and includes space for corrections and notes.",
     href: checklistPdf.url,
     icon: ListChecks,
   },
   {
     title: "Checklists — Google Docs-friendly HTML",
     description:
-      "A simplified text version of all four checklists, with task owners and purchase-order and address markers. Suitable for copying into Google Docs for collaborative editing.",
+      "A simplified text version of all five checklists, with task owners and purchase-order and address markers. Suitable for copying into Google Docs for collaborative editing.",
     href: "/bwmech/process-checklists-for-google-docs.html",
     icon: FileText,
   },
